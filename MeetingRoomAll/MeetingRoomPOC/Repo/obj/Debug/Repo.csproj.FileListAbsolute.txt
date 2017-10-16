@@ -1,0 +1,42 @@
+c:\users\gopal.chavan\documents\visual studio 2015\Projects\MeetingRoomPOC\Repo\bin\Debug\Repo.dll.config
+c:\users\gopal.chavan\documents\visual studio 2015\Projects\MeetingRoomPOC\Repo\bin\Debug\Repo.dll
+c:\users\gopal.chavan\documents\visual studio 2015\Projects\MeetingRoomPOC\Repo\bin\Debug\Repo.pdb
+c:\users\gopal.chavan\documents\visual studio 2015\Projects\MeetingRoomPOC\Repo\bin\Debug\DataLayer.dll
+c:\users\gopal.chavan\documents\visual studio 2015\Projects\MeetingRoomPOC\Repo\bin\Debug\DomainLayer.dll
+c:\users\gopal.chavan\documents\visual studio 2015\Projects\MeetingRoomPOC\Repo\bin\Debug\EntityFramework.dll
+c:\users\gopal.chavan\documents\visual studio 2015\Projects\MeetingRoomPOC\Repo\bin\Debug\EntityFramework.SqlServer.dll
+c:\users\gopal.chavan\documents\visual studio 2015\Projects\MeetingRoomPOC\Repo\bin\Debug\DataLayer.pdb
+c:\users\gopal.chavan\documents\visual studio 2015\Projects\MeetingRoomPOC\Repo\bin\Debug\DomainLayer.pdb
+c:\users\gopal.chavan\documents\visual studio 2015\Projects\MeetingRoomPOC\Repo\bin\Debug\EntityFramework.xml
+c:\users\gopal.chavan\documents\visual studio 2015\Projects\MeetingRoomPOC\Repo\bin\Debug\EntityFramework.SqlServer.xml
+c:\users\gopal.chavan\documents\visual studio 2015\Projects\MeetingRoomPOC\Repo\obj\Debug\Repo.csprojResolveAssemblyReference.cache
+c:\users\gopal.chavan\documents\visual studio 2015\Projects\MeetingRoomPOC\Repo\obj\Debug\Repo.dll
+c:\users\gopal.chavan\documents\visual studio 2015\Projects\MeetingRoomPOC\Repo\obj\Debug\Repo.pdb
+C:\Users\gopal.chavan\Desktop\Angular\MeetingRoom(POC)\New folder\MeetingRoomPOC\Repo\obj\Debug\Repo.csprojResolveAssemblyReference.cache
+C:\Users\gopal.chavan\Desktop\Angular\MeetingRoom(POC)\New folder\MeetingRoomPOC\Repo\obj\Debug\Repo.dll
+C:\Users\gopal.chavan\Desktop\Angular\MeetingRoom(POC)\New folder\MeetingRoomPOC\Repo\obj\Debug\Repo.pdb
+C:\Users\gopal.chavan\Desktop\Angular\MeetingRoom(POC)\New folder\MeetingRoomPOC\Repo\bin\Debug\Repo.dll.config
+C:\Users\gopal.chavan\Desktop\Angular\MeetingRoom(POC)\New folder\MeetingRoomPOC\Repo\bin\Debug\Repo.dll
+C:\Users\gopal.chavan\Desktop\Angular\MeetingRoom(POC)\New folder\MeetingRoomPOC\Repo\bin\Debug\Repo.pdb
+C:\Users\gopal.chavan\Desktop\Angular\MeetingRoom(POC)\New folder\MeetingRoomPOC\Repo\bin\Debug\DataLayer.dll
+C:\Users\gopal.chavan\Desktop\Angular\MeetingRoom(POC)\New folder\MeetingRoomPOC\Repo\bin\Debug\DomainLayer.dll
+C:\Users\gopal.chavan\Desktop\Angular\MeetingRoom(POC)\New folder\MeetingRoomPOC\Repo\bin\Debug\EntityFramework.dll
+C:\Users\gopal.chavan\Desktop\Angular\MeetingRoom(POC)\New folder\MeetingRoomPOC\Repo\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\gopal.chavan\Desktop\Angular\MeetingRoom(POC)\New folder\MeetingRoomPOC\Repo\bin\Debug\DataLayer.pdb
+C:\Users\gopal.chavan\Desktop\Angular\MeetingRoom(POC)\New folder\MeetingRoomPOC\Repo\bin\Debug\DomainLayer.pdb
+C:\Users\gopal.chavan\Desktop\Angular\MeetingRoom(POC)\New folder\MeetingRoomPOC\Repo\bin\Debug\EntityFramework.xml
+C:\Users\gopal.chavan\Desktop\Angular\MeetingRoom(POC)\New folder\MeetingRoomPOC\Repo\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\gopal.chavan\Desktop\MeetingRoomPOC\Repo\bin\Debug\Repo.dll.config
+C:\Users\gopal.chavan\Desktop\MeetingRoomPOC\Repo\bin\Debug\Repo.dll
+C:\Users\gopal.chavan\Desktop\MeetingRoomPOC\Repo\bin\Debug\Repo.pdb
+C:\Users\gopal.chavan\Desktop\MeetingRoomPOC\Repo\bin\Debug\DataLayer.dll
+C:\Users\gopal.chavan\Desktop\MeetingRoomPOC\Repo\bin\Debug\DomainLayer.dll
+C:\Users\gopal.chavan\Desktop\MeetingRoomPOC\Repo\bin\Debug\EntityFramework.dll
+C:\Users\gopal.chavan\Desktop\MeetingRoomPOC\Repo\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\gopal.chavan\Desktop\MeetingRoomPOC\Repo\bin\Debug\DataLayer.pdb
+C:\Users\gopal.chavan\Desktop\MeetingRoomPOC\Repo\bin\Debug\DomainLayer.pdb
+C:\Users\gopal.chavan\Desktop\MeetingRoomPOC\Repo\bin\Debug\EntityFramework.xml
+C:\Users\gopal.chavan\Desktop\MeetingRoomPOC\Repo\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\gopal.chavan\Desktop\MeetingRoomPOC\Repo\obj\Debug\Repo.csprojResolveAssemblyReference.cache
+C:\Users\gopal.chavan\Desktop\MeetingRoomPOC\Repo\obj\Debug\Repo.dll
+C:\Users\gopal.chavan\Desktop\MeetingRoomPOC\Repo\obj\Debug\Repo.pdb

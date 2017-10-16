@@ -1,0 +1,30 @@
+c:\users\gopal.chavan\documents\visual studio 2015\Projects\MeetingRoomPOC\DataLayer\bin\Debug\DataLayer.dll.config
+c:\users\gopal.chavan\documents\visual studio 2015\Projects\MeetingRoomPOC\DataLayer\bin\Debug\DataLayer.dll
+c:\users\gopal.chavan\documents\visual studio 2015\Projects\MeetingRoomPOC\DataLayer\bin\Debug\DataLayer.pdb
+c:\users\gopal.chavan\documents\visual studio 2015\Projects\MeetingRoomPOC\DataLayer\bin\Debug\EntityFramework.dll
+c:\users\gopal.chavan\documents\visual studio 2015\Projects\MeetingRoomPOC\DataLayer\bin\Debug\EntityFramework.SqlServer.dll
+c:\users\gopal.chavan\documents\visual studio 2015\Projects\MeetingRoomPOC\DataLayer\bin\Debug\EntityFramework.xml
+c:\users\gopal.chavan\documents\visual studio 2015\Projects\MeetingRoomPOC\DataLayer\bin\Debug\EntityFramework.SqlServer.xml
+c:\users\gopal.chavan\documents\visual studio 2015\Projects\MeetingRoomPOC\DataLayer\obj\Debug\DataLayer.csprojResolveAssemblyReference.cache
+c:\users\gopal.chavan\documents\visual studio 2015\Projects\MeetingRoomPOC\DataLayer\obj\Debug\DataLayer.dll
+c:\users\gopal.chavan\documents\visual studio 2015\Projects\MeetingRoomPOC\DataLayer\obj\Debug\DataLayer.pdb
+C:\Users\gopal.chavan\Desktop\Angular\MeetingRoom(POC)\New folder\MeetingRoomPOC\DataLayer\bin\Debug\DataLayer.dll.config
+C:\Users\gopal.chavan\Desktop\Angular\MeetingRoom(POC)\New folder\MeetingRoomPOC\DataLayer\bin\Debug\DataLayer.dll
+C:\Users\gopal.chavan\Desktop\Angular\MeetingRoom(POC)\New folder\MeetingRoomPOC\DataLayer\bin\Debug\DataLayer.pdb
+C:\Users\gopal.chavan\Desktop\Angular\MeetingRoom(POC)\New folder\MeetingRoomPOC\DataLayer\bin\Debug\EntityFramework.dll
+C:\Users\gopal.chavan\Desktop\Angular\MeetingRoom(POC)\New folder\MeetingRoomPOC\DataLayer\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\gopal.chavan\Desktop\Angular\MeetingRoom(POC)\New folder\MeetingRoomPOC\DataLayer\bin\Debug\EntityFramework.xml
+C:\Users\gopal.chavan\Desktop\Angular\MeetingRoom(POC)\New folder\MeetingRoomPOC\DataLayer\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\gopal.chavan\Desktop\Angular\MeetingRoom(POC)\New folder\MeetingRoomPOC\DataLayer\obj\Debug\DataLayer.csprojResolveAssemblyReference.cache
+C:\Users\gopal.chavan\Desktop\Angular\MeetingRoom(POC)\New folder\MeetingRoomPOC\DataLayer\obj\Debug\DataLayer.dll
+C:\Users\gopal.chavan\Desktop\Angular\MeetingRoom(POC)\New folder\MeetingRoomPOC\DataLayer\obj\Debug\DataLayer.pdb
+C:\Users\gopal.chavan\Desktop\MeetingRoomPOC\DataLayer\bin\Debug\DataLayer.dll.config
+C:\Users\gopal.chavan\Desktop\MeetingRoomPOC\DataLayer\bin\Debug\DataLayer.dll
+C:\Users\gopal.chavan\Desktop\MeetingRoomPOC\DataLayer\bin\Debug\DataLayer.pdb
+C:\Users\gopal.chavan\Desktop\MeetingRoomPOC\DataLayer\bin\Debug\EntityFramework.dll
+C:\Users\gopal.chavan\Desktop\MeetingRoomPOC\DataLayer\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\gopal.chavan\Desktop\MeetingRoomPOC\DataLayer\bin\Debug\EntityFramework.xml
+C:\Users\gopal.chavan\Desktop\MeetingRoomPOC\DataLayer\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\gopal.chavan\Desktop\MeetingRoomPOC\DataLayer\obj\Debug\DataLayer.csprojResolveAssemblyReference.cache
+C:\Users\gopal.chavan\Desktop\MeetingRoomPOC\DataLayer\obj\Debug\DataLayer.dll
+C:\Users\gopal.chavan\Desktop\MeetingRoomPOC\DataLayer\obj\Debug\DataLayer.pdb

@@ -1,0 +1,10 @@
+c:\users\gopal.chavan\documents\visual studio 2015\Projects\MeetingRoomPOC\DomainLayer\bin\Debug\DomainLayer.dll
+c:\users\gopal.chavan\documents\visual studio 2015\Projects\MeetingRoomPOC\DomainLayer\bin\Debug\DomainLayer.pdb
+c:\users\gopal.chavan\documents\visual studio 2015\Projects\MeetingRoomPOC\DomainLayer\obj\Debug\DomainLayer.dll
+c:\users\gopal.chavan\documents\visual studio 2015\Projects\MeetingRoomPOC\DomainLayer\obj\Debug\DomainLayer.pdb
+c:\users\gopal.chavan\documents\visual studio 2015\Projects\MeetingRoomPOC\DomainLayer\obj\Debug\DomainLayer.csprojResolveAssemblyReference.cache
+C:\Users\gopal.chavan\Desktop\Angular\MeetingRoom(POC)\New folder\MeetingRoomPOC\DomainLayer\bin\Debug\DomainLayer.dll
+C:\Users\gopal.chavan\Desktop\Angular\MeetingRoom(POC)\New folder\MeetingRoomPOC\DomainLayer\bin\Debug\DomainLayer.pdb
+C:\Users\gopal.chavan\Desktop\Angular\MeetingRoom(POC)\New folder\MeetingRoomPOC\DomainLayer\obj\Debug\DomainLayer.csprojResolveAssemblyReference.cache
+C:\Users\gopal.chavan\Desktop\Angular\MeetingRoom(POC)\New folder\MeetingRoomPOC\DomainLayer\obj\Debug\DomainLayer.dll
+C:\Users\gopal.chavan\Desktop\Angular\MeetingRoom(POC)\New folder\MeetingRoomPOC\DomainLayer\obj\Debug\DomainLayer.pdb

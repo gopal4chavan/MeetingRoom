@@ -1,0 +1,24 @@
+<div class="layout">
+  <table class="table-responsive table-striped" border="2px">
+    <thead>
+      <tr>
+        <th>slot\date</th>
+        <th *ngFor="let date of daterange" [style.width]="dynamicWidth">{{date}}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let slot of slots">
+        <th>{{slot.slot}}</th>
+        <ng-container *ngFor="let date of daterange">
+                      
+          <td  [attr.rowspan]=slotcount *ngIf="CheckIfBooked(date,slot) && aboveFlag" [class.logedInSlot]="CheckIfLoginSlot(date,slot)" class="booked" (click)="GetBookedSlotDetails(date,slot)">
+            <div>BookingID:{{bookingID}}</div>
+            <div>{{subject}}</div> 
+          </td>
+          <td *ngIf=!(CheckIfBooked(date,slot)) (click)='getBookingForm(slot,date)'></td>
+
+        </ng-container>
+      </tr>
+    </tbody>
+  </table>
+</div>

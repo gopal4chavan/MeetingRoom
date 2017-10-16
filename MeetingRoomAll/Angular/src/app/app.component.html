@@ -1,0 +1,20 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="panel  panel-primary">
+            <div class="panel-heading text-center">
+                <h3> Meeting Room Booking</h3>
+            </div>
+        </div>
+    </div>
+    <!--child one-->
+    <div class=" row">
+
+        <div class="container">
+            <main (detailsEvent)="SetPrimaryDetails($event)" (locationChangeEvent)="LocationChanged($event)"></main>
+        </div>
+    </div>
+    <!--child two-->
+    <div *ngIf="showSlots_flag" class="row layout">
+        <slot [primaryDetails]='primary_details'></slot>
+    </div>
+</div>

@@ -1,0 +1,47 @@
+<div class="modal-dialog modal-lg" *ngIf=flag>
+    <div class="modal-content">
+
+        <div class="modal-header booking_header" >
+            <button type="button" class="close" (click)="modal_close()">&times;</button>
+            <h4 class="modal-title" style="text-align: center;font-size: 35px;">Booking Details</h4>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <label class="col-xs-4">Subject</label>
+                <div class="col-xs-8">{{bookingDetails.subject}}</div>
+            </div>
+            <div class="row">
+                <label class="col-xs-4">Booking ID</label>
+                <div class="col-xs-8">{{bookingDetails.bookingID}}</div>
+            </div>
+            <div class="row">
+                <label class="col-xs-4">createdBy</label>
+                <div class="col-xs-8">{{bookingDetails.createdBy}}</div>
+            </div>
+            <div class="row">
+                <label class="col-xs-4">Creation Time</label>
+                <div class="col-xs-8">{{bookingDetails.timeStamp}}</div>
+            </div>
+            <div class="row">
+                <label class="col-xs-4">description</label>
+                <div class="col-xs-8">{{bookingDetails.description}}</div>
+            </div>
+            <div class="row">
+                <label class="col-xs-4">Location</label>
+                <div class="col-xs-8">{{bookingDetails.location_name}}</div>
+            </div>
+            <div class="row">
+                <label class="col-xs-4">room</label>
+                <div class="col-xs-8">{{bookingDetails.room_name}}</div>
+            </div>
+
+        </div>
+        <div class="modal-footer" *ngIf="enableDeleteOptions()">
+            <button class="btn btn-primary" (click)="updateBooking()">Edit</button>
+            <button class="btn btn-danger" (click)="delete()">delete entire booking</button>
+            <button class="btn btn-danger" (click)="deleteSlot()">delete selected slot</button>
+            <button type="button" class="btn btn-default" (click)="modal_close()">Close</button>
+        </div>
+
+    </div>
+</div>

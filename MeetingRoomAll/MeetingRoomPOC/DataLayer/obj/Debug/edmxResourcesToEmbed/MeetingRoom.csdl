@@ -1,0 +1,170 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="AngularPOCModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="tbl_Booking_Date">
+    <Key>
+      <PropertyRef Name="location_room_id" />
+      <PropertyRef Name="date" />
+      <PropertyRef Name="slotID" />
+    </Key>
+    <Property Name="bookingID" Type="Int32" />
+    <Property Name="location_room_id" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="slotID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="tblBooking" Relationship="Self.bookingID_fk" FromRole="tbl_Booking_Date" ToRole="tblBooking" />
+    <NavigationProperty Name="tblSlot" Relationship="Self.slotID_fk" FromRole="tbl_Booking_Date" ToRole="tblSlot" />
+  </EntityType>
+  <EntityType Name="tblBooking">
+    <Key>
+      <PropertyRef Name="bookingID" />
+    </Key>
+    <Property Name="bookingID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="createdBy" Type="Int32" Nullable="false" />
+    <Property Name="location_id" Type="Int32" Nullable="false" />
+    <Property Name="room_id" Type="Int32" Nullable="false" />
+    <Property Name="timestamp" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="fromDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="toDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="subject" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="description" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="tbl_Booking_Date" Relationship="Self.bookingID_fk" FromRole="tblBooking" ToRole="tbl_Booking_Date" />
+    <NavigationProperty Name="tblLocation" Relationship="Self.location_id_fk" FromRole="tblBooking" ToRole="tblLocation" />
+    <NavigationProperty Name="tblRoom" Relationship="Self.room_id_fk" FromRole="tblBooking" ToRole="tblRoom" />
+  </EntityType>
+  <EntityType Name="tblLocation">
+    <Key>
+      <PropertyRef Name="locationID" />
+    </Key>
+    <Property Name="locationID" Type="Int32" Nullable="false" />
+    <Property Name="locationName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="tblBookings" Relationship="Self.location_id_fk" FromRole="tblLocation" ToRole="tblBooking" />
+    <NavigationProperty Name="tblRooms" Relationship="Self.locationID_fk" FromRole="tblLocation" ToRole="tblRoom" />
+  </EntityType>
+  <EntityType Name="tblRoom">
+    <Key>
+      <PropertyRef Name="roomID" />
+    </Key>
+    <Property Name="roomID" Type="Int32" Nullable="false" />
+    <Property Name="roomName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="location_id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="tblBookings" Relationship="Self.room_id_fk" FromRole="tblRoom" ToRole="tblBooking" />
+    <NavigationProperty Name="tblLocation" Relationship="Self.locationID_fk" FromRole="tblRoom" ToRole="tblLocation" />
+  </EntityType>
+  <EntityType Name="tblSlot">
+    <Key>
+      <PropertyRef Name="slotID" />
+    </Key>
+    <Property Name="slotID" Type="Int32" Nullable="false" />
+    <Property Name="slot" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="tbl_Booking_Date" Relationship="Self.slotID_fk" FromRole="tblSlot" ToRole="tbl_Booking_Date" />
+  </EntityType>
+  <Association Name="bookingID_fk">
+    <End Role="tblBooking" Type="Self.tblBooking" Multiplicity="0..1" />
+    <End Role="tbl_Booking_Date" Type="Self.tbl_Booking_Date" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblBooking">
+        <PropertyRef Name="bookingID" />
+      </Principal>
+      <Dependent Role="tbl_Booking_Date">
+        <PropertyRef Name="bookingID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="slotID_fk">
+    <End Role="tblSlot" Type="Self.tblSlot" Multiplicity="1" />
+    <End Role="tbl_Booking_Date" Type="Self.tbl_Booking_Date" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblSlot">
+        <PropertyRef Name="slotID" />
+      </Principal>
+      <Dependent Role="tbl_Booking_Date">
+        <PropertyRef Name="slotID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="location_id_fk">
+    <End Role="tblLocation" Type="Self.tblLocation" Multiplicity="1" />
+    <End Role="tblBooking" Type="Self.tblBooking" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblLocation">
+        <PropertyRef Name="locationID" />
+      </Principal>
+      <Dependent Role="tblBooking">
+        <PropertyRef Name="location_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="room_id_fk">
+    <End Role="tblRoom" Type="Self.tblRoom" Multiplicity="1" />
+    <End Role="tblBooking" Type="Self.tblBooking" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblRoom">
+        <PropertyRef Name="roomID" />
+      </Principal>
+      <Dependent Role="tblBooking">
+        <PropertyRef Name="room_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="locationID_fk">
+    <End Role="tblLocation" Type="Self.tblLocation" Multiplicity="1" />
+    <End Role="tblRoom" Type="Self.tblRoom" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblLocation">
+        <PropertyRef Name="locationID" />
+      </Principal>
+      <Dependent Role="tblRoom">
+        <PropertyRef Name="location_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="AngularPOCEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="tbl_Booking_Date" EntityType="Self.tbl_Booking_Date" />
+    <EntitySet Name="tblBookings" EntityType="Self.tblBooking" />
+    <EntitySet Name="tblLocations" EntityType="Self.tblLocation" />
+    <EntitySet Name="tblRooms" EntityType="Self.tblRoom" />
+    <EntitySet Name="tblSlots" EntityType="Self.tblSlot" />
+    <AssociationSet Name="bookingID_fk" Association="Self.bookingID_fk">
+      <End Role="tblBooking" EntitySet="tblBookings" />
+      <End Role="tbl_Booking_Date" EntitySet="tbl_Booking_Date" />
+    </AssociationSet>
+    <AssociationSet Name="slotID_fk" Association="Self.slotID_fk">
+      <End Role="tblSlot" EntitySet="tblSlots" />
+      <End Role="tbl_Booking_Date" EntitySet="tbl_Booking_Date" />
+    </AssociationSet>
+    <AssociationSet Name="location_id_fk" Association="Self.location_id_fk">
+      <End Role="tblLocation" EntitySet="tblLocations" />
+      <End Role="tblBooking" EntitySet="tblBookings" />
+    </AssociationSet>
+    <AssociationSet Name="room_id_fk" Association="Self.room_id_fk">
+      <End Role="tblRoom" EntitySet="tblRooms" />
+      <End Role="tblBooking" EntitySet="tblBookings" />
+    </AssociationSet>
+    <AssociationSet Name="locationID_fk" Association="Self.locationID_fk">
+      <End Role="tblLocation" EntitySet="tblLocations" />
+      <End Role="tblRoom" EntitySet="tblRooms" />
+    </AssociationSet>
+    <FunctionImport Name="booking_proc">
+      <Parameter Name="createdBy" Mode="In" Type="Int32" />
+      <Parameter Name="location_id" Mode="In" Type="Int32" />
+      <Parameter Name="room_id" Mode="In" Type="Int32" />
+      <Parameter Name="subject" Mode="In" Type="String" />
+      <Parameter Name="description" Mode="In" Type="String" />
+      <Parameter Name="fromDate" Mode="In" Type="DateTime" />
+      <Parameter Name="toDate" Mode="In" Type="DateTime" />
+      <Parameter Name="slot" Mode="In" Type="Int32" />
+      <Parameter Name="slot_count" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="update_booking_proc">
+      <Parameter Name="bookingID" Mode="In" Type="Int32" />
+      <Parameter Name="createdBy" Mode="In" Type="Int32" />
+      <Parameter Name="location_id" Mode="In" Type="Int32" />
+      <Parameter Name="room_id" Mode="In" Type="Int32" />
+      <Parameter Name="subject" Mode="In" Type="String" />
+      <Parameter Name="description" Mode="In" Type="String" />
+      <Parameter Name="fromDate" Mode="In" Type="DateTime" />
+      <Parameter Name="toDate" Mode="In" Type="DateTime" />
+      <Parameter Name="slot" Mode="In" Type="Int32" />
+      <Parameter Name="slot_count" Mode="In" Type="Int32" />
+    </FunctionImport>
+  </EntityContainer>
+</Schema>

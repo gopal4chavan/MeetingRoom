@@ -1,0 +1,24 @@
+<div class="panel-body panel  panel-primary">
+    <div class="col-sm-3">
+        <select class="form-control" (change)=getRooms($event) required id="location">
+            <option value="" selected>Location</option>
+            <option *ngFor="let location of locations" id={{location.locationID}} value={{location.locationName}}>{{location.locationName}}</option>
+        </select>
+    </div>
+    <div class="col-sm-3">
+        <select class="form-control" (change)="roomSelected($event)"required id="room">
+            <option value="" selected>Room</option>
+            <option *ngFor="let room of rooms" id={{room.roomID}} value={{room.roomName}}>{{room.roomName}}</option>
+        </select>
+    </div>
+    <div class="col-sm-2">        
+        <input  type="text" class="form-control" [options]="options"  daterangepicker (selected)="selectedDate($event)">
+        
+    </div>    
+    <div class="col-sm-2">
+        <input type="button" [disabled]="date_inValid" class=" form-control btn btn-default" value="CheckAvailability" (click)="getSlots()">
+    </div>
+    <div class="col-sm-2">
+        <input type="button" class=" form-control btn btn-default" value="Book Directly" (click)="BookDirectly()" data-toggle="modal" data-target="#BookingFormModal"/>
+    </div>
+</div>

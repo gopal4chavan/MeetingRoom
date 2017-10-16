@@ -1,0 +1,71 @@
+<div class="modal-dialog">
+        <div class="modal-content">
+
+            <!--Form-->
+            <form #form='ngForm' (ngSubmit)="book()" novalidate [formGroup]="BookingForm">
+
+                <!--Header-->
+                <div class="modal-header">
+                    <button type="button" class="close" (click)="close()">&times;</button>
+                    <h4 class="modal-title">{{title}}</h4>
+                </div>
+                <!--Body-->
+                <div class="modal-body">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="subject plz...." formControlName="subject" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-control" placeholder="Description plz...." required formControlName="description"></textarea>
+                    </div>
+                    <div class="row" style="margin-bottom: 15px">
+                        <div class="col-md-6">
+                            <label>FromDate</label><br>
+                            <p-calendar [showIcon]="true" [minDate]="minDate" [maxDate]="maxDate" required formControlName="fromDate"></p-calendar>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label>ToDate</label><br>
+                            <p-calendar [showIcon]="true" [minDate]="BookingForm.value.fromDate" [maxDate]="maxDate" required formControlName="toDate"></p-calendar>
+                        </div>
+                    </div>
+
+                    <div class="row" style="margin-bottom: 15px">
+                        <div class="col-sm-6">
+                            <label>Location</label>
+                        <select class="form-control" formControlName="locationID" (change)=getRooms($event) required>
+                            <option *ngFor="let location of locations" [value]="location.locationID">{{location.locationName}}</option>
+                        </select>        
+                        </div>
+
+                        <div class="col-sm-6">
+                            <label>Room</label>
+                        <select class="form-control" required formControlName="roomID">
+                            <option *ngFor="let room of rooms" [value]="room.roomID">{{room.roomName}}</option>
+                        </select>    
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Start Time</label>
+                        <select class="form-control" formControlName="slotID">
+                            <option *ngFor="let slot of slots" [value]="slot.slotID">{{slot.slot}}</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Duration</label>
+                        <select class="form-control" formControlName="slotCount">
+                            <option *ngFor="let duration of durationList" [value]="duration.id">{{duration.value}}</option>
+                        </select>
+                    </div>
+                    <div class="alert alert-danger" *ngIf="failureFlag">
+                        <p> Cannot Book for the specified Date and time plz check the available slots </p>
+                    </div>
+                </div>
+                <!--Footer-->
+                <div class="modal-footer">                    
+                    <button type="submit" class="btn btn-success">submit</button>
+                    <button type="button" class="btn btn-default" (click)="cancel()">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>

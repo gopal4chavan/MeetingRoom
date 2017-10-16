@@ -1,0 +1,29 @@
+<div class="modal-dialog">
+    <div class="modal-content">
+
+        <div class="modal-header">
+            <button type="button" class="close" (click)="close()">&times;</button>
+            <h4 class="modal-title">SuccessFully Booked</h4>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="form-control">{{bookingDetails.subject}}</div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">{{bookingDetails.fromDate}}</div>
+                <div class="col-sm-6">{{bookingDetails.toDate}}</div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">{{bookingDetails.locationName}}</div>
+                <div class="col-sm-6">{{bookingDetails.roomName}}</div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">{{bookingDetails.slot}}</div>
+                <div class="col-sm-6">{{bookingDetails.slotCount*30}} min</div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary" (click)="confirm()">Close</button>
+        </div>
+    </div>
+</div>
