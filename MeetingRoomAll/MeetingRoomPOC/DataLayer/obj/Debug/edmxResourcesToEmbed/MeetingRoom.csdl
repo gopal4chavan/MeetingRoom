@@ -143,7 +143,7 @@
       <End Role="tblLocation" EntitySet="tblLocations" />
       <End Role="tblRoom" EntitySet="tblRooms" />
     </AssociationSet>
-    <FunctionImport Name="booking_proc">
+    <FunctionImport Name="sp_booking">
       <Parameter Name="createdBy" Mode="In" Type="Int32" />
       <Parameter Name="location_id" Mode="In" Type="Int32" />
       <Parameter Name="room_id" Mode="In" Type="Int32" />
@@ -154,7 +154,7 @@
       <Parameter Name="slot" Mode="In" Type="Int32" />
       <Parameter Name="slot_count" Mode="In" Type="Int32" />
     </FunctionImport>
-    <FunctionImport Name="update_booking_proc">
+    <FunctionImport Name="sp_update_booking">
       <Parameter Name="bookingID" Mode="In" Type="Int32" />
       <Parameter Name="createdBy" Mode="In" Type="Int32" />
       <Parameter Name="location_id" Mode="In" Type="Int32" />

@@ -33,7 +33,7 @@ namespace DataLayer
         public virtual DbSet<tblRoom> tblRooms { get; set; }
         public virtual DbSet<tblSlot> tblSlots { get; set; }
     
-        public virtual int booking_proc(Nullable<int> createdBy, Nullable<int> location_id, Nullable<int> room_id, string subject, string description, Nullable<System.DateTime> fromDate, Nullable<System.DateTime> toDate, Nullable<int> slot, Nullable<int> slot_count)
+        public virtual int sp_booking(Nullable<int> createdBy, Nullable<int> location_id, Nullable<int> room_id, string subject, string description, Nullable<System.DateTime> fromDate, Nullable<System.DateTime> toDate, Nullable<int> slot, Nullable<int> slot_count)
         {
             var createdByParameter = createdBy.HasValue ?
                 new ObjectParameter("createdBy", createdBy) :
@@ -71,10 +71,10 @@ namespace DataLayer
                 new ObjectParameter("slot_count", slot_count) :
                 new ObjectParameter("slot_count", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("booking_proc", createdByParameter, location_idParameter, room_idParameter, subjectParameter, descriptionParameter, fromDateParameter, toDateParameter, slotParameter, slot_countParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_booking", createdByParameter, location_idParameter, room_idParameter, subjectParameter, descriptionParameter, fromDateParameter, toDateParameter, slotParameter, slot_countParameter);
         }
     
-        public virtual int update_booking_proc(Nullable<int> bookingID, Nullable<int> createdBy, Nullable<int> location_id, Nullable<int> room_id, string subject, string description, Nullable<System.DateTime> fromDate, Nullable<System.DateTime> toDate, Nullable<int> slot, Nullable<int> slot_count)
+        public virtual int sp_update_booking(Nullable<int> bookingID, Nullable<int> createdBy, Nullable<int> location_id, Nullable<int> room_id, string subject, string description, Nullable<System.DateTime> fromDate, Nullable<System.DateTime> toDate, Nullable<int> slot, Nullable<int> slot_count)
         {
             var bookingIDParameter = bookingID.HasValue ?
                 new ObjectParameter("bookingID", bookingID) :
@@ -116,7 +116,7 @@ namespace DataLayer
                 new ObjectParameter("slot_count", slot_count) :
                 new ObjectParameter("slot_count", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("update_booking_proc", bookingIDParameter, createdByParameter, location_idParameter, room_idParameter, subjectParameter, descriptionParameter, fromDateParameter, toDateParameter, slotParameter, slot_countParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_update_booking", bookingIDParameter, createdByParameter, location_idParameter, room_idParameter, subjectParameter, descriptionParameter, fromDateParameter, toDateParameter, slotParameter, slot_countParameter);
         }
     }
 }

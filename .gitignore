@@ -1,0 +1,4 @@
+node_modules/
+build/
+[Bb]in/
+MeetingRoomAll/Angular/package-lock.json

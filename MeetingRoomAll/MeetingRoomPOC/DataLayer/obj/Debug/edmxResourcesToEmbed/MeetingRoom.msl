@@ -51,7 +51,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <FunctionImportMapping FunctionImportName="booking_proc" FunctionName="AngularPOCModel.Store.booking_proc" />
-    <FunctionImportMapping FunctionImportName="update_booking_proc" FunctionName="AngularPOCModel.Store.update_booking_proc" />
+    <FunctionImportMapping FunctionImportName="sp_booking" FunctionName="AngularPOCModel.Store.sp_booking" />
+    <FunctionImportMapping FunctionImportName="sp_update_booking" FunctionName="AngularPOCModel.Store.sp_update_booking" />
   </EntityContainerMapping>
 </Mapping>

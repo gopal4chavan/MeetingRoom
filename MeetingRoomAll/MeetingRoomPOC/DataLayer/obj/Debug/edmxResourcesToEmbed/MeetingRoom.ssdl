@@ -107,7 +107,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Function Name="booking_proc" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+  <Function Name="sp_booking" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="createdBy" Type="int" Mode="In" />
     <Parameter Name="location_id" Type="int" Mode="In" />
     <Parameter Name="room_id" Type="int" Mode="In" />
@@ -118,7 +118,7 @@
     <Parameter Name="slot" Type="int" Mode="In" />
     <Parameter Name="slot_count" Type="int" Mode="In" />
   </Function>
-  <Function Name="update_booking_proc" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+  <Function Name="sp_update_booking" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="bookingID" Type="int" Mode="In" />
     <Parameter Name="createdBy" Type="int" Mode="In" />
     <Parameter Name="location_id" Type="int" Mode="In" />

@@ -8,3 +8,8 @@ C:\Users\gopal.chavan\Desktop\Angular\MeetingRoom(POC)\New folder\MeetingRoomPOC
 C:\Users\gopal.chavan\Desktop\Angular\MeetingRoom(POC)\New folder\MeetingRoomPOC\DomainLayer\obj\Debug\DomainLayer.csprojResolveAssemblyReference.cache
 C:\Users\gopal.chavan\Desktop\Angular\MeetingRoom(POC)\New folder\MeetingRoomPOC\DomainLayer\obj\Debug\DomainLayer.dll
 C:\Users\gopal.chavan\Desktop\Angular\MeetingRoom(POC)\New folder\MeetingRoomPOC\DomainLayer\obj\Debug\DomainLayer.pdb
+D:\MeetingRoomRepo\MeetingRoomAll\MeetingRoomPOC\DomainLayer\bin\Debug\DomainLayer.dll
+D:\MeetingRoomRepo\MeetingRoomAll\MeetingRoomPOC\DomainLayer\bin\Debug\DomainLayer.pdb
+D:\MeetingRoomRepo\MeetingRoomAll\MeetingRoomPOC\DomainLayer\obj\Debug\DomainLayer.csprojResolveAssemblyReference.cache
+D:\MeetingRoomRepo\MeetingRoomAll\MeetingRoomPOC\DomainLayer\obj\Debug\DomainLayer.dll
+D:\MeetingRoomRepo\MeetingRoomAll\MeetingRoomPOC\DomainLayer\obj\Debug\DomainLayer.pdb

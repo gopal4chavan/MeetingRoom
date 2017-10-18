@@ -20,7 +20,7 @@ namespace Repo
 
                 using (db = new AngularPOCEntities())
                 {
-                    db.booking_proc(
+                    db.sp_booking(
                         details.createdBy,
                         details.location_id,
                         details.room_id,
@@ -66,28 +66,6 @@ namespace Repo
                 throw;
             }
         }
-
-        //public string DeleteSlot(int bookingID,int slotID,DateTime date)
-        //{
-        //    try
-        //    {
-        //        using (db = new AngularPOCEntities())
-        //        {
-        //            db.tbl_Booking_Date.RemoveRange(db.tbl_Booking_Date.Where(result => result.bookingID == bookingID && result.slotID==slotID && result.date==date));
-        //            int count = db.tbl_Booking_Date.Where(result => result.bookingID == bookingID).Count();
-        //            if (count==0)
-        //            {
-        //                db.tblBookings.RemoveRange(db.tblBookings.Where(res => res.bookingID == bookingID));
-        //            }                    
-        //            db.SaveChanges();
-        //            return "success";
-        //        }
-        //    }
-        //    catch(Exception e)
-        //    {
-        //        throw;
-        //    }
-        //}
         public string DeleteDay(int bookingID,DateTime date)
         {
             try
@@ -134,7 +112,7 @@ namespace Repo
 
                 using (db = new AngularPOCEntities())
                 {
-                    db.update_booking_proc(
+                    db.sp_update_booking(
                         bookingID,
                         details.createdBy,
                         details.location_id,
