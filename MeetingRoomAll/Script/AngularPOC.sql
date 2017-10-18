@@ -9,7 +9,7 @@
 --create table tblRoom(
 --roomID int,
 --roomName varchar(30) NOT NULL,
---location_id int  NOT NULL,
+--location_ int  NOT NULL,
 --CONSTRAINT roomID_pk PRIMARY KEY(roomID),
 --CONSTRAINT locationID_fk FOREIGN KEY (location_id) REFERENCES tblLocation(locationID)
 --);
@@ -32,22 +32,31 @@
 --timestamp SMALLDATETIME NOT NULL,
 --fromDate DATE NOT NULL,
 --toDate DATE NOT NULL,
+--slot_id int NOT NULL,
+--slot_count int NOT NULL,
 --subject VARCHAR(60) NOT NULL,
 --description VARCHAR(250) NOT NULL,
+--type varchar(20) NOT NULL,
 --CONSTRAINT bookingID_pk PRIMARY KEY(bookingID),
 --CONSTRAINT location_id_fk FOREIGN KEY (location_id) REFERENCES tblLocation(locationID),
---CONSTRAINT room_id_fk FOREIGN KEY (room_id) REFERENCES tblRoom(roomID)
+--CONSTRAINT room_id_fk FOREIGN KEY (room_id) REFERENCES tblRoom(roomID),
+--CONSTRAINT slot_id_fk FOREIGN KEY (slot_id) REFERENCES tblSlot(slotID)
 --);
 
 --------------------------------------------------------------------------------------------	Date-Booking Table
 --CREATE TABLE tbl_Booking_Date(
---bookingID int,
---location_room_id varchar(10) NOT NULL,
+--S_No INT IDENTITY(1,1) NOT NULL,
+--bookingID INT,
+--locationID INT NOT NULL,
+--roomID INT NOT NULL,
 --date date NOT NULL,
 --slotID int NOT NULL,
---CONSTRAINT booking_date_pk PRIMARY KEY(location_room_ID,date,slotID),
---CONSTRAINT bookingID_fk FOREIGN KEY (bookingID) REFERENCES tblBooking(bookingID),
---CONSTRAINT slotID_fk FOREIGN KEY (slotID) REFERENCES tblSlot(slotID)
+--status VARCHAR(30) NULL,
+--CONSTRAINT S_No_pk PRIMARY KEY(S_No),
+--CONSTRAINT FK_tbl_Booking_Date_bookingID FOREIGN KEY (bookingID) REFERENCES tblBooking(bookingID),
+--CONSTRAINT FK_tbl_Booking_Date_location_id FOREIGN KEY (location_id) REFERENCES tblLocation(locationID),
+--CONSTRAINT FK_tbl_Booking_Date_room_id FOREIGN KEY (room_id) REFERENCES tblRoom(roomID),
+--CONSTRAINT FK_tbl_Booking_Date_slot_id FOREIGN KEY (slot_id) REFERENCES tblSlot(slotID)
 --);
 
 --------------------------------------------------------------------------------------------	Booking table and Date-Booking table store procedure
