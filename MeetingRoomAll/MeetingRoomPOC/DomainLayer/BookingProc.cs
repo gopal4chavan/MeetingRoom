@@ -16,6 +16,7 @@ namespace DomainLayer
         public DateTime fromDate { get; set; }
         public DateTime toDate { get; set; }
         public int slot_id { get; set; }
+
         public int slot_count { get; set; }
     }
 }
