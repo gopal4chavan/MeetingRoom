@@ -159,7 +159,6 @@
 --);
 
 ------------------------------------------------------------------------------------------	Booking table and Date-Booking table store procedure
-
 --CREATE PROCEDURE SP_Booking
 --@CreatedBy INT,
 --@LocationID INT,
@@ -168,7 +167,7 @@
 --@Description VARCHAR(250),
 --@FromDate DATE,
 --@ToDate DATE,
---@Slot INT,
+--@SlotID INT,
 --@SlotCount INT
 --AS
 --BEGIN
@@ -181,7 +180,7 @@
 --		ELSE 
 --		BEGIN
 --			INSERT INTO TblBooking(CreatedBy,LocationID,RoomID,TimeStamp,FromDate,ToDate,SlotID,SlotCount ,Subject,Description,Type)
---			VALUES(@CreatedBy,@LocationID,@RoomID,CURRENT_TIMESTAMP,@FromDate,@ToDate,@Slot,@SlotCount,@Subject,@Description,'NORMAL');
+--			VALUES(@CreatedBy,@LocationID,@RoomID,CURRENT_TIMESTAMP,@FromDate,@ToDate,@SlotID,@SlotCount,@Subject,@Description,'NORMAL');
 
 --			DECLARE @BookingID INT;
 --			SET @BookingID=(SELECT max(BookingID) FROM TblBooking);
@@ -192,17 +191,17 @@
 --			BEGIN
 --				WHILE(@FD <= @TD)
 --				BEGIN							
---					IF NOT EXISTS(SELECT 1 FROM TblBookingDate WHERE LocationID=@LocationID AND RoomID=@RoomID AND Date=@FD AND SlotID=@Slot AND Status='ACTIVE')
+--					IF NOT EXISTS(SELECT 1 FROM TblBookingDate WHERE LocationID=@LocationID AND RoomID=@RoomID AND Date=@FD AND SlotID=@SlotID AND Status='ACTIVE')
 --					BEGIN
 --						INSERT INTO  TblBookingDate (BookingID,LocationID,RoomID,Date,SlotID,Status,StatusUpdated)
---							VALUES(@BookingID,@LocationID,@RoomID,@FD,@Slot,'ACTIVE',NULL);
+--							VALUES(@BookingID,@LocationID,@RoomID,@FD,@SlotID,'ACTIVE',NULL);
 --						SET @FD = DATEADD(DAY,1,@FD);					
 --					END
 --					ELSE
 --						RAISERROR(N'The current Booking overlaps the Existing booking',16,1);
 --				END
 --				SET @FD=@FromDate;
---				SET @Slot=@Slot+1;
+--				SET @SlotID=@SlotID+1;
 --				SET @Count=@Count+1;
 --			END	
 --			COMMIT TRAN;
@@ -223,102 +222,84 @@
 --@Description = 'Description',
 --@FromDate = '2017/08/25',
 --@ToDate = '2017/08/29',
---@Slot = 1,
+--@SlotID = 1,
 --@SlotCount = 2;
 
 ----------------------------------------------------------------------------------------- Update store procdure	
-CREATE procedure SP_UpdateBooking
-@BookingID INT,
-@CreatedBy INT,
-@LocationID INT,
-@RoomID INT,
-@Subject VARCHAR(60),
-@Description VARCHAR(250),
-@FromDate DATE,
-@ToDate DATE,
-@Slot INT,
-@SlotCount INT,
-@EditSlots BIT
-AS
-BEGIN	
-	BEGIN TRY
-		BEGIN TRAN
-		IF(@SlotCount>4 OR @SlotCount<1)
-			RAISERROR(N'Invalid number of Slots',16,1);
-		ELSE IF(@FromDate>@ToDate OR DATEDIFF(DAY, @FromDate, @ToDate)>30)
-			RAISERROR(N'Invalid Date Range',16,1);
-		ELSE IF(@EditSlots=1)
-		BEGIN
-			UPDATE TblBooking 			
-			SET LocationID=@LocationID,RoomID=@RoomID,TimeStamp=CURRENT_TIMESTAMP,Subject=@Subject,Description=@Description,FromDate=@FromDate,ToDate=@ToDate
-			WHERE BookingID=@BookingID AND CreatedBy=@CreatedBy;
+--Alter procedure SP_UpdateBooking
+--@BookingID INT,
+--@CreatedBy INT,
+--@LocationID INT,
+--@RoomID INT,
+--@Subject VARCHAR(60),
+--@Description VARCHAR(250),
+--@FromDate DATE,
+--@ToDate DATE,
+--@SlotID INT,
+--@SlotCount INT,
+--@EditSlots BIT
+--AS
+--BEGIN	
+--	BEGIN TRY
+--		BEGIN TRAN
+--		IF(@SlotCount>4 OR @SlotCount<1)
+--			RAISERROR(N'Invalid number of Slots',16,1);
+--		ELSE IF(@FromDate>@ToDate OR DATEDIFF(DAY, @FromDate, @ToDate)>30)
+--			RAISERROR(N'Invalid Date Range',16,1);
+--		ELSE IF(@EditSlots=1)
+--		BEGIN
+--			UPDATE TblBooking 			
+--			SET LocationID=@LocationID,RoomID=@RoomID,TimeStamp=CURRENT_TIMESTAMP,Subject=@Subject,Description=@Description,FromDate=@FromDate,ToDate=@ToDate,SlotID=@SlotID,@SlotCount=@SlotCount
+--			WHERE BookingID=@BookingID AND CreatedBy=@CreatedBy;
 
-			UPDATE TblBookingDate
-			SET Status='TEMP_EDITED',StatusUpdated=CURRENT_TIMESTAMP
-			WHERE BookingID=@BookingID AND Status='ACTIVE'
+--			UPDATE TblBookingDate
+--			SET Status='TEMP_EDITED',StatusUpdated=CURRENT_TIMESTAMP
+--			WHERE BookingID=@BookingID AND Status='ACTIVE'
 
-			DECLARE @FD DATE = @FromDate;
-			DECLARE @TD DATE = @ToDate;
-			DECLARE  @Count INT= 0;		
+--			DECLARE @FD DATE = @FromDate;
+--			DECLARE @TD DATE = @ToDate;
+--			DECLARE  @Count INT= 0;		
 
-			WHILE(@Count<@SlotCount)		
-			BEGIN
-				WHILE(@FD <= @TD)
-				BEGIN				
-					IF NOT EXISTS(SELECT 1 FROM TblBookingDate WHERE LocationID=@LocationID AND RoomID=@RoomID AND Date=@FD AND SlotID=@Slot AND Status='ACTIVE')
-					BEGIN
-						IF EXISTS(SELECT 1 FROM TblBookingDate WHERE LocationID=@LocationID AND RoomID=@RoomID AND Date=@FD AND SlotID=@Slot AND Status='TEMP_EDITED')
-							UPDATE TblBookingDate SET Status='ACTIVE' WHERE LocationID=@LocationID AND RoomID=@RoomID AND Date=@FD AND SlotID=@Slot;
-						ELSE
-							INSERT INTO  TblBookingDate (BookingID,LocationID,RoomID,Date,SlotID,Status,StatusUpdated)
-								VALUES(@BookingID,@LocationID,@RoomID,@FD,@Slot,'ACTIVE',NULL);
-						SET @FD = DATEADD(DAY,1,@FD);			
-					END
-					ELSE
-						RAISERROR(N'The current Booking overlaps the Existing booking',16,1);				
-				END
-				SET @FD=@FromDate;
-				SET @Slot=@Slot+1;
-				SET @Count=@Count+1;
-			END
-			UPDATE TblBookingDate SET Status='EDITED' Where BookingID=@BookingID AND Status='TEMP_EDITED';					
-			COMMIT TRAN;
-		END
-	END TRY
-	BEGIN CATCH					
-		ROLLBACK TRAN;
-		DECLARE @ERRORMSG VARCHAR(350) = ERROR_MESSAGE();
-		RAISERROR(@ErrorMsg,16,1);
-	END CATCH
-END
+--			WHILE(@Count<@SlotCount)		
+--			BEGIN
+--				WHILE(@FD <= @TD)
+--				BEGIN				
+--					IF NOT EXISTS(SELECT 1 FROM TblBookingDate WHERE LocationID=@LocationID AND RoomID=@RoomID AND Date=@FD AND SlotID=@SlotID AND Status='ACTIVE')
+--					BEGIN
+--						IF NOT EXISTS(SELECT 1 FROM TblBookingDate WHERE LocationID=@LocationID AND RoomID=@RoomID AND Date=@FD AND SlotID=@SlotID AND Status='TEMP_EDITED')
+--							INSERT INTO  TblBookingDate (BookingID,LocationID,RoomID,Date,SlotID,Status,StatusUpdated)
+--								VALUES(@BookingID,@LocationID,@RoomID,@FD,@SlotID,'ACTIVE',NULL);
+--						ELSE
+--							UPDATE TblBookingDate SET Status='ACTIVE',StatusUpdated=NULL WHERE LocationID=@LocationID AND RoomID=@RoomID AND Date=@FD AND SlotID=@SlotID;							
+--						SET @FD = DATEADD(DAY,1,@FD);			
+--					END
+--					ELSE
+--						RAISERROR(N'The current Booking overlaps the Existing booking',16,1);				
+--				END
+--				SET @FD=@FromDate;
+--				SET @SlotID=@SlotID+1;
+--				SET @Count=@Count+1;
+--			END
+--			UPDATE TblBookingDate SET Status='EDITED' Where BookingID=@BookingID AND Status='TEMP_EDITED';					
+--			COMMIT TRAN;
+--		END
+--	END TRY
+--	BEGIN CATCH					
+--		ROLLBACK TRAN;
+--		DECLARE @ERRORMSG VARCHAR(350) = ERROR_MESSAGE();
+--		RAISERROR(@ErrorMsg,16,1);
+--	END CATCH
+--END
 
-exec SP_UpdateBooking
-@BookingID=23,
-@CreatedBy=1,
-@LocationID=1,
-@RoomID=1,
-@Subject='123',
-@Description='lkasfdj;laskdjf;laskdjf',
-@FromDate='2017-08-26',
-@ToDate='2017-08-28',
-@Slot=3,
-@SlotCount=2,
-@EditSlots=1;
-
-select * from TblBooking;
-select * from TblBookingDate;
-------------------------------------------------------------------------------------------	EXAMPLES
-
-------------------------------------------------------------------------------------------	Store procedure execution
----------------------------------------------------------------------------------------------------------------------------------------
-exec sp_update_booking
-@bookingID=13,
-@createdBy=1,
-@location_id=1,
-@room_id=1,
-@subject='123',
-@description='lkasfdj;laskdjf;laskdjf',
-@fromDate='9-13-2017',
-@toDate='9-15-2017',
-@Slot=2,
-@Slot_count=1;
+--exec SP_UpdateBooking
+--@BookingID=3,
+--@CreatedBy=1,
+--@LocationID=1,
+--@RoomID=1,
+--@Subject='123',
+--@Description='lkf',
+--@FromDate='2017-08-26',
+--@ToDate='2017-08-27',
+--@SlotID=2,
+--@SlotCount=2,
+--@EditSlots=1;
