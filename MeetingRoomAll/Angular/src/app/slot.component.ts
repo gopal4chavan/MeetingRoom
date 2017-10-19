@@ -49,19 +49,16 @@ export class SlotsComponent implements OnInit, DoCheck {
 
     ngOnInit(): void {
         this.service.getBookedSlots(this.primaryDetails.loc_id, this.primaryDetails.room_id)
+            .finally(()=>console.log(this.BookedSlotsDetails))
             .subscribe
             (
-            res => this.BookedSlotsDetails = res,
-            (error) => console.log(error),
+                res => this.BookedSlotsDetails = res,
+                (error) => console.log(error),
             () => {
                 this.BookedSlots = [];
-                for (let i = 0; i < this.BookedSlotsDetails.length; i++) {
-                    let temp_createdBy = this.BookedSlotsDetails[i].createdBy;
-                    let temp_bookingID = this.BookedSlotsDetails[i].bookingID;
-                    for (let j = 0; j < this.BookedSlotsDetails[i].bookedSlots.length; j++) {
-                        this.BookedSlotsDetails[i].bookedSlots[j].bookingID = temp_bookingID;
-                        this.BookedSlotsDetails[i].bookedSlots[j].createdBy = temp_createdBy;
-                        this.BookedSlots.push(this.BookedSlotsDetails[i].bookedSlots[j]);
+                for (let i = 0; i < this.BookedSlotsDetails.length; i++) {                    
+                    for (let j = 0; j < this.BookedSlotsDetails[i].BookedSlots.length; j++) {
+                            this.BookedSlots.push(this.BookedSlotsDetails[i].BookedSlots[j]);
                     }
                 }
 
@@ -98,7 +95,9 @@ export class SlotsComponent implements OnInit, DoCheck {
             null,
             new Date(date),
             null,
-            slot.slotID,
+            null,
+            null,
+            slot.SlotID,
             null,
             null);
 
@@ -112,25 +111,27 @@ export class SlotsComponent implements OnInit, DoCheck {
 
         this.viewDets = { createdBy: null, bookingID: null, subject: null, description: null, timeStamp: null };
 
-        let elem = this.BookedSlots.find(element => element.slotID == slot.slotID && (new Date(element.date)).toDateString() == (new Date(date)).toDateString());
-        let res = this.BookedSlotsDetails.find(ele => ele.bookingID == elem.bookingID);
-        this.viewDets = { bookingID: res.bookingID, createdBy: res.createdBy, timeStamp: res.timeStamp, subject: res.subject, description: res.description }
+        let elem = this.BookedSlots.find(element => element.SlotID == slot.SlotID && (new Date(element.Date)).toDateString() == (new Date(date)).toDateString());
+        let res = this.BookedSlotsDetails.find(ele => ele.BookingID == elem.BookingID);
+        this.viewDets = { bookingID: res.BookingID, createdBy: res.CreatedBy, timeStamp: res.TimeStamp, subject: res.Subject, description: res.Description }
         // let bookingDetails;
         // this.service.getDetails(res.bookingID).subscribe(res=>bookingDetails=res);
         this.dialogService
-            .addDialog(BookedFormModalComponent, { title: "Booking Details", bookingID:res.bookingID,selectedDate:date,Slot:slot }, { backdropColor: 'rgba(0,0,0,0.5)' })
+            .addDialog(BookedFormModalComponent, { title: "Booking Details", bookingID:res.BookingID,selectedDate:date,Slot:slot }, { backdropColor: 'rgba(0,0,0,0.5)' })
             .subscribe(result => { if (result) { this.ngOnInit() } });
     }
 
-    CheckIfBooked(date: Date, slot: ISlot) {
-        let elem = this.BookedSlots.find(element => element.slotID == slot.slotID && (new Date(element.date)).toDateString() == (new Date(date)).toDateString());
+    CheckIfBooked(date: Date, slot: ISlot) {        
+        let elem = this.BookedSlots.find(element => element.SlotID == slot.SlotID && (new Date(element.Date)).toDateString() == (new Date(date)).toDateString());
         let daySlots;
+        // console.log(elem);
+        // console.log(this.BookedSlots);
 
         if (elem) {
-            let res = this.BookedSlotsDetails.find(ele => ele.bookingID == elem.bookingID);
-            daySlots = this.BookedSlots.filter(el => new Date(el.date).toDateString() == (new Date(date)).toDateString() && el.bookingID == elem.bookingID);
-            this.subject = res.subject;
-            this.bookingID = res.bookingID;
+            let res = this.BookedSlotsDetails.find(ele => ele.BookingID == elem.BookingID);
+            daySlots = this.BookedSlots.filter(el => new Date(el.Date).toDateString() == (new Date(date)).toDateString() && el.BookingID == elem.BookingID);
+            this.subject = res.Subject;
+            this.bookingID = res.BookingID;
             this.slotcount = daySlots.length;
             let index = daySlots.indexOf(elem);
 
@@ -141,9 +142,9 @@ export class SlotsComponent implements OnInit, DoCheck {
         return false;
     }
     CheckIfLoginSlot(date: Date, slot: ISlot) {
-        let elem = this.BookedSlots.find(element => element.slotID == slot.slotID && (new Date(element.date)).toDateString() == (new Date(date)).toDateString());
+        let elem = this.BookedSlots.find(element => element.SlotID == slot.SlotID && (new Date(element.Date)).toDateString() == (new Date(date)).toDateString());
         if (elem) {
-            if (localStorage.getItem("userid") == elem.createdBy.toString()) {
+            if (localStorage.getItem("userid") == elem.CreatedBy.toString()) {
                 return true;
             }
             else return false;

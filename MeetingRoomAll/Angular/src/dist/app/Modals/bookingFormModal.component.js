@@ -34,28 +34,22 @@ var BookingFormModalComponent = (function (_super) {
         var _this = this;
         this.slotService.getDuration().subscribe(function (result) { return _this.durationList = result; });
         this.mainService.getAllLocations()
-            .subscribe(function (result) { return _this.locations = result; }, function (error) { return console.log(error); }, function () { return console.log(_this.locations); });
+            .subscribe(function (result) { return _this.locations = result; }, function (error) { return console.log(error); });
         this.maxDate.setDate(this.maxDate.getDate() + 30);
         this.slotService.getSlots().subscribe(function (result) { return _this.slots = result; });
         this.BookingForm = this.fb.group(this.bookingFormDetails);
-        if (this.bookingFormDetails.locationID != null) {
+        if (this.bookingFormDetails.LocationID != null) {
             this.getRooms();
-            this.BookingForm.value.roomID = this.bookingFormDetails.roomID;
-            this.BookingForm.value.roomName = this.bookingFormDetails.roomName;
         }
     };
-    // confirm() {
-    //   // this.result = true;
-    //   // this.close();
-    // }
     BookingFormModalComponent.prototype.cancel = function () {
         this.close();
     };
     BookingFormModalComponent.prototype.getRooms = function () {
         var _this = this;
-        var locationid = this.BookingForm.value.locationID;
+        var locationid = this.BookingForm.value.LocationID;
         this.mainService.getAllRooms(locationid)
-            .subscribe(function (result) { return _this.rooms = result; }, function (error) { return console.log(error); }, function () { console.log(_this.rooms); });
+            .subscribe(function (result) { return _this.rooms = result; }, function (error) { return console.log(error); });
     };
     BookingFormModalComponent.prototype.book = function () {
         var _this = this;
@@ -67,16 +61,16 @@ var BookingFormModalComponent = (function (_super) {
                 .subscribe(function (res) { result_1 = res; }, function (error) { console.log(error); });
         }
         else {
-            var locID_1 = this.BookingForm.value.locationID;
-            var roomID_1 = this.BookingForm.value.roomID;
-            var slot_id_1 = this.BookingForm.value.slotID;
-            this.BookingForm.value.createdby = localStorage.getItem("userid");
-            this.BookingForm.value.locationName = this.locations.find(function (elem) { return elem.locationID == locID_1; }).locationName;
-            this.BookingForm.value.roomName = this.rooms.find(function (elem) { return elem.roomID == roomID_1; }).roomName;
-            this.BookingForm.value.slot = this.slots.find(function (elem) { return elem.slotID == slot_id_1; }).slot;
+            var locID_1 = this.BookingForm.value.LocationID;
+            var roomID_1 = this.BookingForm.value.RoomID;
+            var slot_id_1 = this.BookingForm.value.SlotID;
+            console.log(this.BookingForm.value);
+            this.BookingForm.value.Createdby = localStorage.getItem("userid");
+            this.BookingForm.value.LocationName = this.locations.find(function (elem) { return elem.LocationID == locID_1; }).LocationName;
+            this.BookingForm.value.RoomName = this.rooms.find(function (elem) { return elem.RoomID == roomID_1; }).RoomName;
+            this.BookingForm.value.Slot = this.slots.find(function (elem) { return elem.SlotID == slot_id_1; }).Slot;
             var result_2;
-            this.slotService
-                .bookRoom(this.BookingForm.value)
+            this.slotService.bookRoom(this.BookingForm.value)
                 .finally(function () { _this.bookedSuccess(result_2); })
                 .subscribe(function (res) { result_2 = res; }, function (error) { console.log(error); });
         }

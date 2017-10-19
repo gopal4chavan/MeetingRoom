@@ -1,21 +1,21 @@
 // ------------------------------------------------------------------------------   simple table details
 // For Location Details
 export interface ILocation {
-    locationID: number;
-    locationName: string;
+    LocationID: number;
+    LocationName: string;
 }
 
 // For Room Details
 export interface IRoom {
-    roomID: number;
-    roomName: string;
-    location_id: number;
+    RoomID: number;
+    RoomName: string;
+    LocationID: number;
 }
 
 // For Slot Details
 export interface ISlot {
-    slotID: number;
-    slot: string;
+    SlotID: number;
+    Slot: string;
 }
 
 export interface IPrimaryDetails {
@@ -36,18 +36,18 @@ export interface IViewDetails {
 }
 
 export interface IBookedSlot {
-    bookingID: number;
-    createdBy: number;
-    slotID: number;
-    date: Date;
+    BookingID: number;
+    CreatedBy: number;
+    SlotID: number;
+    Date: Date;
 }
 export interface IBookedSlotDetail {
-    bookingID: number;
-    createdBy: number;
-    timeStamp: Date;
-    subject: string;
-    description: string;
-    bookedSlots: IBookedSlot[];
+    BookingID: number;
+    CreatedBy: number;
+    TimeStamp: Date;
+    Subject: string;
+    Description: string;
+    BookedSlots: IBookedSlot[];
 }
 
 // ------------------------------------------------------------------------------   Form Details
@@ -80,18 +80,20 @@ export class IviewDet {
 }
 export class FormDetails {
     constructor(
-        public createdby: number,
-        public locationID: number,
-        public locationName: string,
-        public roomID: number,
-        public roomName: string,
-        public subject: string,
-        public description: string,
-        public fromDate: Date,
-        public toDate: Date,
-        public slotID: number,
-        public slot: string,
-        public slotCount: number) { }
+        public Createdby: number,
+        public LocationID: number,
+        public LocationName: string,
+        public RoomID: number,
+        public RoomName: string,
+        public Subject: string,
+        public Description: string,
+        public FD: Date,
+        public TD: Date,
+        public FromDate:string,
+        public ToDate:string,
+        public SlotID: number,
+        public Slot: string,
+        public SlotCount: number) { }
 }
 // ------------------------------------------------------------------------------   Duration Details
 export class Duration {

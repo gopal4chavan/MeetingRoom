@@ -32,18 +32,10 @@ var SlotService = (function () {
         return of_1.of(classes_1.DurationList).delay(500);
     };
     SlotService.prototype.bookRoom = function (formdet) {
-        var det = { createdby: null, description: null, subject: null, fromDate: null, toDate: null, location_id: null, room_id: null, slot_id: null, slot_count: null };
-        det.createdby = formdet.createdby;
-        det.description = formdet.description;
-        det.subject = formdet.subject;
-        det.fromDate = new Date(formdet.fromDate).toDateString();
-        det.toDate = new Date(formdet.toDate).toDateString();
-        det.location_id = formdet.locationID;
-        det.room_id = formdet.roomID;
-        det.slot_id = formdet.slotID;
-        det.slot_count = formdet.slotCount;
-        var re = { val: null };
-        return this.http.post(this.booking_url, det).map(function (result) { return result.json(); });
+        console.log(formdet);
+        formdet.FromDate = new Date(formdet.FD).toDateString();
+        formdet.ToDate = new Date(formdet.TD).toDateString();
+        return this.http.post(this.booking_url, formdet).map(function (result) { return result.json(); });
     };
     SlotService.prototype.getBookedSlots = function (location_id, room_id) {
         return this.http.get(this.booked_slots_url + ("locationid=" + location_id + "&roomid=" + room_id)).map(function (result) { return result.json(); });
@@ -58,7 +50,7 @@ var SlotService = (function () {
         return this.http.post(this.deleteslot_url + bookingID + ("&date=" + date + "&slotID=" + slotID), null).map(function (res) { return res.json(); });
     };
     SlotService.prototype.getDetails = function (bookingID) {
-        return this.http.post(this.details_url + bookingID, null).map(function (res) { return res.json(); });
+        return this.http.get(this.details_url + bookingID).map(function (res) { return res.json(); });
     };
     SlotService.prototype.updateBooking = function (bookingID, obj) {
         var det = { createdby: null, description: null, subject: null, fromDate: null, toDate: null, location_id: null, room_id: null, slot_id: null, slot_count: null };

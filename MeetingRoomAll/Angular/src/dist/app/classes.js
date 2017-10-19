@@ -22,19 +22,21 @@ var IviewDet = (function () {
 }());
 exports.IviewDet = IviewDet;
 var FormDetails = (function () {
-    function FormDetails(createdby, locationID, locationName, roomID, roomName, subject, description, fromDate, toDate, slotID, slot, slotCount) {
-        this.createdby = createdby;
-        this.locationID = locationID;
-        this.locationName = locationName;
-        this.roomID = roomID;
-        this.roomName = roomName;
-        this.subject = subject;
-        this.description = description;
-        this.fromDate = fromDate;
-        this.toDate = toDate;
-        this.slotID = slotID;
-        this.slot = slot;
-        this.slotCount = slotCount;
+    function FormDetails(Createdby, LocationID, LocationName, RoomID, RoomName, Subject, Description, FD, TD, FromDate, ToDate, SlotID, Slot, SlotCount) {
+        this.Createdby = Createdby;
+        this.LocationID = LocationID;
+        this.LocationName = LocationName;
+        this.RoomID = RoomID;
+        this.RoomName = RoomName;
+        this.Subject = Subject;
+        this.Description = Description;
+        this.FD = FD;
+        this.TD = TD;
+        this.FromDate = FromDate;
+        this.ToDate = ToDate;
+        this.SlotID = SlotID;
+        this.Slot = Slot;
+        this.SlotCount = SlotCount;
     }
     return FormDetails;
 }());

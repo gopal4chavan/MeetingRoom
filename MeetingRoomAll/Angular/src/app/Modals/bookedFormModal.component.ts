@@ -40,8 +40,8 @@ export class BookedFormModalComponent extends DialogComponent<ConfirmModel, bool
             () => {
                 if (this.bookingDetails) {
                     this.flag = true;
-                    this.bookingDetails.slot = this.Slot.slot;
-                    this.bookingDetails.slot_id = this.Slot.slotID;
+                    this.bookingDetails.slot = this.Slot.Slot;
+                    this.bookingDetails.slot_id = this.Slot.SlotID;
                 }
             });
 
@@ -93,7 +93,7 @@ export class BookedFormModalComponent extends DialogComponent<ConfirmModel, bool
             });
     }
     updateBooking() {
-        let temp_obj: FormDetails = new FormDetails(this.bookingDetails.createdBy, this.bookingDetails.location_id, this.bookingDetails.location_name, this.bookingDetails.room_id, this.bookingDetails.room_name, this.bookingDetails.subject, this.bookingDetails.description, new Date(this.bookingDetails.fromDate), new Date(this.bookingDetails.toDate), this.bookingDetails.slot_id, this.bookingDetails.slot, this.bookingDetails.slot_count);
+        let temp_obj: FormDetails = new FormDetails(this.bookingDetails.createdBy, this.bookingDetails.location_id, this.bookingDetails.location_name, this.bookingDetails.room_id, this.bookingDetails.room_name, this.bookingDetails.subject, this.bookingDetails.description, new Date(this.bookingDetails.fromDate), new Date(this.bookingDetails.toDate),null,null,this.bookingDetails.slot_id, this.bookingDetails.slot, this.bookingDetails.slot_count);
 
         this.dialogService
             .addDialog(BookingFormModalComponent, { title: "Booking Form", bookingFormDetails: temp_obj, bookingID: this.bookingID }, { backdropColor: 'rgba(0,0,0,0.5)' })

@@ -57,7 +57,7 @@ namespace Repo
                             TimeStamp = res.TimeStamp,
                             Subject = res.Subject,
                             Description = res.Description,
-                            BookedSlots = _db.TblBookingDates.Where(resp => res.BookingID == resp.BookingID).Select(r => new { BookingID=r.BookingID, slotID = r.SlotID, date = r.Date }).ToList()
+                            BookedSlots = _db.TblBookingDates.Where(resp => res.BookingID == resp.BookingID).Select(r => new { BookingID=r.BookingID,CreatedBy=res.CreatedBy, SlotID = r.SlotID, Date = r.Date }).ToList()
                         }).ToList();
                 }
             }

@@ -25,7 +25,7 @@ var MainService = (function () {
         return this.http.get(this.location_url, options).map(function (result) { return result.json(); });
     };
     MainService.prototype.getAllRooms = function (locationid) {
-        return this.http.post(this.room_url + locationid, "")
+        return this.http.get(this.room_url + locationid)
             .map(function (result) { return result.json(); });
     };
     MainService.prototype.getDuration = function () {

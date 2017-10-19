@@ -32,8 +32,8 @@ var BookedFormModalComponent = (function (_super) {
         this.slotService.getDetails(this.bookingID).subscribe(function (res) { return _this.bookingDetails = res; }, function (error) { }, function () {
             if (_this.bookingDetails) {
                 _this.flag = true;
-                _this.bookingDetails.slot = _this.Slot.slot;
-                _this.bookingDetails.slot_id = _this.Slot.slotID;
+                _this.bookingDetails.slot = _this.Slot.Slot;
+                _this.bookingDetails.slot_id = _this.Slot.SlotID;
             }
         });
     };
@@ -82,7 +82,7 @@ var BookedFormModalComponent = (function (_super) {
     };
     BookedFormModalComponent.prototype.updateBooking = function () {
         var _this = this;
-        var temp_obj = new classes_1.FormDetails(this.bookingDetails.createdBy, this.bookingDetails.location_id, this.bookingDetails.location_name, this.bookingDetails.room_id, this.bookingDetails.room_name, this.bookingDetails.subject, this.bookingDetails.description, new Date(this.bookingDetails.fromDate), new Date(this.bookingDetails.toDate), this.bookingDetails.slot_id, this.bookingDetails.slot, this.bookingDetails.slot_count);
+        var temp_obj = new classes_1.FormDetails(this.bookingDetails.createdBy, this.bookingDetails.location_id, this.bookingDetails.location_name, this.bookingDetails.room_id, this.bookingDetails.room_name, this.bookingDetails.subject, this.bookingDetails.description, new Date(this.bookingDetails.fromDate), new Date(this.bookingDetails.toDate), null, null, this.bookingDetails.slot_id, this.bookingDetails.slot, this.bookingDetails.slot_count);
         this.dialogService
             .addDialog(bookingFormModal_component_1.BookingFormModalComponent, { title: "Booking Form", bookingFormDetails: temp_obj, bookingID: this.bookingID }, { backdropColor: 'rgba(0,0,0,0.5)' })
             .subscribe(function (result) { if (result) {

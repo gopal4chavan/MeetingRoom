@@ -57,7 +57,7 @@ var MainComponent = (function () {
     };
     // To book room directly
     MainComponent.prototype.BookDirectly = function () {
-        var temp_form_det = new classes_1.FormDetails(null, null, null, null, null, null, null, null, null, null, null, null);
+        var temp_form_det = new classes_1.FormDetails(null, null, null, null, null, null, null, null, null, null, null, null, null, null);
         var disposable = this.dialogService
             .addDialog(bookingFormModal_component_1.BookingFormModalComponent, { title: "Header", bookingFormDetails: temp_form_det }, { backdropColor: 'rgba(0,0,0,0.5)' });
     };

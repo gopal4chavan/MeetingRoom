@@ -28,7 +28,7 @@ export class MainService {
 
 
     public getAllRooms(locationid:number): Observable<IRoom[]> {
-        return this.http.post(this.room_url+locationid,"")
+        return this.http.get(this.room_url+locationid)
             .map(result => result.json());
     }
     public getDuration():Observable<Duration[]>{

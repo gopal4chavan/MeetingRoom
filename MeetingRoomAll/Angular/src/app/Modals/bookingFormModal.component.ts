@@ -38,38 +38,30 @@ export class BookingFormModalComponent extends DialogComponent<ConfirmModel, boo
     this.slotService.getDuration().subscribe(result => this.durationList = result);
 
     this.mainService.getAllLocations()
-      .subscribe(result => this.locations = result,
-      (error) => console.log(error),
-      () => console.log(this.locations));
+      .subscribe(
+        (result) => this.locations = result,
+        (error) => console.log(error));
+
     this.maxDate.setDate(this.maxDate.getDate() + 30);
     this.slotService.getSlots().subscribe(result => this.slots = result);
 
-    this.BookingForm = this.fb.group(this.bookingFormDetails);
+    this.BookingForm = this.fb.group(this.bookingFormDetails);    
 
-
-    if (this.bookingFormDetails.locationID != null) {
-      this.getRooms();
-      this.BookingForm.value.roomID = this.bookingFormDetails.roomID;
-      this.BookingForm.value.roomName = this.bookingFormDetails.roomName;
+    if (this.bookingFormDetails.LocationID != null) {
+      this.getRooms();      
     }
   }
 
-  // confirm() {
-  //   // this.result = true;
-  //   // this.close();
-
-  // }
   cancel() {
     this.close();
   }
   getRooms() {
 
-    const locationid: number = this.BookingForm.value.locationID;
+    const locationid: number = this.BookingForm.value.LocationID;
     this.mainService.getAllRooms(locationid)
-      .subscribe(result => this.rooms = result,
-      (error) => console.log(error),
-      () => { console.log(this.rooms) }
-      );
+      .subscribe(
+        (result) => this.rooms = result,
+        (error) => console.log(error));
   }
   book() {
     if (this.bookingID) {
@@ -85,23 +77,21 @@ export class BookingFormModalComponent extends DialogComponent<ConfirmModel, boo
       
     }
     else {      
-      let locID = this.BookingForm.value.locationID;
-      let roomID = this.BookingForm.value.roomID;
-      let slot_id = this.BookingForm.value.slotID;
-
-      this.BookingForm.value.createdby = localStorage.getItem("userid");
-      this.BookingForm.value.locationName = this.locations.find(elem => elem.locationID == locID).locationName;
-      this.BookingForm.value.roomName = this.rooms.find(elem => elem.roomID == roomID).roomName;
-      this.BookingForm.value.slot = this.slots.find(elem => elem.slotID == slot_id).slot;
+      let locID = this.BookingForm.value.LocationID;
+      let roomID = this.BookingForm.value.RoomID;
+      let slot_id = this.BookingForm.value.SlotID;
+      console.log(this.BookingForm.value)
+      this.BookingForm.value.Createdby = localStorage.getItem("userid");
+      this.BookingForm.value.LocationName = this.locations.find(elem => elem.LocationID == locID).LocationName;
+      this.BookingForm.value.RoomName = this.rooms.find(elem => elem.RoomID == roomID).RoomName;
+      this.BookingForm.value.Slot = this.slots.find(elem => elem.SlotID == slot_id).Slot;
 
       let result: any;
-      this.slotService
-        .bookRoom(this.BookingForm.value)
+      this.slotService.bookRoom(this.BookingForm.value)
         .finally(() => { this.bookedSuccess(result); })
         .subscribe(
-        res => { result = res },
-        (error) => { console.log(error); },
-      );
+          (res) => { result = res },
+          (error) => { console.log(error)});
     }
   }
 

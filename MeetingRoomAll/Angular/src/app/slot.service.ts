@@ -30,18 +30,10 @@ export class SlotService {
     }
 
     public bookRoom(formdet:FormDetails):Observable<string>{
-        let det:Details={createdby:null,description:null,subject:null,fromDate:null,toDate:null,location_id:null,room_id:null,slot_id:null,slot_count:null};
-        det.createdby=formdet.createdby;
-        det.description=formdet.description;
-        det.subject=formdet.subject;
-        det.fromDate=new Date(formdet.fromDate).toDateString();
-        det.toDate=new Date(formdet.toDate).toDateString();
-        det.location_id=formdet.locationID;
-        det.room_id=formdet.roomID;
-        det.slot_id=formdet.slotID;
-        det.slot_count=formdet.slotCount;
-        let re:{val:any}={val:null};
-        return this.http.post(this.booking_url,det).map(result=>result.json());
+        console.log(formdet);
+        formdet.FromDate=new Date(formdet.FD).toDateString();
+        formdet.ToDate =new Date(formdet.TD).toDateString();
+        return this.http.post(this.booking_url,formdet).map(result=>result.json());
     }
 
     public getBookedSlots(location_id:number,room_id:number)
@@ -61,7 +53,7 @@ export class SlotService {
     }
     public getDetails(bookingID:number)
     {
-        return this.http.post(this.details_url+bookingID,null).map(res=>res.json());
+        return this.http.get(this.details_url+bookingID).map(res=>res.json());
     }
     public updateBooking(bookingID:number,obj:FormDetails){
         let det:Details={createdby:null,description:null,subject:null,fromDate:null,toDate:null,location_id:null,room_id:null,slot_id:null,slot_count:null};

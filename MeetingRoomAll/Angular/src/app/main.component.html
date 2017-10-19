@@ -2,13 +2,13 @@
     <div class="col-sm-3">
         <select class="form-control" (change)=getRooms($event) required id="location">
             <option value="" selected>Location</option>
-            <option *ngFor="let location of locations" id={{location.locationID}} value={{location.locationName}}>{{location.locationName}}</option>
+            <option *ngFor="let location of locations" id={{location.LocationID}} value={{location.LocationName}}>{{location.LocationName}}</option>
         </select>
     </div>
     <div class="col-sm-3">
         <select class="form-control" (change)="roomSelected($event)"required id="room">
             <option value="" selected>Room</option>
-            <option *ngFor="let room of rooms" id={{room.roomID}} value={{room.roomName}}>{{room.roomName}}</option>
+            <option *ngFor="let room of rooms" id={{room.RoomID}} value={{room.RoomName}}>{{room.RoomName}}</option>
         </select>
     </div>
     <div class="col-sm-2">        
