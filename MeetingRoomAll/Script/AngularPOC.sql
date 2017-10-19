@@ -335,3 +335,102 @@
 --@SlotID=4,
 --@SlotCount=2,
 --@EditSlots=0;
+
+----------------------------------------------------------------------------------------- Repeat Booking Proc
+
+--CREATE PROCEDURE SP_RepeatBooking
+--@CreatedBy INT,
+--@LocationID INT,
+--@RoomID INT,
+--@Subject VARCHAR(60),
+--@Description VARCHAR(250),
+--@MON BIT,
+--@TUE BIT,
+--@WED BIT,
+--@THU BIT,
+--@FRI BIT,
+--@SAT BIT,
+--@SUN BIT,
+--@StartOn DATE,
+--@EndOn DATE,
+--@SlotID INT,
+--@SlotCount INT
+--AS
+--BEGIN
+--	BEGIN TRY
+--		BEGIN TRAN
+--		IF(@SlotCount<0 OR @SlotCount>4)
+--			RAISERROR(N'Invalid SlotCount(Duration)',16,1);
+--		ELSE IF(@StartOn>@EndOn)
+--			RAISERROR(N'Invalid StartDate or EndDate',16,1);
+--		ELSE IF ((@SUN!=0 AND @SUN!=1) OR (@MON!=0 AND @MON!=1) OR (@TUE!=0 AND @TUE!=1) OR (@WED!=0 AND @WED!=1) OR (@THU!=0 AND @THU!=1) OR (@FRI!=0 AND @FRI!=1) OR (@SAT!=0 AND @SAT!=1))
+--					RAISERROR(N'Invalid WeekDays Details',16,1);
+--		ELSE 
+--		BEGIN
+--			INSERT INTO TblBooking(CreatedBy,LocationID,RoomID,TimeStamp,FromDate,ToDate,SlotID,SlotCount,Subject,Description,Type)
+--			VALUES(@CreatedBy,@LocationID,@RoomID,current_timestamp,@StartOn,@EndOn,@SlotID,@SlotCount,@Subject,@Description,'REPEAT');
+
+--			DECLARE @BookingID INT;
+--			SELECT @BookingID=MAX(BookingID) FROM TblBooking
+
+--			DECLARE @FD DATE = @StartOn;
+--			DECLARE @TD DATE = @EndOn;
+
+--			DECLARE @INDEX INT=1;
+
+--			DECLARE @TEMP_TBL TABLE(ID INT,Book BIT)
+--			INSERT @TEMP_TBL(ID,Book) VALUES(1,@SUN),(2,@MON),(3,@TUE),(4,@WED),(5,@THU),(6,@FRI),(7,@SAT);
+					
+--			WHILE(@INDEX<8)		
+--			BEGIN
+--				IF EXISTS(SELECT 1 FROM @TEMP_TBL WHERE ID=@INDEX AND Book=1)
+--				BEGIN
+--					DECLARE @TEMP_DATE DATE = DATEADD(DAY,(7-DATEPART(DW,@FD)+@INDEX)%7,@FD);
+--					WHILE(@TEMP_DATE <= @TD)
+--					BEGIN												
+--						DECLARE @Count INT = 1;
+--						DECLARE @TEMP_SID INT = @SlotID;
+--						WHILE(@Count<=@SlotCount)
+--						BEGIN							
+--							IF NOT EXISTS(SELECT 1 FROM TblBookingDate WHERE LocationID=@LocationID AND RoomID = @RoomID AND Date=@TEMP_DATE AND SlotID=@TEMP_SID AND Status='ACTIVE')
+--							BEGIN
+--								INSERT INTO  TblBookingDate(BookingID,LocationID,RoomID,Date,SlotID,Status,StatusUpdated)
+--									VALUES(@BookingID,@LocationID,@RoomID,@TEMP_DATE,@TEMP_SID,'ACTIVE',NULL);
+--							END
+--							ELSE
+--								RAISERROR(N'The current Booking overlaps the Existing booking',16,1);
+--							SET @Count=@Count+1;
+--							SET @TEMP_SID = @TEMP_SID+1;
+--						END
+--						SET @TEMP_DATE = DATEADD(DAY,7,@TEMP_DATE);
+--					END
+--				END	
+--				SET @INDEX=@INDEX+1;
+--			END
+--			COMMIT TRAN;
+--		END		
+--	END TRY
+--	BEGIN CATCH
+--		ROLLBACK TRAN;
+--		DECLARE @ERRORMSG VARCHAR(350) = ERROR_MESSAGE();
+--		RAISERROR(@ErrorMsg,16,1);
+--	END CATCH
+--END
+
+--exec SP_RepeatBooking
+--@CreatedBy = 1,
+--@LocationID = 1,
+--@RoomID = 1,
+--@Subject = 'SUB',
+--@Description = 'DESC',
+--@MON = 1,
+--@TUE = 1,
+--@WED = 1,
+--@THU = 1,
+--@FRI = 1,
+--@SAT = 1,
+--@SUN = 1,
+--@StartOn = '2017-10-20',
+--@EndOn = '2017-10-29',
+--@SlotID = 3,
+--@SlotCount =2  
