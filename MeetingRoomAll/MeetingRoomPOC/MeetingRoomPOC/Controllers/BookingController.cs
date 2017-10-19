@@ -42,19 +42,7 @@ namespace MeetingRoomPOC.Controllers
                 return SetErrorResponse(e.Message);
             }
         }
-        //[HttpPost]
-        //[Route("deleteslot")]
-        //public HttpResponseMessage DeleteSlot(int bookingID, int slotID, DateTime date)
-        //{
-        //    try
-        //    {
-        //        return Request.CreateResponse(HttpStatusCode.OK, _repoObj.DeleteSlot(bookingID, slotID, date));
-        //    }
-        //    catch(Exception e)
-        //    {
-        //        throw;
-        //    }
-        //}
+
         [HttpPost]
         [Route("deleteday")]
         public HttpResponseMessage DeleteDay(int bookingID, DateTime date)
@@ -84,18 +72,18 @@ namespace MeetingRoomPOC.Controllers
 
         [HttpPost]
         [Route("update")]
-        public HttpResponseMessage UpdateBooking(int bookingID,[FromBody]BookingTbl details)
+        public HttpResponseMessage UpdateBooking(int bookingID, [FromBody]BookingTbl details, bool bulkEdit)
         {
             try
             {
-                return Request.CreateResponse(HttpStatusCode.OK, _repoObj.UpdateBooking(bookingID,details));
+                return Request.CreateResponse(HttpStatusCode.OK, _repoObj.UpdateBooking(bookingID, details, bulkEdit));
             }
             catch (Exception e)
             {
                 throw;
             }
         }
-        [HttpPost]
+        [HttpGet]
         [Route("getdetails")]
         public HttpResponseMessage GetDetails(int bookingID)
         {

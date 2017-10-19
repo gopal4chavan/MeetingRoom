@@ -67,19 +67,19 @@
       <DependentUpon>MeetingRoom.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="tblBooking.cs">
+    <Compile Include="TblBooking.cs">
       <DependentUpon>MeetingRoom.tt</DependentUpon>
     </Compile>
-    <Compile Include="tblLocation.cs">
+    <Compile Include="TblBookingDate.cs">
       <DependentUpon>MeetingRoom.tt</DependentUpon>
     </Compile>
-    <Compile Include="tblRoom.cs">
+    <Compile Include="TblLocation.cs">
       <DependentUpon>MeetingRoom.tt</DependentUpon>
     </Compile>
-    <Compile Include="tblSlot.cs">
+    <Compile Include="TblRoom.cs">
       <DependentUpon>MeetingRoom.tt</DependentUpon>
     </Compile>
-    <Compile Include="tbl_Booking_Date.cs">
+    <Compile Include="TblSlot.cs">
       <DependentUpon>MeetingRoom.tt</DependentUpon>
     </Compile>
   </ItemGroup>

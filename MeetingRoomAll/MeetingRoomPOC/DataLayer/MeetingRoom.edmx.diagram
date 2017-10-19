@@ -4,17 +4,20 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="dfe750448555466d9fbeec978660aa19" Name="Diagram1">
-        <EntityTypeShape EntityType="AngularPOCModel.tbl_Booking_Date" Width="1.5" PointX="7.5" PointY="5.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="AngularPOCModel.tblBooking" Width="1.5" PointX="5.25" PointY="4.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="AngularPOCModel.tblLocation" Width="1.5" PointX="0.75" PointY="3.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="AngularPOCModel.tblRoom" Width="1.5" PointX="3" PointY="7.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="AngularPOCModel.tblSlot" Width="1.5" PointX="5.25" PointY="1.5" IsExpanded="true" />
-        <AssociationConnector Association="AngularPOCModel.bookingID_fk" ManuallyRouted="false" />
-        <AssociationConnector Association="AngularPOCModel.slotID_fk" ManuallyRouted="false" />
-        <AssociationConnector Association="AngularPOCModel.location_id_fk" ManuallyRouted="false" />
-        <AssociationConnector Association="AngularPOCModel.room_id_fk" ManuallyRouted="false" />
-        <AssociationConnector Association="AngularPOCModel.locationID_fk" ManuallyRouted="false" />
+      <Diagram DiagramId="a6086f80bc854c369989e5bc72512c9b" Name="Diagram1">
+        <EntityTypeShape EntityType="AngularPOCModel.TblBooking" Width="1.5" PointX="5.25" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="AngularPOCModel.TblBookingDate" Width="1.5" PointX="7.5" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="AngularPOCModel.TblLocation" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AngularPOCModel.TblRoom" Width="1.5" PointX="3" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="AngularPOCModel.TblSlot" Width="1.5" PointX="3" PointY="5.25" IsExpanded="true" />
+        <AssociationConnector Association="AngularPOCModel.FK_TblBooking_TblLocation" ManuallyRouted="false" />
+        <AssociationConnector Association="AngularPOCModel.FK_TblBooking_TblRoom" ManuallyRouted="false" />
+        <AssociationConnector Association="AngularPOCModel.FK_TblBooking_TblSlot" ManuallyRouted="false" />
+        <AssociationConnector Association="AngularPOCModel.FK_TblBookingDate_TblBooking" ManuallyRouted="false" />
+        <AssociationConnector Association="AngularPOCModel.FK_TblBookingDate_TblLocation" ManuallyRouted="false" />
+        <AssociationConnector Association="AngularPOCModel.FK_TblBookingDate_TblRoom" ManuallyRouted="false" />
+        <AssociationConnector Association="AngularPOCModel.FK_TblBookingDate_TblSlot" ManuallyRouted="false" />
+        <AssociationConnector Association="AngularPOCModel.FK_TblRoom_TblLocation" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

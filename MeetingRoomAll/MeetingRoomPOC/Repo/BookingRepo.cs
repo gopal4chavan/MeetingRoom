@@ -11,27 +11,27 @@ namespace Repo
 {
     public class BookingRepo
     {
-        private AngularPOCEntities db;
+        private AngularPOCEntities _db;
 
         public string AddBooking(BookingTbl details)
         {
             try
             {
 
-                using (db = new AngularPOCEntities())
+                using (_db = new AngularPOCEntities())
                 {
-                    db.sp_booking(
-                        details.createdBy,
-                        details.location_id,
-                        details.room_id,
-                        details.subject,
-                        details.description,
-                        details.fromDate,
-                        details.toDate,
-                        details.slot_id,
-                        details.slot_count
+                    _db.SP_Booking(
+                        details.CreatedBy,
+                        details.LocationID,
+                        details.RoomID,
+                        details.Subject,
+                        details.Description,
+                        details.FromDate,
+                        details.ToDate,
+                        details.SlotID,
+                        details.SlotCount
                     );
-                    db.SaveChanges();
+                    _db.SaveChanges();
                     return "success";
                 }
             }
@@ -46,18 +46,18 @@ namespace Repo
             try
             {
 
-                using (db = new AngularPOCEntities())
+                using (_db = new AngularPOCEntities())
                 {
 
-                    return db.tblBookings.Where(result => result.location_id == locid && result.room_id == roomid)
+                    return _db.TblBookings.Where(result => result.LocationID == locid && result.RoomID == roomid)
                         .Select(res => new
                         {
-                            bookingID = res.bookingID,
-                            createdBy = res.createdBy,
-                            timeStamp = res.timestamp,
-                            subject = res.subject,
-                            description = res.description,
-                            bookedSlots = db.tbl_Booking_Date.Where(resp => res.bookingID == resp.bookingID).Select(r => new { bookingID=r.bookingID, slotID = r.slotID, date = r.date }).ToList()
+                            BookingID = res.BookingID,
+                            CreatedBy = res.CreatedBy,
+                            TimeStamp = res.TimeStamp,
+                            Subject = res.Subject,
+                            Description = res.Description,
+                            BookedSlots = _db.TblBookingDates.Where(resp => res.BookingID == resp.BookingID).Select(r => new { BookingID=r.BookingID, slotID = r.SlotID, date = r.Date }).ToList()
                         }).ToList();
                 }
             }
@@ -66,19 +66,19 @@ namespace Repo
                 throw;
             }
         }
-        public string DeleteDay(int bookingID,DateTime date)
+        public string DeleteDay(int BookingID,DateTime date)
         {
             try
             {
-                using (db = new AngularPOCEntities())
+                using (_db = new AngularPOCEntities())
                 {
-                    db.tbl_Booking_Date.RemoveRange(db.tbl_Booking_Date.Where(result => result.bookingID == bookingID && result.date == date));
-                    int count = db.tbl_Booking_Date.Where(result => result.bookingID == bookingID).Count();
+                    _db.TblBookingDates.RemoveRange(_db.TblBookingDates.Where(result => result.BookingID == BookingID && result.Date == date));
+                    int count = _db.TblBookingDates.Where(result => result.BookingID == BookingID).Count();
                     if (count == 0)
                     {
-                        db.tblBookings.Remove(db.tblBookings.SingleOrDefault(res => res.bookingID == bookingID));
+                        _db.TblBookings.Remove(_db.TblBookings.SingleOrDefault(res => res.BookingID == BookingID));
                     }
-                    db.SaveChanges();
+                    _db.SaveChanges();
                     return "success";
                 }
             }
@@ -87,15 +87,15 @@ namespace Repo
                 throw;
             }
         }
-        public string DeleteEntireBooking(int bookingID)
+        public string DeleteEntireBooking(int BookingID)
         {
             try
             {
-                using (db = new AngularPOCEntities())
+                using (_db = new AngularPOCEntities())
                 {
-                    db.tbl_Booking_Date.RemoveRange(db.tbl_Booking_Date.Where(result => result.bookingID == bookingID));
-                    db.tblBookings.Remove(db.tblBookings.SingleOrDefault(res => res.bookingID == bookingID));
-                    db.SaveChanges();
+                    _db.TblBookingDates.RemoveRange(_db.TblBookingDates.Where(result => result.BookingID == BookingID));
+                    _db.TblBookings.Remove(_db.TblBookings.SingleOrDefault(res => res.BookingID == BookingID));
+                    _db.SaveChanges();
                     return "success";
                 }
             }
@@ -105,26 +105,27 @@ namespace Repo
             }
         }
 
-        public string UpdateBooking(int bookingID,BookingTbl details)
+        public string UpdateBooking(int BookingID,BookingTbl details,bool bulkEdit)
         {
             try
             {
 
-                using (db = new AngularPOCEntities())
+                using (_db = new AngularPOCEntities())
                 {
-                    db.sp_update_booking(
-                        bookingID,
-                        details.createdBy,
-                        details.location_id,
-                        details.room_id,
-                        details.subject,
-                        details.description,
-                        details.fromDate,
-                        details.toDate,
-                        details.slot_id,
-                        details.slot_count
+                    _db.SP_UpdateBooking(
+                        BookingID,
+                        details.CreatedBy,
+                        details.LocationID,
+                        details.RoomID,
+                        details.Subject,
+                        details.Description,
+                        details.FromDate,
+                        details.ToDate,
+                        details.SlotID,
+                        details.SlotCount,
+                        bulkEdit
                     );
-                    db.SaveChanges();
+                    _db.SaveChanges();
                     return "success";
                 }
             }
@@ -134,28 +135,28 @@ namespace Repo
             }
         }
 
-        public object GetDetails(int bookingID)
+        public object GetDetails(int BookingID)
         {
             try
             {
 
-                using (db = new AngularPOCEntities())
+                using (_db = new AngularPOCEntities())
                 {
 
-                    return db.tblBookings.Where(result => result.bookingID == bookingID)
+                    return _db.TblBookings.Where(result => result.BookingID == BookingID)
                         .Select(res => new
                         {
-                            bookingID = res.bookingID,
-                            createdBy = res.createdBy,
-                            subject = res.subject,
-                            description = res.description,
-                            fromDate = res.fromDate,
-                            toDate = res.toDate,
-                            location_id = res.location_id,
-                            room_id = res.room_id,
-                            location_name = db.tblLocations.FirstOrDefault(elem => elem.locationID == res.location_id).locationName,
-                            room_name = db.tblRooms.FirstOrDefault(elem => elem.roomID == res.room_id).roomName,
-                            slot_count = db.tbl_Booking_Date.Where(elem => elem.bookingID == res.bookingID).Select(m => m.slotID).Distinct().Count()
+                            BookingID = res.BookingID,
+                            CreatedBy = res.CreatedBy,
+                            Subject = res.Subject,
+                            Description = res.Description,
+                            FromDate = res.FromDate,
+                            ToDate = res.ToDate,
+                            LocationID = res.LocationID,
+                            RoomID = res.RoomID,
+                            LocationName = _db.TblLocations.FirstOrDefault(elem => elem.LocationID == res.LocationID).LocationName,
+                            RoomName = _db.TblRooms.FirstOrDefault(elem => elem.RoomID == res.RoomID).RoomName,
+                            SlotCount = _db.TblBookingDates.Where(elem => elem.BookingID == res.BookingID).Select(m => m.SlotID).Distinct().Count()
 
                         }).FirstOrDefault();
                 }

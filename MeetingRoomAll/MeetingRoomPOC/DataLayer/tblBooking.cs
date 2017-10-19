@@ -12,27 +12,31 @@ namespace DataLayer
     using System;
     using System.Collections.Generic;
     
-    public partial class tblBooking
+    public partial class TblBooking
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tblBooking()
+        public TblBooking()
         {
-            this.tbl_Booking_Date = new HashSet<tbl_Booking_Date>();
+            this.TblBookingDates = new HashSet<TblBookingDate>();
         }
     
-        public int bookingID { get; set; }
-        public int createdBy { get; set; }
-        public int location_id { get; set; }
-        public int room_id { get; set; }
-        public System.DateTime timestamp { get; set; }
-        public System.DateTime fromDate { get; set; }
-        public System.DateTime toDate { get; set; }
-        public string subject { get; set; }
-        public string description { get; set; }
+        public int BookingID { get; set; }
+        public int CreatedBy { get; set; }
+        public int LocationID { get; set; }
+        public int RoomID { get; set; }
+        public System.DateTime TimeStamp { get; set; }
+        public System.DateTime FromDate { get; set; }
+        public System.DateTime ToDate { get; set; }
+        public int SlotID { get; set; }
+        public int SlotCount { get; set; }
+        public string Subject { get; set; }
+        public string Description { get; set; }
+        public string Type { get; set; }
     
+        public virtual TblLocation TblLocation { get; set; }
+        public virtual TblRoom TblRoom { get; set; }
+        public virtual TblSlot TblSlot { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbl_Booking_Date> tbl_Booking_Date { get; set; }
-        public virtual tblLocation tblLocation { get; set; }
-        public virtual tblRoom tblRoom { get; set; }
+        public virtual ICollection<TblBookingDate> TblBookingDates { get; set; }
     }
 }
