@@ -7,17 +7,17 @@ namespace Repo
 {
     public class RoomRepo
     {
-        private AngularPOCEntities db;
+        private AngularPOCEntities _db;
 
         public IEnumerable<RoomTbl> GetRoomsByLocationID(int LocationID)
         {
-            using (db = new AngularPOCEntities())
+            using (_db = new AngularPOCEntities())
             {
-                return db.tblRooms.Where(m=>m.location_id==LocationID).Select(m => new RoomTbl()
+                return _db.TblRooms.Where(m=>m.LocationID==LocationID).Select(m => new RoomTbl()
                 {
-                    roomID=m.roomID,
-                    roomName=m.roomName,
-                    location_id=m.location_id
+                    RoomID=m.RoomID,
+                    RoomName=m.RoomName,
+                    LocationID=m.LocationID
 
                 }).ToList();
             }

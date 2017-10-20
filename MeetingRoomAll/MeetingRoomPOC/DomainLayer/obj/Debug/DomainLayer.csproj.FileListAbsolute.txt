@@ -13,3 +13,13 @@ D:\MeetingRoomRepo\MeetingRoomAll\MeetingRoomPOC\DomainLayer\bin\Debug\DomainLay
 D:\MeetingRoomRepo\MeetingRoomAll\MeetingRoomPOC\DomainLayer\obj\Debug\DomainLayer.csprojResolveAssemblyReference.cache
 D:\MeetingRoomRepo\MeetingRoomAll\MeetingRoomPOC\DomainLayer\obj\Debug\DomainLayer.dll
 D:\MeetingRoomRepo\MeetingRoomAll\MeetingRoomPOC\DomainLayer\obj\Debug\DomainLayer.pdb
+E:\Projects\MeetingRoom\MeetingRoomAll\MeetingRoomPOC\DomainLayer\bin\Debug\DomainLayer.dll
+E:\Projects\MeetingRoom\MeetingRoomAll\MeetingRoomPOC\DomainLayer\bin\Debug\DomainLayer.pdb
+E:\Projects\MeetingRoom\MeetingRoomAll\MeetingRoomPOC\DomainLayer\obj\Debug\DomainLayer.csprojResolveAssemblyReference.cache
+E:\Projects\MeetingRoom\MeetingRoomAll\MeetingRoomPOC\DomainLayer\obj\Debug\DomainLayer.dll
+E:\Projects\MeetingRoom\MeetingRoomAll\MeetingRoomPOC\DomainLayer\obj\Debug\DomainLayer.pdb
+D:\MeetingRoom\MeetingRoom\MeetingRoomAll\MeetingRoomPOC\DomainLayer\bin\Debug\DomainLayer.dll
+D:\MeetingRoom\MeetingRoom\MeetingRoomAll\MeetingRoomPOC\DomainLayer\bin\Debug\DomainLayer.pdb
+D:\MeetingRoom\MeetingRoom\MeetingRoomAll\MeetingRoomPOC\DomainLayer\obj\Debug\DomainLayer.csprojResolveAssemblyReference.cache
+D:\MeetingRoom\MeetingRoom\MeetingRoomAll\MeetingRoomPOC\DomainLayer\obj\Debug\DomainLayer.dll
+D:\MeetingRoom\MeetingRoom\MeetingRoomAll\MeetingRoomPOC\DomainLayer\obj\Debug\DomainLayer.pdb

@@ -14,7 +14,7 @@ namespace MeetingRoomPOC.Controllers
             _repoObj = new Repo.RoomRepo();
         }
 
-        [HttpPost]
+        [HttpGet]
         public HttpResponseMessage GetRoomsByLocationID([FromUri] int locationID)
         {
             try

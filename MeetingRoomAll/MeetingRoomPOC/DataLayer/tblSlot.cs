@@ -12,18 +12,21 @@ namespace DataLayer
     using System;
     using System.Collections.Generic;
     
-    public partial class tblSlot
+    public partial class TblSlot
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tblSlot()
+        public TblSlot()
         {
-            this.tbl_Booking_Date = new HashSet<tbl_Booking_Date>();
+            this.TblBookings = new HashSet<TblBooking>();
+            this.TblBookingDates = new HashSet<TblBookingDate>();
         }
     
-        public int slotID { get; set; }
-        public string slot { get; set; }
+        public int SlotID { get; set; }
+        public string Slot { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbl_Booking_Date> tbl_Booking_Date { get; set; }
+        public virtual ICollection<TblBooking> TblBookings { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TblBookingDate> TblBookingDates { get; set; }
     }
 }

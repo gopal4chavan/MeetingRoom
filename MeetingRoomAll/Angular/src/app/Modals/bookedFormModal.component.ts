@@ -27,7 +27,7 @@ export class BookedFormModalComponent extends DialogComponent<ConfirmModel, bool
     bookingID: number;
     selectedDate: Date;
 
-    bookingDetails: IviewDet;
+    bookingDetails: FormDetails;
     flag: boolean = false;
 
     constructor(dialogService: DialogService, private slotService: SlotService) {
@@ -36,12 +36,11 @@ export class BookedFormModalComponent extends DialogComponent<ConfirmModel, bool
     ngOnInit() {
         this.slotService.getDetails(this.bookingID).subscribe(
             (res) => this.bookingDetails = res,
-            (error) => { },
+            (error) => { console.log(error)},
             () => {
+                console.log(this.bookingDetails);
                 if (this.bookingDetails) {
                     this.flag = true;
-                    this.bookingDetails.slot = this.Slot.slot;
-                    this.bookingDetails.slot_id = this.Slot.slotID;
                 }
             });
 
@@ -51,16 +50,16 @@ export class BookedFormModalComponent extends DialogComponent<ConfirmModel, bool
     }
 
     enableDeleteOptions() {
-        // if (this.bookingDetails.createdBy == parseInt(localStorage.getItem("userid"),10)) {
+        if (this.bookingDetails.CreatedBy == parseInt(localStorage.getItem("userid"),10)) {
         return true;
-        // }
-        // else return false;
+        }
+        else return false;
     }
 
     delete() {
         let result: string;
         let disposable = this.dialogService
-            .addDialog(DeleteConfirmComponent, { title: "Confirm Deletion for selected booking ID" }, { backdropColor: 'rgba(0,0,0,0.5)' })
+            .addDialog(DeleteConfirmComponent, { title: "Are you sure, you want to delete entire booking" }, { backdropColor: 'rgba(0,0,0,0.5)' })
             .subscribe(
             (confirm: boolean) => {
                 if (confirm) {
@@ -78,7 +77,7 @@ export class BookedFormModalComponent extends DialogComponent<ConfirmModel, bool
     deleteSlot() {
         let result: string;
         let disposable = this.dialogService
-            .addDialog(DeleteConfirmComponent, { title: "Confirm Deletion for selected day" }, { backdropColor: 'rgba(0,0,0,0.5)' })
+            .addDialog(DeleteConfirmComponent, { title: "Are you sure, you want to delete selected date booking" }, { backdropColor: 'rgba(0,0,0,0.5)' })
             .subscribe(
             (confirm: boolean) => {
                 if (confirm) {
@@ -93,10 +92,12 @@ export class BookedFormModalComponent extends DialogComponent<ConfirmModel, bool
             });
     }
     updateBooking() {
-        let temp_obj: FormDetails = new FormDetails(this.bookingDetails.createdBy, this.bookingDetails.location_id, this.bookingDetails.location_name, this.bookingDetails.room_id, this.bookingDetails.room_name, this.bookingDetails.subject, this.bookingDetails.description, new Date(this.bookingDetails.fromDate), new Date(this.bookingDetails.toDate), this.bookingDetails.slot_id, this.bookingDetails.slot, this.bookingDetails.slot_count);
-
+        // let temp_obj: FormDetails = new FormDetails(this.bookingDetails.CreatedBy, this.bookingDetails.LocationID, this.bookingDetails.LocationName, this.bookingDetails.RoomID, this.bookingDetails.RoomName, this.bookingDetails.Subject, this.bookingDetails.Description, new Date(this.bookingDetails.FromDate), new Date(this.bookingDetails.ToDate),null,null,this.bookingDetails.SlotID, this.bookingDetails.Slot, this.bookingDetails.SlotCount,null);
+        this.bookingDetails.FD=new Date(this.bookingDetails.FromDate);
+        this.bookingDetails.TD=new Date(this.bookingDetails.ToDate);
+        console.log(this.bookingDetails);
         this.dialogService
-            .addDialog(BookingFormModalComponent, { title: "Booking Form", bookingFormDetails: temp_obj, bookingID: this.bookingID }, { backdropColor: 'rgba(0,0,0,0.5)' })
+            .addDialog(BookingFormModalComponent, { title: "Booking Form", bookingFormDetails: this.bookingDetails, bookingID: this.bookingID }, { backdropColor: 'rgba(0,0,0,0.5)' })
             .subscribe(result => { if (result) { this.ngOnInit();this.result=true;this.close() } });
     }
 }

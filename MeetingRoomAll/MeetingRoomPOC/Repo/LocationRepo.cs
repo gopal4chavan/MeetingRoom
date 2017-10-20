@@ -8,19 +8,19 @@ namespace Repo
 {
     public class LocationRepo
     {
-        private AngularPOCEntities db;
+        private AngularPOCEntities _db;
 
         public IEnumerable<LocationTbl> GetAllLocations()
         {
             try
             {
 
-                using (db = new AngularPOCEntities())
+                using (_db = new AngularPOCEntities())
                 {
-                    return db.tblLocations.Select(m => new LocationTbl()
+                    return _db.TblLocations.Select(m => new LocationTbl()
                     {
-                        locationID = m.locationID,
-                        locationName = m.locationName
+                        LocationID = m.LocationID,
+                        LocationName = m.LocationName
                     }).ToList();
                 }
             }

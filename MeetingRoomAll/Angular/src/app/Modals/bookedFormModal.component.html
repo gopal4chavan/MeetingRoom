@@ -3,36 +3,36 @@
 
         <div class="modal-header booking_header" >
             <button type="button" class="close" (click)="modal_close()">&times;</button>
-            <h4 class="modal-title" style="text-align: center;font-size: 35px;">Booking Details</h4>
+            <h2 class="modal-title text-center">Booking Details</h2>
         </div>
         <div class="modal-body">
             <div class="row">
-                <label class="col-xs-4">Subject</label>
-                <div class="col-xs-8">{{bookingDetails.subject}}</div>
+                <label class="col-xs-4 captalize">Subject</label>
+                <div class="col-xs-8">: {{bookingDetails.Subject}}</div>
             </div>
             <div class="row">
-                <label class="col-xs-4">Booking ID</label>
-                <div class="col-xs-8">{{bookingDetails.bookingID}}</div>
+                <label class="col-xs-4 captalize">Booking ID</label>
+                <div class="col-xs-8">: {{bookingDetails.BookingID}}</div>
             </div>
             <div class="row">
-                <label class="col-xs-4">createdBy</label>
-                <div class="col-xs-8">{{bookingDetails.createdBy}}</div>
+                <label class="col-xs-4 captalize">createdBy</label>
+                <div class="col-xs-8">: {{bookingDetails.CreatedBy}}</div>
             </div>
             <div class="row">
-                <label class="col-xs-4">Creation Time</label>
-                <div class="col-xs-8">{{bookingDetails.timeStamp}}</div>
+                <label class="col-xs-4 captalize">Creation Time</label>
+                <div class="col-xs-8">: {{bookingDetails.TimeStamp}}</div>
             </div>
             <div class="row">
-                <label class="col-xs-4">description</label>
-                <div class="col-xs-8">{{bookingDetails.description}}</div>
+                <label class="col-xs-4 captalize">description</label>
+                <div class="col-xs-8">: {{bookingDetails.Description}}</div>
             </div>
             <div class="row">
-                <label class="col-xs-4">Location</label>
-                <div class="col-xs-8">{{bookingDetails.location_name}}</div>
+                <label class="col-xs-4 captalize">Location</label>
+                <div class="col-xs-8">: {{bookingDetails.LocationName}}</div>
             </div>
             <div class="row">
-                <label class="col-xs-4">room</label>
-                <div class="col-xs-8">{{bookingDetails.room_name}}</div>
+                <label class="col-xs-4 captalize">room</label>
+                <div class="col-xs-8">: {{bookingDetails.RoomName}}</div>
             </div>
 
         </div>

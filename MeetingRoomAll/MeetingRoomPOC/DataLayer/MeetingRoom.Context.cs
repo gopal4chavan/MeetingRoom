@@ -27,96 +27,169 @@ namespace DataLayer
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<tbl_Booking_Date> tbl_Booking_Date { get; set; }
-        public virtual DbSet<tblBooking> tblBookings { get; set; }
-        public virtual DbSet<tblLocation> tblLocations { get; set; }
-        public virtual DbSet<tblRoom> tblRooms { get; set; }
-        public virtual DbSet<tblSlot> tblSlots { get; set; }
+        public virtual DbSet<TblBooking> TblBookings { get; set; }
+        public virtual DbSet<TblBookingDate> TblBookingDates { get; set; }
+        public virtual DbSet<TblLocation> TblLocations { get; set; }
+        public virtual DbSet<TblRoom> TblRooms { get; set; }
+        public virtual DbSet<TblSlot> TblSlots { get; set; }
     
-        public virtual int sp_booking(Nullable<int> createdBy, Nullable<int> location_id, Nullable<int> room_id, string subject, string description, Nullable<System.DateTime> fromDate, Nullable<System.DateTime> toDate, Nullable<int> slot, Nullable<int> slot_count)
+        public virtual int SP_Booking(Nullable<int> createdBy, Nullable<int> locationID, Nullable<int> roomID, string subject, string description, Nullable<System.DateTime> fromDate, Nullable<System.DateTime> toDate, Nullable<int> slotID, Nullable<int> slotCount)
         {
             var createdByParameter = createdBy.HasValue ?
-                new ObjectParameter("createdBy", createdBy) :
-                new ObjectParameter("createdBy", typeof(int));
+                new ObjectParameter("CreatedBy", createdBy) :
+                new ObjectParameter("CreatedBy", typeof(int));
     
-            var location_idParameter = location_id.HasValue ?
-                new ObjectParameter("location_id", location_id) :
-                new ObjectParameter("location_id", typeof(int));
+            var locationIDParameter = locationID.HasValue ?
+                new ObjectParameter("LocationID", locationID) :
+                new ObjectParameter("LocationID", typeof(int));
     
-            var room_idParameter = room_id.HasValue ?
-                new ObjectParameter("room_id", room_id) :
-                new ObjectParameter("room_id", typeof(int));
+            var roomIDParameter = roomID.HasValue ?
+                new ObjectParameter("RoomID", roomID) :
+                new ObjectParameter("RoomID", typeof(int));
     
             var subjectParameter = subject != null ?
-                new ObjectParameter("subject", subject) :
-                new ObjectParameter("subject", typeof(string));
+                new ObjectParameter("Subject", subject) :
+                new ObjectParameter("Subject", typeof(string));
     
             var descriptionParameter = description != null ?
-                new ObjectParameter("description", description) :
-                new ObjectParameter("description", typeof(string));
+                new ObjectParameter("Description", description) :
+                new ObjectParameter("Description", typeof(string));
     
             var fromDateParameter = fromDate.HasValue ?
-                new ObjectParameter("fromDate", fromDate) :
-                new ObjectParameter("fromDate", typeof(System.DateTime));
+                new ObjectParameter("FromDate", fromDate) :
+                new ObjectParameter("FromDate", typeof(System.DateTime));
     
             var toDateParameter = toDate.HasValue ?
-                new ObjectParameter("toDate", toDate) :
-                new ObjectParameter("toDate", typeof(System.DateTime));
+                new ObjectParameter("ToDate", toDate) :
+                new ObjectParameter("ToDate", typeof(System.DateTime));
     
-            var slotParameter = slot.HasValue ?
-                new ObjectParameter("slot", slot) :
-                new ObjectParameter("slot", typeof(int));
+            var slotIDParameter = slotID.HasValue ?
+                new ObjectParameter("SlotID", slotID) :
+                new ObjectParameter("SlotID", typeof(int));
     
-            var slot_countParameter = slot_count.HasValue ?
-                new ObjectParameter("slot_count", slot_count) :
-                new ObjectParameter("slot_count", typeof(int));
+            var slotCountParameter = slotCount.HasValue ?
+                new ObjectParameter("SlotCount", slotCount) :
+                new ObjectParameter("SlotCount", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_booking", createdByParameter, location_idParameter, room_idParameter, subjectParameter, descriptionParameter, fromDateParameter, toDateParameter, slotParameter, slot_countParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Booking", createdByParameter, locationIDParameter, roomIDParameter, subjectParameter, descriptionParameter, fromDateParameter, toDateParameter, slotIDParameter, slotCountParameter);
         }
     
-        public virtual int sp_update_booking(Nullable<int> bookingID, Nullable<int> createdBy, Nullable<int> location_id, Nullable<int> room_id, string subject, string description, Nullable<System.DateTime> fromDate, Nullable<System.DateTime> toDate, Nullable<int> slot, Nullable<int> slot_count)
+        public virtual int SP_RepeatBooking(Nullable<int> createdBy, Nullable<int> locationID, Nullable<int> roomID, string subject, string description, Nullable<bool> mON, Nullable<bool> tUE, Nullable<bool> wED, Nullable<bool> tHU, Nullable<bool> fRI, Nullable<bool> sAT, Nullable<bool> sUN, Nullable<System.DateTime> startOn, Nullable<System.DateTime> endOn, Nullable<int> slotID, Nullable<int> slotCount)
         {
-            var bookingIDParameter = bookingID.HasValue ?
-                new ObjectParameter("bookingID", bookingID) :
-                new ObjectParameter("bookingID", typeof(int));
-    
             var createdByParameter = createdBy.HasValue ?
-                new ObjectParameter("createdBy", createdBy) :
-                new ObjectParameter("createdBy", typeof(int));
+                new ObjectParameter("CreatedBy", createdBy) :
+                new ObjectParameter("CreatedBy", typeof(int));
     
-            var location_idParameter = location_id.HasValue ?
-                new ObjectParameter("location_id", location_id) :
-                new ObjectParameter("location_id", typeof(int));
+            var locationIDParameter = locationID.HasValue ?
+                new ObjectParameter("LocationID", locationID) :
+                new ObjectParameter("LocationID", typeof(int));
     
-            var room_idParameter = room_id.HasValue ?
-                new ObjectParameter("room_id", room_id) :
-                new ObjectParameter("room_id", typeof(int));
+            var roomIDParameter = roomID.HasValue ?
+                new ObjectParameter("RoomID", roomID) :
+                new ObjectParameter("RoomID", typeof(int));
     
             var subjectParameter = subject != null ?
-                new ObjectParameter("subject", subject) :
-                new ObjectParameter("subject", typeof(string));
+                new ObjectParameter("Subject", subject) :
+                new ObjectParameter("Subject", typeof(string));
     
             var descriptionParameter = description != null ?
-                new ObjectParameter("description", description) :
-                new ObjectParameter("description", typeof(string));
+                new ObjectParameter("Description", description) :
+                new ObjectParameter("Description", typeof(string));
+    
+            var mONParameter = mON.HasValue ?
+                new ObjectParameter("MON", mON) :
+                new ObjectParameter("MON", typeof(bool));
+    
+            var tUEParameter = tUE.HasValue ?
+                new ObjectParameter("TUE", tUE) :
+                new ObjectParameter("TUE", typeof(bool));
+    
+            var wEDParameter = wED.HasValue ?
+                new ObjectParameter("WED", wED) :
+                new ObjectParameter("WED", typeof(bool));
+    
+            var tHUParameter = tHU.HasValue ?
+                new ObjectParameter("THU", tHU) :
+                new ObjectParameter("THU", typeof(bool));
+    
+            var fRIParameter = fRI.HasValue ?
+                new ObjectParameter("FRI", fRI) :
+                new ObjectParameter("FRI", typeof(bool));
+    
+            var sATParameter = sAT.HasValue ?
+                new ObjectParameter("SAT", sAT) :
+                new ObjectParameter("SAT", typeof(bool));
+    
+            var sUNParameter = sUN.HasValue ?
+                new ObjectParameter("SUN", sUN) :
+                new ObjectParameter("SUN", typeof(bool));
+    
+            var startOnParameter = startOn.HasValue ?
+                new ObjectParameter("StartOn", startOn) :
+                new ObjectParameter("StartOn", typeof(System.DateTime));
+    
+            var endOnParameter = endOn.HasValue ?
+                new ObjectParameter("EndOn", endOn) :
+                new ObjectParameter("EndOn", typeof(System.DateTime));
+    
+            var slotIDParameter = slotID.HasValue ?
+                new ObjectParameter("SlotID", slotID) :
+                new ObjectParameter("SlotID", typeof(int));
+    
+            var slotCountParameter = slotCount.HasValue ?
+                new ObjectParameter("SlotCount", slotCount) :
+                new ObjectParameter("SlotCount", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_RepeatBooking", createdByParameter, locationIDParameter, roomIDParameter, subjectParameter, descriptionParameter, mONParameter, tUEParameter, wEDParameter, tHUParameter, fRIParameter, sATParameter, sUNParameter, startOnParameter, endOnParameter, slotIDParameter, slotCountParameter);
+        }
+    
+        public virtual int SP_UpdateBooking(Nullable<int> bookingID, Nullable<int> createdBy, Nullable<int> locationID, Nullable<int> roomID, string subject, string description, Nullable<System.DateTime> fromDate, Nullable<System.DateTime> toDate, Nullable<int> slotID, Nullable<int> slotCount, Nullable<bool> editSlots)
+        {
+            var bookingIDParameter = bookingID.HasValue ?
+                new ObjectParameter("BookingID", bookingID) :
+                new ObjectParameter("BookingID", typeof(int));
+    
+            var createdByParameter = createdBy.HasValue ?
+                new ObjectParameter("CreatedBy", createdBy) :
+                new ObjectParameter("CreatedBy", typeof(int));
+    
+            var locationIDParameter = locationID.HasValue ?
+                new ObjectParameter("LocationID", locationID) :
+                new ObjectParameter("LocationID", typeof(int));
+    
+            var roomIDParameter = roomID.HasValue ?
+                new ObjectParameter("RoomID", roomID) :
+                new ObjectParameter("RoomID", typeof(int));
+    
+            var subjectParameter = subject != null ?
+                new ObjectParameter("Subject", subject) :
+                new ObjectParameter("Subject", typeof(string));
+    
+            var descriptionParameter = description != null ?
+                new ObjectParameter("Description", description) :
+                new ObjectParameter("Description", typeof(string));
     
             var fromDateParameter = fromDate.HasValue ?
-                new ObjectParameter("fromDate", fromDate) :
-                new ObjectParameter("fromDate", typeof(System.DateTime));
+                new ObjectParameter("FromDate", fromDate) :
+                new ObjectParameter("FromDate", typeof(System.DateTime));
     
             var toDateParameter = toDate.HasValue ?
-                new ObjectParameter("toDate", toDate) :
-                new ObjectParameter("toDate", typeof(System.DateTime));
+                new ObjectParameter("ToDate", toDate) :
+                new ObjectParameter("ToDate", typeof(System.DateTime));
     
-            var slotParameter = slot.HasValue ?
-                new ObjectParameter("slot", slot) :
-                new ObjectParameter("slot", typeof(int));
+            var slotIDParameter = slotID.HasValue ?
+                new ObjectParameter("SlotID", slotID) :
+                new ObjectParameter("SlotID", typeof(int));
     
-            var slot_countParameter = slot_count.HasValue ?
-                new ObjectParameter("slot_count", slot_count) :
-                new ObjectParameter("slot_count", typeof(int));
+            var slotCountParameter = slotCount.HasValue ?
+                new ObjectParameter("SlotCount", slotCount) :
+                new ObjectParameter("SlotCount", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_update_booking", bookingIDParameter, createdByParameter, location_idParameter, room_idParameter, subjectParameter, descriptionParameter, fromDateParameter, toDateParameter, slotParameter, slot_countParameter);
+            var editSlotsParameter = editSlots.HasValue ?
+                new ObjectParameter("EditSlots", editSlots) :
+                new ObjectParameter("EditSlots", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_UpdateBooking", bookingIDParameter, createdByParameter, locationIDParameter, roomIDParameter, subjectParameter, descriptionParameter, fromDateParameter, toDateParameter, slotIDParameter, slotCountParameter, editSlotsParameter);
         }
     }
 }

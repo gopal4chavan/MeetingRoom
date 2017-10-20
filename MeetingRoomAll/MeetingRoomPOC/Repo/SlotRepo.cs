@@ -8,16 +8,16 @@ namespace Repo
 {
     public class SlotRepo
     {
-        private AngularPOCEntities db;
+        private AngularPOCEntities _db;
 
         public IEnumerable<SlotTbl> GetAllSlots()
         {
-            using (db = new AngularPOCEntities())
+            using (_db = new AngularPOCEntities())
             {
-                return db.tblSlots.Select(m => new SlotTbl()
+                return _db.TblSlots.Select(m => new SlotTbl()
                 {
-                    slotID = m.slotID,
-                    slot = m.slot
+                    SlotID = m.SlotID,
+                    Slot = m.Slot
                 }).ToList();
             }
         }

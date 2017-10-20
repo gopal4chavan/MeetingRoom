@@ -1,0 +1,12 @@
+.title{    
+    margin-top: 0px;
+    margin-bottom: 10px;
+}
+.captalize{
+    text-transform:capitalize;
+    font-weight: bold;
+}
+.modal-header{
+    background-color: #337AB7;
+    color: white;
+}

@@ -1,57 +1,65 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="AngularPOCModelStoreContainer" CdmEntityContainer="AngularPOCEntities">
-    <EntitySetMapping Name="tbl_Booking_Date">
-      <EntityTypeMapping TypeName="AngularPOCModel.tbl_Booking_Date">
-        <MappingFragment StoreEntitySet="tbl_Booking_Date">
-          <ScalarProperty Name="bookingID" ColumnName="bookingID" />
-          <ScalarProperty Name="location_room_id" ColumnName="location_room_id" />
-          <ScalarProperty Name="date" ColumnName="date" />
-          <ScalarProperty Name="slotID" ColumnName="slotID" />
+    <EntitySetMapping Name="TblBookings">
+      <EntityTypeMapping TypeName="AngularPOCModel.TblBooking">
+        <MappingFragment StoreEntitySet="TblBooking">
+          <ScalarProperty Name="BookingID" ColumnName="BookingID" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+          <ScalarProperty Name="RoomID" ColumnName="RoomID" />
+          <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+          <ScalarProperty Name="FromDate" ColumnName="FromDate" />
+          <ScalarProperty Name="ToDate" ColumnName="ToDate" />
+          <ScalarProperty Name="SlotID" ColumnName="SlotID" />
+          <ScalarProperty Name="SlotCount" ColumnName="SlotCount" />
+          <ScalarProperty Name="Subject" ColumnName="Subject" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="tblBookings">
-      <EntityTypeMapping TypeName="AngularPOCModel.tblBooking">
-        <MappingFragment StoreEntitySet="tblBooking">
-          <ScalarProperty Name="bookingID" ColumnName="bookingID" />
-          <ScalarProperty Name="createdBy" ColumnName="createdBy" />
-          <ScalarProperty Name="location_id" ColumnName="location_id" />
-          <ScalarProperty Name="room_id" ColumnName="room_id" />
-          <ScalarProperty Name="timestamp" ColumnName="timestamp" />
-          <ScalarProperty Name="fromDate" ColumnName="fromDate" />
-          <ScalarProperty Name="toDate" ColumnName="toDate" />
-          <ScalarProperty Name="subject" ColumnName="subject" />
-          <ScalarProperty Name="description" ColumnName="description" />
+    <EntitySetMapping Name="TblBookingDates">
+      <EntityTypeMapping TypeName="AngularPOCModel.TblBookingDate">
+        <MappingFragment StoreEntitySet="TblBookingDate">
+          <ScalarProperty Name="SNo" ColumnName="SNo" />
+          <ScalarProperty Name="BookingID" ColumnName="BookingID" />
+          <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+          <ScalarProperty Name="RoomID" ColumnName="RoomID" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="SlotID" ColumnName="SlotID" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="StatusUpdated" ColumnName="StatusUpdated" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="tblLocations">
-      <EntityTypeMapping TypeName="AngularPOCModel.tblLocation">
-        <MappingFragment StoreEntitySet="tblLocation">
-          <ScalarProperty Name="locationID" ColumnName="locationID" />
-          <ScalarProperty Name="locationName" ColumnName="locationName" />
+    <EntitySetMapping Name="TblLocations">
+      <EntityTypeMapping TypeName="AngularPOCModel.TblLocation">
+        <MappingFragment StoreEntitySet="TblLocation">
+          <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+          <ScalarProperty Name="LocationName" ColumnName="LocationName" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="tblRooms">
-      <EntityTypeMapping TypeName="AngularPOCModel.tblRoom">
-        <MappingFragment StoreEntitySet="tblRoom">
-          <ScalarProperty Name="roomID" ColumnName="roomID" />
-          <ScalarProperty Name="roomName" ColumnName="roomName" />
-          <ScalarProperty Name="location_id" ColumnName="location_id" />
+    <EntitySetMapping Name="TblRooms">
+      <EntityTypeMapping TypeName="AngularPOCModel.TblRoom">
+        <MappingFragment StoreEntitySet="TblRoom">
+          <ScalarProperty Name="RoomID" ColumnName="RoomID" />
+          <ScalarProperty Name="RoomName" ColumnName="RoomName" />
+          <ScalarProperty Name="LocationID" ColumnName="LocationID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="tblSlots">
-      <EntityTypeMapping TypeName="AngularPOCModel.tblSlot">
-        <MappingFragment StoreEntitySet="tblSlot">
-          <ScalarProperty Name="slotID" ColumnName="slotID" />
-          <ScalarProperty Name="slot" ColumnName="slot" />
+    <EntitySetMapping Name="TblSlots">
+      <EntityTypeMapping TypeName="AngularPOCModel.TblSlot">
+        <MappingFragment StoreEntitySet="TblSlot">
+          <ScalarProperty Name="SlotID" ColumnName="SlotID" />
+          <ScalarProperty Name="Slot" ColumnName="Slot" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <FunctionImportMapping FunctionImportName="sp_booking" FunctionName="AngularPOCModel.Store.sp_booking" />
-    <FunctionImportMapping FunctionImportName="sp_update_booking" FunctionName="AngularPOCModel.Store.sp_update_booking" />
+    <FunctionImportMapping FunctionImportName="SP_Booking" FunctionName="AngularPOCModel.Store.SP_Booking" />
+    <FunctionImportMapping FunctionImportName="SP_RepeatBooking" FunctionName="AngularPOCModel.Store.SP_RepeatBooking" />
+    <FunctionImportMapping FunctionImportName="SP_UpdateBooking" FunctionName="AngularPOCModel.Store.SP_UpdateBooking" />
   </EntityContainerMapping>
 </Mapping>

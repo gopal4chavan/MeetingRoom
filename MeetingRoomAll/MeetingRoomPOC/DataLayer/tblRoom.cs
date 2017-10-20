@@ -12,20 +12,23 @@ namespace DataLayer
     using System;
     using System.Collections.Generic;
     
-    public partial class tblRoom
+    public partial class TblRoom
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tblRoom()
+        public TblRoom()
         {
-            this.tblBookings = new HashSet<tblBooking>();
+            this.TblBookings = new HashSet<TblBooking>();
+            this.TblBookingDates = new HashSet<TblBookingDate>();
         }
     
-        public int roomID { get; set; }
-        public string roomName { get; set; }
-        public int location_id { get; set; }
+        public int RoomID { get; set; }
+        public string RoomName { get; set; }
+        public int LocationID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tblBooking> tblBookings { get; set; }
-        public virtual tblLocation tblLocation { get; set; }
+        public virtual ICollection<TblBooking> TblBookings { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TblBookingDate> TblBookingDates { get; set; }
+        public virtual TblLocation TblLocation { get; set; }
     }
 }

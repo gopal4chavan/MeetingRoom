@@ -1,7 +1,11 @@
 .btn-danger{
     float: left;
 }
-.booking_header{
-    background-color: black;
+.modal-header{
+    background-color: #337AB7;
     color: white;
+}
+.captalize{
+    text-transform:capitalize;
+    font-weight: bold;
 }
