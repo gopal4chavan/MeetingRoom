@@ -15,7 +15,7 @@ export interface ConfirmModel {
                    </div>
                    <div class="model-body">
                       <br>
-                       &nbsp;<div class="modal-title">{{title || 'Confirm'}}</div>
+                      <div class="modal-title text-center">{{title || 'Confirm'}}</div>
                       <br>
                    </div>
                    <div class="modal-footer">

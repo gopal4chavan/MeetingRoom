@@ -68,3 +68,17 @@ E:\Projects\MeetingRoom\MeetingRoomAll\MeetingRoomPOC\Repo\bin\Debug\EntityFrame
 E:\Projects\MeetingRoom\MeetingRoomAll\MeetingRoomPOC\Repo\obj\Debug\Repo.csprojResolveAssemblyReference.cache
 E:\Projects\MeetingRoom\MeetingRoomAll\MeetingRoomPOC\Repo\obj\Debug\Repo.dll
 E:\Projects\MeetingRoom\MeetingRoomAll\MeetingRoomPOC\Repo\obj\Debug\Repo.pdb
+D:\MeetingRoom\MeetingRoom\MeetingRoomAll\MeetingRoomPOC\Repo\bin\Debug\Repo.dll.config
+D:\MeetingRoom\MeetingRoom\MeetingRoomAll\MeetingRoomPOC\Repo\bin\Debug\Repo.dll
+D:\MeetingRoom\MeetingRoom\MeetingRoomAll\MeetingRoomPOC\Repo\bin\Debug\Repo.pdb
+D:\MeetingRoom\MeetingRoom\MeetingRoomAll\MeetingRoomPOC\Repo\bin\Debug\DataLayer.dll
+D:\MeetingRoom\MeetingRoom\MeetingRoomAll\MeetingRoomPOC\Repo\bin\Debug\DomainLayer.dll
+D:\MeetingRoom\MeetingRoom\MeetingRoomAll\MeetingRoomPOC\Repo\bin\Debug\EntityFramework.dll
+D:\MeetingRoom\MeetingRoom\MeetingRoomAll\MeetingRoomPOC\Repo\bin\Debug\EntityFramework.SqlServer.dll
+D:\MeetingRoom\MeetingRoom\MeetingRoomAll\MeetingRoomPOC\Repo\bin\Debug\DataLayer.pdb
+D:\MeetingRoom\MeetingRoom\MeetingRoomAll\MeetingRoomPOC\Repo\bin\Debug\DomainLayer.pdb
+D:\MeetingRoom\MeetingRoom\MeetingRoomAll\MeetingRoomPOC\Repo\bin\Debug\EntityFramework.xml
+D:\MeetingRoom\MeetingRoom\MeetingRoomAll\MeetingRoomPOC\Repo\bin\Debug\EntityFramework.SqlServer.xml
+D:\MeetingRoom\MeetingRoom\MeetingRoomAll\MeetingRoomPOC\Repo\obj\Debug\Repo.csprojResolveAssemblyReference.cache
+D:\MeetingRoom\MeetingRoom\MeetingRoomAll\MeetingRoomPOC\Repo\obj\Debug\Repo.dll
+D:\MeetingRoom\MeetingRoom\MeetingRoomAll\MeetingRoomPOC\Repo\obj\Debug\Repo.pdb
