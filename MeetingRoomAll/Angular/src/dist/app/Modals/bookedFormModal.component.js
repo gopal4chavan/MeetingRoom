@@ -15,7 +15,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require("@angular/core");
 var ng2_bootstrap_modal_1 = require("ng2-bootstrap-modal");
-var classes_1 = require("../classes");
 var slot_service_1 = require("../slot.service");
 var delete_confirm_component_1 = require("./delete-confirm.component");
 var bookingFormModal_component_1 = require("./bookingFormModal.component");
@@ -29,11 +28,10 @@ var BookedFormModalComponent = (function (_super) {
     }
     BookedFormModalComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.slotService.getDetails(this.bookingID).subscribe(function (res) { return _this.bookingDetails = res; }, function (error) { }, function () {
+        this.slotService.getDetails(this.bookingID).subscribe(function (res) { return _this.bookingDetails = res; }, function (error) { console.log(error); }, function () {
+            console.log(_this.bookingDetails);
             if (_this.bookingDetails) {
                 _this.flag = true;
-                _this.bookingDetails.slot = _this.Slot.Slot;
-                _this.bookingDetails.slot_id = _this.Slot.SlotID;
             }
         });
     };
@@ -41,16 +39,17 @@ var BookedFormModalComponent = (function (_super) {
         this.close();
     };
     BookedFormModalComponent.prototype.enableDeleteOptions = function () {
-        // if (this.bookingDetails.createdBy == parseInt(localStorage.getItem("userid"),10)) {
-        return true;
-        // }
-        // else return false;
+        if (this.bookingDetails.CreatedBy == parseInt(localStorage.getItem("userid"), 10)) {
+            return true;
+        }
+        else
+            return false;
     };
     BookedFormModalComponent.prototype.delete = function () {
         var _this = this;
         var result;
         var disposable = this.dialogService
-            .addDialog(delete_confirm_component_1.DeleteConfirmComponent, { title: "Confirm Deletion for selected booking ID" }, { backdropColor: 'rgba(0,0,0,0.5)' })
+            .addDialog(delete_confirm_component_1.DeleteConfirmComponent, { title: "Are you sure, you want to delete entire booking" }, { backdropColor: 'rgba(0,0,0,0.5)' })
             .subscribe(function (confirm) {
             if (confirm) {
                 _this.slotService
@@ -67,7 +66,7 @@ var BookedFormModalComponent = (function (_super) {
         var _this = this;
         var result;
         var disposable = this.dialogService
-            .addDialog(delete_confirm_component_1.DeleteConfirmComponent, { title: "Confirm Deletion for selected day" }, { backdropColor: 'rgba(0,0,0,0.5)' })
+            .addDialog(delete_confirm_component_1.DeleteConfirmComponent, { title: "Are you sure, you want to delete selected date booking" }, { backdropColor: 'rgba(0,0,0,0.5)' })
             .subscribe(function (confirm) {
             if (confirm) {
                 _this.slotService
@@ -82,9 +81,12 @@ var BookedFormModalComponent = (function (_super) {
     };
     BookedFormModalComponent.prototype.updateBooking = function () {
         var _this = this;
-        var temp_obj = new classes_1.FormDetails(this.bookingDetails.createdBy, this.bookingDetails.location_id, this.bookingDetails.location_name, this.bookingDetails.room_id, this.bookingDetails.room_name, this.bookingDetails.subject, this.bookingDetails.description, new Date(this.bookingDetails.fromDate), new Date(this.bookingDetails.toDate), null, null, this.bookingDetails.slot_id, this.bookingDetails.slot, this.bookingDetails.slot_count);
+        // let temp_obj: FormDetails = new FormDetails(this.bookingDetails.CreatedBy, this.bookingDetails.LocationID, this.bookingDetails.LocationName, this.bookingDetails.RoomID, this.bookingDetails.RoomName, this.bookingDetails.Subject, this.bookingDetails.Description, new Date(this.bookingDetails.FromDate), new Date(this.bookingDetails.ToDate),null,null,this.bookingDetails.SlotID, this.bookingDetails.Slot, this.bookingDetails.SlotCount,null);
+        this.bookingDetails.FD = new Date(this.bookingDetails.FromDate);
+        this.bookingDetails.TD = new Date(this.bookingDetails.ToDate);
+        console.log(this.bookingDetails);
         this.dialogService
-            .addDialog(bookingFormModal_component_1.BookingFormModalComponent, { title: "Booking Form", bookingFormDetails: temp_obj, bookingID: this.bookingID }, { backdropColor: 'rgba(0,0,0,0.5)' })
+            .addDialog(bookingFormModal_component_1.BookingFormModalComponent, { title: "Booking Form", bookingFormDetails: this.bookingDetails, bookingID: this.bookingID }, { backdropColor: 'rgba(0,0,0,0.5)' })
             .subscribe(function (result) { if (result) {
             _this.ngOnInit();
             _this.result = true;

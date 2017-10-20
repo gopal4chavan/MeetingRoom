@@ -53,18 +53,7 @@ var SlotService = (function () {
         return this.http.get(this.details_url + bookingID).map(function (res) { return res.json(); });
     };
     SlotService.prototype.updateBooking = function (bookingID, obj) {
-        var det = { createdby: null, description: null, subject: null, fromDate: null, toDate: null, location_id: null, room_id: null, slot_id: null, slot_count: null };
-        det.createdby = obj.createdby;
-        det.description = obj.description;
-        det.subject = obj.subject;
-        det.fromDate = new Date(obj.fromDate).toDateString();
-        det.toDate = new Date(obj.toDate).toDateString();
-        det.location_id = obj.locationID;
-        det.room_id = obj.roomID;
-        det.slot_id = obj.slotID;
-        det.slot_count = obj.slotCount;
-        var re = { val: null };
-        return this.http.post(this.updatebooking_url + bookingID, det).map(function (res) { return res.json(); });
+        return this.http.post(this.updatebooking_url + bookingID, obj).map(function (res) { return res.json(); });
     };
     return SlotService;
 }());

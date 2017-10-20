@@ -136,7 +136,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_TblRoom_TblLocation">
+  <Association Name="FK_tblRoom_tblLocation">
     <End Role="TblLocation" Type="Self.TblLocation" Multiplicity="1" />
     <End Role="TblRoom" Type="Self.TblRoom" Multiplicity="*" />
     <ReferentialConstraint>
@@ -156,7 +156,7 @@
     <Parameter Name="Description" Type="varchar" Mode="In" />
     <Parameter Name="FromDate" Type="date" Mode="In" />
     <Parameter Name="ToDate" Type="date" Mode="In" />
-    <Parameter Name="Slot" Type="int" Mode="In" />
+    <Parameter Name="SlotID" Type="int" Mode="In" />
     <Parameter Name="SlotCount" Type="int" Mode="In" />
   </Function>
   <Function Name="SP_RepeatBooking" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -224,7 +224,7 @@
       <End Role="TblSlot" EntitySet="TblSlot" />
       <End Role="TblBookingDate" EntitySet="TblBookingDate" />
     </AssociationSet>
-    <AssociationSet Name="FK_TblRoom_TblLocation" Association="Self.FK_TblRoom_TblLocation">
+    <AssociationSet Name="FK_tblRoom_tblLocation" Association="Self.FK_tblRoom_tblLocation">
       <End Role="TblLocation" EntitySet="TblLocation" />
       <End Role="TblRoom" EntitySet="TblRoom" />
     </AssociationSet>

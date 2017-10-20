@@ -80,7 +80,7 @@ export class IviewDet {
 }
 export class FormDetails {
     constructor(
-        public Createdby: number,
+        public CreatedBy: number,
         public LocationID: number,
         public LocationName: string,
         public RoomID: number,
@@ -93,7 +93,8 @@ export class FormDetails {
         public ToDate:string,
         public SlotID: number,
         public Slot: string,
-        public SlotCount: number) { }
+        public SlotCount: number,
+        public TimeStamp:Date) { }
 }
 // ------------------------------------------------------------------------------   Duration Details
 export class Duration {

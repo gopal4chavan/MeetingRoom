@@ -31,7 +31,8 @@ var ConfirmComponent = (function (_super) {
 ConfirmComponent = __decorate([
     core_1.Component({
         selector: 'confirm',
-        templateUrl: 'app/Modals/confirm.component.html'
+        templateUrl: 'app/Modals/confirm.component.html',
+        styleUrls: ['app/Modals/confirm.component.css']
     }),
     __metadata("design:paramtypes", [ng2_bootstrap_modal_1.DialogService])
 ], ConfirmComponent);

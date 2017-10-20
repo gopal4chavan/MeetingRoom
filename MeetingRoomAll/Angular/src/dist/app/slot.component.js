@@ -64,7 +64,7 @@ var SlotsComponent = (function () {
     SlotsComponent.prototype.getBookingForm = function (slot, date) {
         var _this = this;
         var id = parseInt(localStorage.getItem("userid"), 10);
-        var temp_obj = new classes_1.FormDetails(id, this.primaryDetails.loc_id, this.primaryDetails.loc_name, this.primaryDetails.room_id, this.primaryDetails.room_name, null, null, new Date(date), null, null, null, slot.SlotID, null, null);
+        var temp_obj = new classes_1.FormDetails(id, this.primaryDetails.loc_id, this.primaryDetails.loc_name, this.primaryDetails.room_id, this.primaryDetails.room_name, null, null, new Date(date), null, null, null, slot.SlotID, null, null, null);
         this.dialogService
             .addDialog(bookingFormModal_component_1.BookingFormModalComponent, { title: "Booking Form", bookingFormDetails: temp_obj }, { backdropColor: 'rgba(0,0,0,0.5)' })
             .subscribe(function (result) { if (result) {

@@ -2,10 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using DomainLayer;
-using System.Collections;
 
 namespace Repo
 {
@@ -105,7 +102,7 @@ namespace Repo
             }
         }
 
-        public string UpdateBooking(int BookingID,BookingTbl details,bool bulkEdit)
+        public string UpdateBooking(int BookingID,BookingTbl details,bool bulkEdit=true)
         {
             try
             {
@@ -156,7 +153,10 @@ namespace Repo
                             RoomID = res.RoomID,
                             LocationName = _db.TblLocations.FirstOrDefault(elem => elem.LocationID == res.LocationID).LocationName,
                             RoomName = _db.TblRooms.FirstOrDefault(elem => elem.RoomID == res.RoomID).RoomName,
-                            SlotCount = _db.TblBookingDates.Where(elem => elem.BookingID == res.BookingID).Select(m => m.SlotID).Distinct().Count()
+                            SlotID = res.SlotID,
+                            SlotCount = res.SlotCount,
+                            Slot = _db.TblSlots.FirstOrDefault(elem => elem.SlotID == res.SlotID).Slot,
+                            TimeStamp = res.TimeStamp                             
 
                         }).FirstOrDefault();
                 }

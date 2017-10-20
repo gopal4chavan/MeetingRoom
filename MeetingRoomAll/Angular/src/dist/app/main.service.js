@@ -13,16 +13,16 @@ require("rxjs/add/operator/map");
 var http_1 = require("@angular/http");
 var classes_1 = require("./classes");
 var of_1 = require("rxjs/Observable/of");
-var headers = new http_1.Headers({ 'Access-Control-Allow-Origin': '*' });
-var options = new http_1.RequestOptions({ headers: headers });
 var MainService = (function () {
     function MainService(http) {
         this.http = http;
         this.location_url = "http://localhost:65091/api/location";
         this.room_url = "http://localhost:65091/api/room?locationID=";
+        this.headers = new http_1.Headers({ 'Access-Control-Allow-Origin': '*' });
+        this.options = new http_1.RequestOptions({ headers: this.headers });
     }
     MainService.prototype.getAllLocations = function () {
-        return this.http.get(this.location_url, options).map(function (result) { return result.json(); });
+        return this.http.get(this.location_url, this.options).map(function (result) { return result.json(); });
     };
     MainService.prototype.getAllRooms = function (locationid) {
         return this.http.get(this.room_url + locationid)

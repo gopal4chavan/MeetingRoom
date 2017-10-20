@@ -22,8 +22,8 @@ var IviewDet = (function () {
 }());
 exports.IviewDet = IviewDet;
 var FormDetails = (function () {
-    function FormDetails(Createdby, LocationID, LocationName, RoomID, RoomName, Subject, Description, FD, TD, FromDate, ToDate, SlotID, Slot, SlotCount) {
-        this.Createdby = Createdby;
+    function FormDetails(CreatedBy, LocationID, LocationName, RoomID, RoomName, Subject, Description, FD, TD, FromDate, ToDate, SlotID, Slot, SlotCount, TimeStamp) {
+        this.CreatedBy = CreatedBy;
         this.LocationID = LocationID;
         this.LocationName = LocationName;
         this.RoomID = RoomID;
@@ -37,6 +37,7 @@ var FormDetails = (function () {
         this.SlotID = SlotID;
         this.Slot = Slot;
         this.SlotCount = SlotCount;
+        this.TimeStamp = TimeStamp;
     }
     return FormDetails;
 }());

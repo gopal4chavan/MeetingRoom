@@ -56,18 +56,7 @@ export class SlotService {
         return this.http.get(this.details_url+bookingID).map(res=>res.json());
     }
     public updateBooking(bookingID:number,obj:FormDetails){
-        let det:Details={createdby:null,description:null,subject:null,fromDate:null,toDate:null,location_id:null,room_id:null,slot_id:null,slot_count:null};
-        det.createdby=obj.createdby;
-        det.description=obj.description;
-        det.subject=obj.subject;
-        det.fromDate=new Date(obj.fromDate).toDateString();
-        det.toDate=new Date(obj.toDate).toDateString();
-        det.location_id=obj.locationID;
-        det.room_id=obj.roomID;
-        det.slot_id=obj.slotID;
-        det.slot_count=obj.slotCount;
-        let re:{val:any}={val:null};
-        return this.http.post(this.updatebooking_url+bookingID,det).map(res=>res.json());
+        return this.http.post(this.updatebooking_url+bookingID,obj).map(res=>res.json());
     }
 }
 

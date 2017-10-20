@@ -14,7 +14,8 @@ export interface ConfirmModel {
 
 @Component({
   selector: 'confirm',
-  templateUrl: 'app/Modals/bookingFormModal.component.html'
+  templateUrl: 'app/Modals/bookingFormModal.component.html',
+  styleUrls:['app/Modals/bookingFormModal.component.css']
 })
 export class BookingFormModalComponent extends DialogComponent<ConfirmModel, boolean> implements ConfirmModel, OnInit {
   bookingFormDetails: FormDetails;
@@ -69,7 +70,7 @@ export class BookingFormModalComponent extends DialogComponent<ConfirmModel, boo
       let result: any;
       this.slotService
         .updateBooking(this.bookingID,this.BookingForm.value)
-        .finally(() => { this.bookedSuccess(result);this.result=true;this.close()})
+        .finally(() => { this.bookedSuccess(result,'Successfully Updated');this.result=true;this.close()})
         .subscribe(
           res => { result = res },
         (error) => { console.log(error); },
@@ -81,28 +82,25 @@ export class BookingFormModalComponent extends DialogComponent<ConfirmModel, boo
       let roomID = this.BookingForm.value.RoomID;
       let slot_id = this.BookingForm.value.SlotID;
       console.log(this.BookingForm.value)
-      this.BookingForm.value.Createdby = localStorage.getItem("userid");
+      this.BookingForm.value.CreatedBy = localStorage.getItem("userid");
       this.BookingForm.value.LocationName = this.locations.find(elem => elem.LocationID == locID).LocationName;
       this.BookingForm.value.RoomName = this.rooms.find(elem => elem.RoomID == roomID).RoomName;
       this.BookingForm.value.Slot = this.slots.find(elem => elem.SlotID == slot_id).Slot;
 
       let result: any;
       this.slotService.bookRoom(this.BookingForm.value)
-        .finally(() => { this.bookedSuccess(result); })
+        .finally(() => { this.bookedSuccess(result,'Successfully Submitted'); })
         .subscribe(
           (res) => { result = res },
           (error) => { console.log(error)});
     }
   }
 
-  bookedSuccess(res: any) {
-    let title: string;
-
+  bookedSuccess(res: any,title:string) {
     if (res == 'success') {
 
-      this.failureFlag = false;
-      title = 'Successfully Submitted';
-      let disposable = this.dialogService.addDialog(ConfirmComponent, { bookingDetails: this.BookingForm.value }, { backdropColor: 'rgba(0,0,0,0.4)' });
+      this.failureFlag = false; 
+      let disposable = this.dialogService.addDialog(ConfirmComponent, { bookingDetails: this.BookingForm.value, title:title }, { backdropColor: 'rgba(0,0,0,0.4)' });
       this.result = true;
       this.close();
     }

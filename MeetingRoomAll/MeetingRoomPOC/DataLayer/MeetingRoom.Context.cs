@@ -33,7 +33,7 @@ namespace DataLayer
         public virtual DbSet<TblRoom> TblRooms { get; set; }
         public virtual DbSet<TblSlot> TblSlots { get; set; }
     
-        public virtual int SP_Booking(Nullable<int> createdBy, Nullable<int> locationID, Nullable<int> roomID, string subject, string description, Nullable<System.DateTime> fromDate, Nullable<System.DateTime> toDate, Nullable<int> slot, Nullable<int> slotCount)
+        public virtual int SP_Booking(Nullable<int> createdBy, Nullable<int> locationID, Nullable<int> roomID, string subject, string description, Nullable<System.DateTime> fromDate, Nullable<System.DateTime> toDate, Nullable<int> slotID, Nullable<int> slotCount)
         {
             var createdByParameter = createdBy.HasValue ?
                 new ObjectParameter("CreatedBy", createdBy) :
@@ -63,15 +63,15 @@ namespace DataLayer
                 new ObjectParameter("ToDate", toDate) :
                 new ObjectParameter("ToDate", typeof(System.DateTime));
     
-            var slotParameter = slot.HasValue ?
-                new ObjectParameter("Slot", slot) :
-                new ObjectParameter("Slot", typeof(int));
+            var slotIDParameter = slotID.HasValue ?
+                new ObjectParameter("SlotID", slotID) :
+                new ObjectParameter("SlotID", typeof(int));
     
             var slotCountParameter = slotCount.HasValue ?
                 new ObjectParameter("SlotCount", slotCount) :
                 new ObjectParameter("SlotCount", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Booking", createdByParameter, locationIDParameter, roomIDParameter, subjectParameter, descriptionParameter, fromDateParameter, toDateParameter, slotParameter, slotCountParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Booking", createdByParameter, locationIDParameter, roomIDParameter, subjectParameter, descriptionParameter, fromDateParameter, toDateParameter, slotIDParameter, slotCountParameter);
         }
     
         public virtual int SP_RepeatBooking(Nullable<int> createdBy, Nullable<int> locationID, Nullable<int> roomID, string subject, string description, Nullable<bool> mON, Nullable<bool> tUE, Nullable<bool> wED, Nullable<bool> tHU, Nullable<bool> fRI, Nullable<bool> sAT, Nullable<bool> sUN, Nullable<System.DateTime> startOn, Nullable<System.DateTime> endOn, Nullable<int> slotID, Nullable<int> slotCount)

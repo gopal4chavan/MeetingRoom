@@ -99,6 +99,7 @@ export class SlotsComponent implements OnInit, DoCheck {
             null,
             slot.SlotID,
             null,
+            null,
             null);
 
         this.dialogService

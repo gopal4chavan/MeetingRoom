@@ -72,7 +72,7 @@ namespace MeetingRoomPOC.Controllers
 
         [HttpPost]
         [Route("update")]
-        public HttpResponseMessage UpdateBooking(int bookingID, [FromBody]BookingTbl details, bool bulkEdit)
+        public HttpResponseMessage UpdateBooking(int bookingID, [FromBody]BookingTbl details, bool bulkEdit=true)
         {
             try
             {

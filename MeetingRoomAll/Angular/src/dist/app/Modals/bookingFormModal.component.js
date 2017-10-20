@@ -57,7 +57,7 @@ var BookingFormModalComponent = (function (_super) {
             var result_1;
             this.slotService
                 .updateBooking(this.bookingID, this.BookingForm.value)
-                .finally(function () { _this.bookedSuccess(result_1); _this.result = true; _this.close(); })
+                .finally(function () { _this.bookedSuccess(result_1, 'Successfully Updated'); _this.result = true; _this.close(); })
                 .subscribe(function (res) { result_1 = res; }, function (error) { console.log(error); });
         }
         else {
@@ -65,22 +65,20 @@ var BookingFormModalComponent = (function (_super) {
             var roomID_1 = this.BookingForm.value.RoomID;
             var slot_id_1 = this.BookingForm.value.SlotID;
             console.log(this.BookingForm.value);
-            this.BookingForm.value.Createdby = localStorage.getItem("userid");
+            this.BookingForm.value.CreatedBy = localStorage.getItem("userid");
             this.BookingForm.value.LocationName = this.locations.find(function (elem) { return elem.LocationID == locID_1; }).LocationName;
             this.BookingForm.value.RoomName = this.rooms.find(function (elem) { return elem.RoomID == roomID_1; }).RoomName;
             this.BookingForm.value.Slot = this.slots.find(function (elem) { return elem.SlotID == slot_id_1; }).Slot;
             var result_2;
             this.slotService.bookRoom(this.BookingForm.value)
-                .finally(function () { _this.bookedSuccess(result_2); })
+                .finally(function () { _this.bookedSuccess(result_2, 'Successfully Submitted'); })
                 .subscribe(function (res) { result_2 = res; }, function (error) { console.log(error); });
         }
     };
-    BookingFormModalComponent.prototype.bookedSuccess = function (res) {
-        var title;
+    BookingFormModalComponent.prototype.bookedSuccess = function (res, title) {
         if (res == 'success') {
             this.failureFlag = false;
-            title = 'Successfully Submitted';
-            var disposable = this.dialogService.addDialog(confirm_component_1.ConfirmComponent, { bookingDetails: this.BookingForm.value }, { backdropColor: 'rgba(0,0,0,0.4)' });
+            var disposable = this.dialogService.addDialog(confirm_component_1.ConfirmComponent, { bookingDetails: this.BookingForm.value, title: title }, { backdropColor: 'rgba(0,0,0,0.4)' });
             this.result = true;
             this.close();
         }
@@ -94,7 +92,8 @@ var BookingFormModalComponent = (function (_super) {
 BookingFormModalComponent = __decorate([
     core_1.Component({
         selector: 'confirm',
-        templateUrl: 'app/Modals/bookingFormModal.component.html'
+        templateUrl: 'app/Modals/bookingFormModal.component.html',
+        styleUrls: ['app/Modals/bookingFormModal.component.css']
     }),
     __metadata("design:paramtypes", [ng2_bootstrap_modal_1.DialogService, forms_1.FormBuilder, main_service_1.MainService, slot_service_1.SlotService])
 ], BookingFormModalComponent);

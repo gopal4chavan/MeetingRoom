@@ -33,7 +33,8 @@ var DeleteConfirmComponent = (function (_super) {
 DeleteConfirmComponent = __decorate([
     core_1.Component({
         selector: 'confirm',
-        template: "<div class=\"modal-dialog\">\n                <div class=\"modal-content\">\n                   <div class=\"modal-header\">\n                     <button type=\"button\" class=\"close\" (click)=\"close()\" >&times;</button>\n                     <h4 class=\"modal-title\">{{title || 'Confirm'}}</h4>\n                   </div>\n\n                   <div class=\"modal-footer\">\n                     <button type=\"button\" class=\"btn btn-danger\" (click)=\"confirm()\">Confirm</button>\n                     <button type=\"button\" class=\"btn btn-default\" (click)=\"cancel()\">Cancel</button>\n                   </div>\n                 </div>\n                </div>"
+        template: "<div class=\"modal-dialog\">\n                <div class=\"modal-content\">\n                   <div class=\"modal-header text-center\">\n                     <button type=\"button\" class=\"close\" (click)=\"close()\" >&times;</button>                    \n                     <h1>Confirm Delete</h1>\n                   </div>\n                   <div class=\"model-body\">\n                      <br>\n                       &nbsp;<div class=\"modal-title\">{{title || 'Confirm'}}</div>\n                      <br>\n                   </div>\n                   <div class=\"modal-footer\">\n                     <button type=\"button\" class=\"btn btn-danger\" (click)=\"confirm()\">Confirm</button>\n                     <button type=\"button\" class=\"btn btn-default\" (click)=\"cancel()\">Cancel</button>\n                   </div>\n                 </div>\n                </div>",
+        styleUrls: ['app/Modals/delete-confirm.component.css']
     }),
     __metadata("design:paramtypes", [ng2_bootstrap_modal_1.DialogService])
 ], DeleteConfirmComponent);
