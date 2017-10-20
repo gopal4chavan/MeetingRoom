@@ -20,7 +20,6 @@ export class ConfirmComponent extends DialogComponent<ConfirmModel, boolean> imp
     super(dialogService);    
   }
   ngOnInit(){
-    console.log(this.bookingDetails);
   }
   confirm() {
     this.close();

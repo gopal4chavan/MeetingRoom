@@ -38,7 +38,6 @@ export class BookedFormModalComponent extends DialogComponent<ConfirmModel, bool
             (res) => this.bookingDetails = res,
             (error) => { console.log(error)},
             () => {
-                console.log(this.bookingDetails);
                 if (this.bookingDetails) {
                     this.flag = true;
                 }
@@ -92,10 +91,8 @@ export class BookedFormModalComponent extends DialogComponent<ConfirmModel, bool
             });
     }
     updateBooking() {
-        // let temp_obj: FormDetails = new FormDetails(this.bookingDetails.CreatedBy, this.bookingDetails.LocationID, this.bookingDetails.LocationName, this.bookingDetails.RoomID, this.bookingDetails.RoomName, this.bookingDetails.Subject, this.bookingDetails.Description, new Date(this.bookingDetails.FromDate), new Date(this.bookingDetails.ToDate),null,null,this.bookingDetails.SlotID, this.bookingDetails.Slot, this.bookingDetails.SlotCount,null);
         this.bookingDetails.FD=new Date(this.bookingDetails.FromDate);
         this.bookingDetails.TD=new Date(this.bookingDetails.ToDate);
-        console.log(this.bookingDetails);
         this.dialogService
             .addDialog(BookingFormModalComponent, { title: "Booking Form", bookingFormDetails: this.bookingDetails, bookingID: this.bookingID }, { backdropColor: 'rgba(0,0,0,0.5)' })
             .subscribe(result => { if (result) { this.ngOnInit();this.result=true;this.close() } });

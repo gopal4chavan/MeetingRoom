@@ -30,7 +30,6 @@ export class SlotService {
     }
 
     public bookRoom(formdet:FormDetails):Observable<string>{
-        console.log(formdet);
         formdet.FromDate=new Date(formdet.FD).toDateString();
         formdet.ToDate =new Date(formdet.TD).toDateString();
         return this.http.post(this.booking_url,formdet).map(result=>result.json());

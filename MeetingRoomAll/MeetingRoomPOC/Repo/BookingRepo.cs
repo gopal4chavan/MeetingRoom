@@ -69,12 +69,9 @@ namespace Repo
             {
                 using (_db = new AngularPOCEntities())
                 {
-                    _db.TblBookingDates.RemoveRange(_db.TblBookingDates.Where(result => result.BookingID == BookingID && result.Date == date));
-                    int count = _db.TblBookingDates.Where(result => result.BookingID == BookingID).Count();
-                    if (count == 0)
-                    {
-                        _db.TblBookings.Remove(_db.TblBookings.SingleOrDefault(res => res.BookingID == BookingID));
-                    }
+                    var thisBookingId = _db.TblBookingDates.Where(result => result.BookingID == BookingID && result.Date == date).ToList();
+
+                    thisBookingId.ForEach(el => el.Status = "CANCEL");
                     _db.SaveChanges();
                     return "success";
                 }
@@ -90,10 +87,11 @@ namespace Repo
             {
                 using (_db = new AngularPOCEntities())
                 {
-                    _db.TblBookingDates.RemoveRange(_db.TblBookingDates.Where(result => result.BookingID == BookingID));
-                    _db.TblBookings.Remove(_db.TblBookings.SingleOrDefault(res => res.BookingID == BookingID));
+                    var thisBookingId = _db.TblBookingDates.Where(result => result.BookingID == BookingID).ToList();
+                    thisBookingId.ForEach(el => el.Status = "CANCEL");
                     _db.SaveChanges();
                     return "success";
+
                 }
             }
             catch (Exception e)

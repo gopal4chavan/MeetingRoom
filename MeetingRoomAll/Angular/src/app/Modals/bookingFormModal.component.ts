@@ -81,7 +81,6 @@ export class BookingFormModalComponent extends DialogComponent<ConfirmModel, boo
       let locID = this.BookingForm.value.LocationID;
       let roomID = this.BookingForm.value.RoomID;
       let slot_id = this.BookingForm.value.SlotID;
-      console.log(this.BookingForm.value)
       this.BookingForm.value.CreatedBy = localStorage.getItem("userid");
       this.BookingForm.value.LocationName = this.locations.find(elem => elem.LocationID == locID).LocationName;
       this.BookingForm.value.RoomName = this.rooms.find(elem => elem.RoomID == roomID).RoomName;
