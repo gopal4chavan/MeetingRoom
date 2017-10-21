@@ -15,7 +15,7 @@ export interface ConfirmModel {
 @Component({
   selector: 'confirm',
   templateUrl: 'app/Modals/bookingFormModal.component.html',
-  styleUrls:['app/Modals/bookingFormModal.component.css']
+  styleUrls: ['app/Modals/bookingFormModal.component.css']
 })
 export class BookingFormModalComponent extends DialogComponent<ConfirmModel, boolean> implements ConfirmModel, OnInit {
   bookingFormDetails: FormDetails;
@@ -36,21 +36,23 @@ export class BookingFormModalComponent extends DialogComponent<ConfirmModel, boo
   }
 
   ngOnInit() {
+    console.log(this.bookingFormDetails);
     this.slotService.getDuration().subscribe(result => this.durationList = result);
 
     this.mainService.getAllLocations()
       .subscribe(
-        (result) => this.locations = result,
-        (error) => console.log(error));
+      (result) => this.locations = result,
+      (error) => console.log(error));
 
     this.maxDate.setDate(this.maxDate.getDate() + 30);
     this.slotService.getSlots().subscribe(result => this.slots = result);
 
-    this.BookingForm = this.fb.group(this.bookingFormDetails);    
+    this.BookingForm = this.fb.group(this.bookingFormDetails);
 
     if (this.bookingFormDetails.LocationID != null) {
-      this.getRooms();      
+      this.getRooms();
     }
+    console.log(this.BookingForm.value);
   }
 
   cancel() {
@@ -61,23 +63,23 @@ export class BookingFormModalComponent extends DialogComponent<ConfirmModel, boo
     const locationid: number = this.BookingForm.value.LocationID;
     this.mainService.getAllRooms(locationid)
       .subscribe(
-        (result) => this.rooms = result,
-        (error) => console.log(error));
+      (result) => this.rooms = result,
+      (error) => console.log(error));
   }
   book() {
     if (this.bookingID) {
 
       let result: any;
       this.slotService
-        .updateBooking(this.bookingID,this.BookingForm.value)
-        .finally(() => { this.bookedSuccess(result,'Successfully Updated');this.result=true;this.close()})
+        .updateBooking(this.bookingID, this.BookingForm.value)
+        .finally(() => { this.bookedSuccess(result, 'Successfully Updated'); this.result = true; this.close() })
         .subscribe(
-          res => { result = res },
+        res => { result = res },
         (error) => { console.log(error); },
-        );      
-      
+      );
+
     }
-    else {      
+    else {
       let locID = this.BookingForm.value.LocationID;
       let roomID = this.BookingForm.value.RoomID;
       let slot_id = this.BookingForm.value.SlotID;
@@ -87,19 +89,28 @@ export class BookingFormModalComponent extends DialogComponent<ConfirmModel, boo
       this.BookingForm.value.Slot = this.slots.find(elem => elem.SlotID == slot_id).Slot;
 
       let result: any;
-      this.slotService.bookRoom(this.BookingForm.value)
-        .finally(() => { this.bookedSuccess(result,'Successfully Submitted'); })
-        .subscribe(
+      if (this.BookingForm.value.Repeat) {
+        this.slotService.repeatBooking(this.BookingForm.value)
+          .finally(() => { this.bookedSuccess(result, 'Successfully Submitted'); })
+          .subscribe(
           (res) => { result = res },
-          (error) => { console.log(error)});
+          (error) => { console.log(error) });
+      }
+      else {
+        this.slotService.bookRoom(this.BookingForm.value)
+          .finally(() => { this.bookedSuccess(result, 'Successfully Submitted'); })
+          .subscribe(
+          (res) => { result = res },
+          (error) => { console.log(error) });
+      }
     }
   }
 
-  bookedSuccess(res: any,title:string) {
+  bookedSuccess(res: any, title: string) {
     if (res == 'success') {
 
-      this.failureFlag = false; 
-      let disposable = this.dialogService.addDialog(ConfirmComponent, { bookingDetails: this.BookingForm.value, title:title }, { backdropColor: 'rgba(0,0,0,0.4)' });
+      this.failureFlag = false;
+      let disposable = this.dialogService.addDialog(ConfirmComponent, { bookingDetails: this.BookingForm.value, title: title }, { backdropColor: 'rgba(0,0,0,0.4)' });
       this.result = true;
       this.close();
     }

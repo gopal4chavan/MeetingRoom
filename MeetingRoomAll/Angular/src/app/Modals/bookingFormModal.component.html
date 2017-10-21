@@ -1,72 +1,85 @@
 <div class="modal-dialog">
-        <div class="modal-content">
+    <div class="modal-content">
 
-            <!--Form-->
-            <form #form='ngForm' (ngSubmit)="book()" novalidate [formGroup]="BookingForm">
+        <!--Form-->
+        <form #form='ngForm' (ngSubmit)="book()" novalidate [formGroup]="BookingForm">
 
-                <!--Header-->
-                <div class="modal-header">
-                    <button type="button" class="close" (click)="close()">&times;</button>
-                    <h2 class="modal-title text-center">{{title}}</h2>
+            <!--Header-->
+            <div class="modal-header">
+                <button type="button" class="close" (click)="close()">&times;</button>
+                <h2 class="modal-title text-center">{{title}}</h2>
+            </div>
+            <!--Body-->
+            <div class="modal-body">
+
+                <p-checkbox label="repeat..." formControlName="Repeat" binary="true"></p-checkbox>
+                <div *ngIf="BookingForm.value.Repeat">
+                    <p-checkbox label='S' binary="true" formControlName="SUN"></p-checkbox>
+                    <p-checkbox label='M' binary="true" formControlName="MON"></p-checkbox>
+                    <p-checkbox label='T' binary="true" formControlName="TUE"></p-checkbox>
+                    <p-checkbox label='W' binary="true" formControlName="WED"></p-checkbox>
+                    <p-checkbox label='T' binary="true" formControlName="THU"></p-checkbox>
+                    <p-checkbox label='F' binary="true" formControlName="FRI"></p-checkbox>
+                    <p-checkbox label='S' binary="true" formControlName="SAT"></p-checkbox>
                 </div>
-                <!--Body-->
-                <div class="modal-body">
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="subject plz...." formControlName="Subject" required>
-                    </div>
-                    <div class="form-group">
-                        <textarea class="form-control" placeholder="Description plz...." required formControlName="Description"></textarea>
-                    </div>
-                    <div class="row" style="margin-bottom: 15px">
-                        <div class="col-sm-6">
-                            <label>FromDate</label><br>
-                            <p-calendar [showIcon]="true" [minDate]="minDate" [maxDate]="maxDate" required formControlName="FD"></p-calendar>
-                        </div>
+                <hr>
 
-                        <div class="col-sm-6">
-                            <label>ToDate</label><br>
-                            <p-calendar [showIcon]="true" [minDate]="BookingForm.value.FD" [maxDate]="maxDate" required formControlName="TD"></p-calendar>
-                        </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="subject plz...." formControlName="Subject" required>
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control" placeholder="Description plz...." required formControlName="Description"></textarea>
+                </div>
+                <div class="row" style="margin-bottom: 15px">
+                    <div class="col-sm-6">
+                        <label>FromDate</label><br>
+                        <p-calendar [showIcon]="true" [minDate]="minDate" [maxDate]="maxDate" required formControlName="FD"></p-calendar>
                     </div>
 
-                    <div class="row" style="margin-bottom: 15px">
-                        <div class="col-sm-6">
-                            <label>Location</label>
+                    <div class="col-sm-6">
+                        <label>ToDate</label><br>
+                        <p-calendar [showIcon]="true" [minDate]="BookingForm.value.FD" [maxDate]="maxDate" required formControlName="TD"></p-calendar>
+                    </div>
+                </div>
+
+                <div class="row" style="margin-bottom: 15px">
+                    <div class="col-sm-6">
+                        <label>Location</label>
                         <select class="form-control" formControlName="LocationID" (change)=getRooms($event) required>
                             <option *ngFor="let location of locations" [value]="location.LocationID">{{location.LocationName}}</option>
-                        </select>        
-                        </div>
+                        </select>
+                    </div>
 
-                        <div class="col-sm-6">
-                            <label>Room</label>
+                    <div class="col-sm-6">
+                        <label>Room</label>
                         <select class="form-control" required formControlName="RoomID">
                             <option *ngFor="let room of rooms" [value]="room.RoomID">{{room.RoomName}}</option>
-                        </select>    
-                        </div>
+                        </select>
                     </div>
-                    <div class="row" style="margin-bottom: 15px">
-                        <div class="col-sm-6">
-                            <label>Start Time</label>
-                            <select class="form-control" formControlName="SlotID">
+                </div>
+                <div class="row" style="margin-bottom: 15px">
+                    <div class="col-sm-6">
+                        <label>Start Time</label>
+                        <select class="form-control" formControlName="SlotID">
                                 <option *ngFor="let slot of slots" [value]="slot.SlotID">{{slot.Slot}}</option>
-                            </select>    
-                        </div>
-                        <div class="col-sm-6">
-                            <label>Duration</label>
-                            <select class="form-control" formControlName="SlotCount">
+                            </select>
+                    </div>
+                    <div class="col-sm-6">
+                        <label>Duration</label>
+                        <select class="form-control" formControlName="SlotCount">
                                 <option *ngFor="let duration of durationList" [value]="duration.id">{{duration.value}}</option>
-                            </select>  
-                        </div>
-                    </div>
-                    <div class="alert alert-danger" *ngIf="failureFlag">
-                        <p> Cannot Book for the specified Date and time plz check the available slots </p>
+                            </select>
                     </div>
                 </div>
-                <!--Footer-->
-                <div class="modal-footer">                    
-                    <button type="submit" class="btn btn-success">submit</button>
-                    <button type="button" class="btn btn-default" (click)="cancel()">Cancel</button>
+                <div class="alert alert-danger" *ngIf="failureFlag">
+                    <p> Cannot Book for the specified Date and time plz check the available slots </p>
                 </div>
-            </form>
-        </div>
+            </div>
+            <!--Footer-->
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-success">submit</button>
+                <button type="button" class="btn btn-default" (click)="cancel()">Cancel</button>
+            </div>
+        </form>
     </div>
+</div>

@@ -1,4 +1,6 @@
 --------------------------------------------------------------------------------------------	Location Table																							
+
+
 --CREATE TABLE TblLocation(
 --LocationID INT,
 --LocationName VARCHAR(30) NOT NULL,
@@ -119,7 +121,6 @@
 --INSERT INTO TblSlot (SlotID, Slot) VALUES (23, N'12:00')
 --INSERT INTO TblSlot (SlotID, Slot) VALUES (24, N'12:30')
 --------------------------------------------------------------------------------------------	Booking Table
-
 --CREATE TABLE TblBooking(
 --BookingID INT IDENTITY(1,1),
 --CreatedBy INT NOT NULL,
@@ -133,6 +134,7 @@
 --Subject VARCHAR(60) NOT NULL,
 --Description VARCHAR(250) NOT NULL,
 --Type VARCHAR(20) NOT NULL,
+--WeekDays VARCHAR(7),
 
 --CONSTRAINT PK_TblBooking PRIMARY KEY(BookingID),
 --CONSTRAINT FK_TblBooking_TblLocation FOREIGN KEY (LocationID) REFERENCES TblLocation(LocationID),
@@ -157,7 +159,6 @@
 --CONSTRAINT FK_TblBookingDate_TblRoom FOREIGN KEY (RoomID) REFERENCES TblRoom(RoomID),
 --CONSTRAINT FK_TblBookingDate_TblSlot FOREIGN KEY (SlotID) REFERENCES TblSlot(SlotID)
 --);
-
 ------------------------------------------------------------------------------------------	Booking table and Date-Booking table store procedure
 --ALTER PROCEDURE SP_Booking
 --@CreatedBy INT,
@@ -338,23 +339,24 @@
 
 ----------------------------------------------------------------------------------------- Repeat Booking Proc
 
---CREATE PROCEDURE SP_RepeatBooking
+--ALTER PROCEDURE SP_RepeatBooking
 --@CreatedBy INT,
 --@LocationID INT,
 --@RoomID INT,
 --@Subject VARCHAR(60),
 --@Description VARCHAR(250),
+--@SUN BIT,
 --@MON BIT,
 --@TUE BIT,
 --@WED BIT,
 --@THU BIT,
 --@FRI BIT,
 --@SAT BIT,
---@SUN BIT,
 --@StartOn DATE,
 --@EndOn DATE,
 --@SlotID INT,
---@SlotCount INT
+--@SlotCount INT,
+--@WeekDays VARCHAR(20)
 --AS
 --BEGIN
 --	BEGIN TRY
@@ -367,8 +369,8 @@
 --					RAISERROR(N'Invalid WeekDays Details',16,1);
 --		ELSE 
 --		BEGIN
---			INSERT INTO TblBooking(CreatedBy,LocationID,RoomID,TimeStamp,FromDate,ToDate,SlotID,SlotCount,Subject,Description,Type)
---			VALUES(@CreatedBy,@LocationID,@RoomID,current_timestamp,@StartOn,@EndOn,@SlotID,@SlotCount,@Subject,@Description,'REPEAT');
+--			INSERT INTO TblBooking(CreatedBy,LocationID,RoomID,TimeStamp,FromDate,ToDate,SlotID,SlotCount,Subject,Description,Type,WeekDays)
+--			VALUES(@CreatedBy,@LocationID,@RoomID,current_timestamp,@StartOn,@EndOn,@SlotID,@SlotCount,@Subject,@Description,'REPEAT',@WeekDays);
 
 --			DECLARE @BookingID INT;
 --			SELECT @BookingID=MAX(BookingID) FROM TblBooking

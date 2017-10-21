@@ -96,18 +96,18 @@ namespace MeetingRoomPOC.Controllers
                 throw;
             }
         }
-        //[Route("repitive")]
-        //[HttpPost]
-        //public HttpResponseMessage AddBooking_Repitive([FromBody]RepitiveBookingTbl details)
-        //{
-        //    try
-        //    {
-        //        return Request.CreateResponse(HttpStatusCode.OK, _repoObj.AddBooking_Repitive(details));
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return SetErrorResponse(ex.Message);
-        //    }
-        //}
+        [Route("repeat")]
+        [HttpPost]
+        public HttpResponseMessage AddRepeatBooking([FromBody]BookingTbl details)
+        {
+            try
+            {
+                return Request.CreateResponse(HttpStatusCode.OK, _repoObj.AddRepeatBooking(details));
+            }
+            catch (Exception ex)
+            {
+                return SetErrorResponse(ex.Message);
+            }
+        }
     }
 }

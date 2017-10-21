@@ -89,12 +89,20 @@ export class SlotsComponent implements OnInit, DoCheck {
             new Date(date),
             null,
             null,
+            null,            
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
             null,
             slot.SlotID,
             null,
             null,
             null);
-
+        console.log(temp_obj);
         this.dialogService
             .addDialog(BookingFormModalComponent, { title: "Booking Form", bookingFormDetails: temp_obj }, { backdropColor: 'rgba(0,0,0,0.5)' })
             .subscribe(result => { if (result) { this.ngOnInit() } });

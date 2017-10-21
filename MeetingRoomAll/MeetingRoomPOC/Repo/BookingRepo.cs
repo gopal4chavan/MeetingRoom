@@ -54,7 +54,7 @@ namespace Repo
                             TimeStamp = res.TimeStamp,
                             Subject = res.Subject,
                             Description = res.Description,
-                            BookedSlots = _db.TblBookingDates.Where(resp => res.BookingID == resp.BookingID).Select(r => new { BookingID=r.BookingID,CreatedBy=res.CreatedBy, SlotID = r.SlotID, Date = r.Date }).ToList()
+                            BookedSlots = _db.TblBookingDates.Where(resp => res.BookingID == resp.BookingID && resp.Status == "ACTIVE").Select(r => new { BookingID = r.BookingID, CreatedBy = res.CreatedBy, SlotID = r.SlotID, Date = r.Date }).ToList()
                         }).ToList();
                 }
             }
@@ -63,7 +63,7 @@ namespace Repo
                 throw;
             }
         }
-        public string DeleteDay(int BookingID,DateTime date)
+        public string DeleteDay(int BookingID, DateTime date)
         {
             try
             {
@@ -100,7 +100,7 @@ namespace Repo
             }
         }
 
-        public string UpdateBooking(int BookingID,BookingTbl details,bool bulkEdit=true)
+        public string UpdateBooking(int BookingID, BookingTbl details, bool bulkEdit = true)
         {
             try
             {
@@ -154,9 +154,43 @@ namespace Repo
                             SlotID = res.SlotID,
                             SlotCount = res.SlotCount,
                             Slot = _db.TblSlots.FirstOrDefault(elem => elem.SlotID == res.SlotID).Slot,
-                            TimeStamp = res.TimeStamp                             
+                            TimeStamp = res.TimeStamp
 
                         }).FirstOrDefault();
+                }
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+        }
+        public string AddRepeatBooking(BookingTbl details)
+        {
+            try
+            {
+                string WeekDays = (details.SUN ? "1" : "0") + (details.MON ? "1" : "0") + (details.TUE ? "1" : "0") + (details.WED ? "1" : "0") + (details.THU ? "1" : "0") + (details.FRI ? "1" : "0") + (details.SAT ? "1" : "0");
+                using (_db = new AngularPOCEntities())
+                {
+                    _db.SP_RepeatBooking(
+                        details.CreatedBy,
+                        details.LocationID,
+                        details.RoomID,
+                        details.Subject,
+                        details.Description,
+                        details.SUN,
+                        details.MON,
+                        details.TUE,
+                        details.WED,
+                        details.THU,
+                        details.FRI,
+                        details.SAT,
+                        details.FromDate,
+                        details.ToDate,
+                        details.SlotID,
+                        details.SlotCount
+                  );
+                    _db.SaveChanges();
+                    return "success";
                 }
             }
             catch (Exception e)

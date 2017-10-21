@@ -81,6 +81,14 @@ export class MainComponent implements OnInit {
             null,
             null,
             null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
             null);
         let disposable = this.dialogService
             .addDialog(BookingFormModalComponent, { title: "Booking Form", bookingFormDetails: temp_form_det }, { backdropColor: 'rgba(0,0,0,0.5)' })

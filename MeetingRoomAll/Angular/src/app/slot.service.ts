@@ -17,6 +17,7 @@ export class SlotService {
     private deleteslot_url="http://localhost:65091/api/booking/deleteslot?bookingID=";
     private details_url="http://localhost:65091/api/booking/getdetails?bookingID=";
     private updatebooking_url="http://localhost:65091/api/booking/update?bookingID=";
+    private repeat_booking_url="http://localhost:65091/api/booking/repeat"
 
     constructor(private http:Http){}
 
@@ -56,6 +57,11 @@ export class SlotService {
     }
     public updateBooking(bookingID:number,obj:FormDetails){
         return this.http.post(this.updatebooking_url+bookingID,obj).map(res=>res.json());
+    }
+    public repeatBooking(obj:FormDetails){
+        obj.FromDate=new Date(obj.FD).toDateString();
+        obj.ToDate =new Date(obj.TD).toDateString();
+        return this.http.post(this.repeat_booking_url,obj).map(res=>res.json());
     }
 }
 
