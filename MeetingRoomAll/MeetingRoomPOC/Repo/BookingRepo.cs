@@ -102,6 +102,7 @@ namespace Repo
 
         public string UpdateBooking(int BookingID, BookingTbl details, bool bulkEdit = true)
         {
+            bool repeat = (details.SUN || details.MON || details.TUE || details.WED || details.THU || details.FRI || details.SAT)
             try
             {
 
@@ -118,6 +119,14 @@ namespace Repo
                         details.ToDate,
                         details.SlotID,
                         details.SlotCount,
+                        repeat,
+                        details.SUN,
+                        details.MON,
+                        details.TUE,
+                        details.WED,
+                        details.THU,
+                        details.FRI,
+                        details.SAT,
                         bulkEdit
                     );
                     _db.SaveChanges();
@@ -187,7 +196,8 @@ namespace Repo
                         details.FromDate,
                         details.ToDate,
                         details.SlotID,
-                        details.SlotCount
+                        details.SlotCount,
+                        WeekDays
                   );
                     _db.SaveChanges();
                     return "success";

@@ -16,6 +16,7 @@
           <ScalarProperty Name="Subject" ColumnName="Subject" />
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="WeekDays" ColumnName="WeekDays" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

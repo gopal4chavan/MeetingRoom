@@ -239,7 +239,15 @@
 --@ToDate DATE,
 --@SlotID INT,
 --@SlotCount INT,
---@EditSlots BIT
+--@Repeat BIT,
+--@SUN BIT,
+--@MON BIT,
+--@TUE BIT,
+--@WED BIT,
+--@THU BIT,
+--@FRI BIT,
+--@SAT BIT,
+--@EditSlots BIT,
 --AS
 --BEGIN	
 --	BEGIN TRY
@@ -248,7 +256,7 @@
 --			RAISERROR(N'Invalid number of Slots',16,1);
 --		ELSE IF(@FromDate>@ToDate OR DATEDIFF(DAY, @FromDate, @ToDate)>30)
 --			RAISERROR(N'Invalid Date Range',16,1);
---		ELSE IF(@EditSlots=1)
+--		ELSE IF(@EditSlots AND !@Repeat)
 --		BEGIN
 --			UPDATE TblBooking 			
 --			SET LocationID=@LocationID,RoomID=@RoomID,TimeStamp=CURRENT_TIMESTAMP,Subject=@Subject,Description=@Description,FromDate=@FromDate,ToDate=@ToDate,SlotID=@SlotID,@SlotCount=@SlotCount
@@ -285,6 +293,10 @@
 --			UPDATE TblBookingDate SET Status='EDITED' Where BookingID=@BookingID AND Status='TEMP_EDITED';					
 --			COMMIT TRAN;
 --		END
+		ELSE IF(@EditSlots AND @Repeat)
+		BEGIN
+			
+		END
 --		ELSE
 --		BEGIN
 --			DECLARE @TEMP_SID INT;

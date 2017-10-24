@@ -32,6 +32,7 @@ namespace DataLayer
         public string Subject { get; set; }
         public string Description { get; set; }
         public string Type { get; set; }
+        public string WeekDays { get; set; }
     
         public virtual TblLocation TblLocation { get; set; }
         public virtual TblRoom TblRoom { get; set; }

@@ -16,6 +16,7 @@
     <Property Name="Subject" Type="varchar" MaxLength="60" Nullable="false" />
     <Property Name="Description" Type="varchar" MaxLength="250" Nullable="false" />
     <Property Name="Type" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="WeekDays" Type="varchar" MaxLength="7" />
   </EntityType>
   <EntityType Name="TblBookingDate">
     <Key>
@@ -136,7 +137,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_tblRoom_tblLocation">
+  <Association Name="FK_TblRoom_TblLocation">
     <End Role="TblLocation" Type="Self.TblLocation" Multiplicity="1" />
     <End Role="TblRoom" Type="Self.TblRoom" Multiplicity="*" />
     <ReferentialConstraint>
@@ -156,7 +157,7 @@
     <Parameter Name="Description" Type="varchar" Mode="In" />
     <Parameter Name="FromDate" Type="date" Mode="In" />
     <Parameter Name="ToDate" Type="date" Mode="In" />
-    <Parameter Name="SlotID" Type="int" Mode="In" />
+    <Parameter Name="Slot" Type="int" Mode="In" />
     <Parameter Name="SlotCount" Type="int" Mode="In" />
   </Function>
   <Function Name="SP_RepeatBooking" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -165,17 +166,18 @@
     <Parameter Name="RoomID" Type="int" Mode="In" />
     <Parameter Name="Subject" Type="varchar" Mode="In" />
     <Parameter Name="Description" Type="varchar" Mode="In" />
+    <Parameter Name="SUN" Type="bit" Mode="In" />
     <Parameter Name="MON" Type="bit" Mode="In" />
     <Parameter Name="TUE" Type="bit" Mode="In" />
     <Parameter Name="WED" Type="bit" Mode="In" />
     <Parameter Name="THU" Type="bit" Mode="In" />
     <Parameter Name="FRI" Type="bit" Mode="In" />
     <Parameter Name="SAT" Type="bit" Mode="In" />
-    <Parameter Name="SUN" Type="bit" Mode="In" />
     <Parameter Name="StartOn" Type="date" Mode="In" />
     <Parameter Name="EndOn" Type="date" Mode="In" />
     <Parameter Name="SlotID" Type="int" Mode="In" />
     <Parameter Name="SlotCount" Type="int" Mode="In" />
+    <Parameter Name="WeekDays" Type="varchar" Mode="In" />
   </Function>
   <Function Name="SP_UpdateBooking" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="BookingID" Type="int" Mode="In" />
@@ -224,7 +226,7 @@
       <End Role="TblSlot" EntitySet="TblSlot" />
       <End Role="TblBookingDate" EntitySet="TblBookingDate" />
     </AssociationSet>
-    <AssociationSet Name="FK_tblRoom_tblLocation" Association="Self.FK_tblRoom_tblLocation">
+    <AssociationSet Name="FK_TblRoom_TblLocation" Association="Self.FK_TblRoom_TblLocation">
       <End Role="TblLocation" EntitySet="TblLocation" />
       <End Role="TblRoom" EntitySet="TblRoom" />
     </AssociationSet>

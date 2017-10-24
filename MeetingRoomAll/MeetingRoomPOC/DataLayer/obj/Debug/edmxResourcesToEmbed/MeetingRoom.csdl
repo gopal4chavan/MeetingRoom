@@ -16,6 +16,7 @@
     <Property Name="Subject" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Type" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="WeekDays" Type="String" MaxLength="7" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="TblLocation" Relationship="Self.FK_TblBooking_TblLocation" FromRole="TblBooking" ToRole="TblLocation" />
     <NavigationProperty Name="TblRoom" Relationship="Self.FK_TblBooking_TblRoom" FromRole="TblBooking" ToRole="TblRoom" />
     <NavigationProperty Name="TblSlot" Relationship="Self.FK_TblBooking_TblSlot" FromRole="TblBooking" ToRole="TblSlot" />
@@ -46,7 +47,7 @@
     <Property Name="LocationName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
     <NavigationProperty Name="TblBookings" Relationship="Self.FK_TblBooking_TblLocation" FromRole="TblLocation" ToRole="TblBooking" />
     <NavigationProperty Name="TblBookingDates" Relationship="Self.FK_TblBookingDate_TblLocation" FromRole="TblLocation" ToRole="TblBookingDate" />
-    <NavigationProperty Name="TblRooms" Relationship="Self.FK_tblRoom_tblLocation" FromRole="TblLocation" ToRole="TblRoom" />
+    <NavigationProperty Name="TblRooms" Relationship="Self.FK_TblRoom_TblLocation" FromRole="TblLocation" ToRole="TblRoom" />
   </EntityType>
   <EntityType Name="TblRoom">
     <Key>
@@ -57,7 +58,7 @@
     <Property Name="LocationID" Type="Int32" Nullable="false" />
     <NavigationProperty Name="TblBookings" Relationship="Self.FK_TblBooking_TblRoom" FromRole="TblRoom" ToRole="TblBooking" />
     <NavigationProperty Name="TblBookingDates" Relationship="Self.FK_TblBookingDate_TblRoom" FromRole="TblRoom" ToRole="TblBookingDate" />
-    <NavigationProperty Name="TblLocation" Relationship="Self.FK_tblRoom_tblLocation" FromRole="TblRoom" ToRole="TblLocation" />
+    <NavigationProperty Name="TblLocation" Relationship="Self.FK_TblRoom_TblLocation" FromRole="TblRoom" ToRole="TblLocation" />
   </EntityType>
   <EntityType Name="TblSlot">
     <Key>
@@ -152,7 +153,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_tblRoom_tblLocation">
+  <Association Name="FK_TblRoom_TblLocation">
     <End Role="TblLocation" Type="Self.TblLocation" Multiplicity="1" />
     <End Role="TblRoom" Type="Self.TblRoom" Multiplicity="*" />
     <ReferentialConstraint>
@@ -198,7 +199,7 @@
       <End Role="TblSlot" EntitySet="TblSlots" />
       <End Role="TblBookingDate" EntitySet="TblBookingDates" />
     </AssociationSet>
-    <AssociationSet Name="FK_tblRoom_tblLocation" Association="Self.FK_tblRoom_tblLocation">
+    <AssociationSet Name="FK_TblRoom_TblLocation" Association="Self.FK_TblRoom_TblLocation">
       <End Role="TblLocation" EntitySet="TblLocations" />
       <End Role="TblRoom" EntitySet="TblRooms" />
     </AssociationSet>
@@ -210,7 +211,7 @@
       <Parameter Name="Description" Mode="In" Type="String" />
       <Parameter Name="FromDate" Mode="In" Type="DateTime" />
       <Parameter Name="ToDate" Mode="In" Type="DateTime" />
-      <Parameter Name="SlotID" Mode="In" Type="Int32" />
+      <Parameter Name="Slot" Mode="In" Type="Int32" />
       <Parameter Name="SlotCount" Mode="In" Type="Int32" />
     </FunctionImport>
     <FunctionImport Name="SP_RepeatBooking">
@@ -219,17 +220,18 @@
       <Parameter Name="RoomID" Mode="In" Type="Int32" />
       <Parameter Name="Subject" Mode="In" Type="String" />
       <Parameter Name="Description" Mode="In" Type="String" />
+      <Parameter Name="SUN" Mode="In" Type="Boolean" />
       <Parameter Name="MON" Mode="In" Type="Boolean" />
       <Parameter Name="TUE" Mode="In" Type="Boolean" />
       <Parameter Name="WED" Mode="In" Type="Boolean" />
       <Parameter Name="THU" Mode="In" Type="Boolean" />
       <Parameter Name="FRI" Mode="In" Type="Boolean" />
       <Parameter Name="SAT" Mode="In" Type="Boolean" />
-      <Parameter Name="SUN" Mode="In" Type="Boolean" />
       <Parameter Name="StartOn" Mode="In" Type="DateTime" />
       <Parameter Name="EndOn" Mode="In" Type="DateTime" />
       <Parameter Name="SlotID" Mode="In" Type="Int32" />
       <Parameter Name="SlotCount" Mode="In" Type="Int32" />
+      <Parameter Name="WeekDays" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="SP_UpdateBooking">
       <Parameter Name="BookingID" Mode="In" Type="Int32" />
