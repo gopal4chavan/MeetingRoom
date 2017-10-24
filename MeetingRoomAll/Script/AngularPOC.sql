@@ -434,3 +434,32 @@
 --@EndOn = '2017-10-29',
 --@SlotID = 3,
 --@SlotCount =2  
+---------------------------------------------------------------------------------------------------------------------Get user bookings proc
+--CREATE procedure [dbo].[SP_GetUserBookings] 
+--@id int 
+--as
+-- SELECT tbl1.bookingID,
+--	tbl1.createdBy,
+--	tbl1.subject,
+--	tbl1.timestamp,
+--	tbl1.description,
+--	tbl1.locationid,
+--	tbl1.roomid,
+--	tbl1.slotid,
+--	tbl1.slotcount,
+--	tbl2.date,
+--	tbl2.status,
+--	tbl2.StatusUpdated
+--FROM tblBooking tbl1 
+--INNER JOIN 
+--(SELECT bookingID,
+--	date,
+--	min(slotID) AS slotID,
+--	status,
+--	StatusUpdated  
+--FROM tblbookingdate 
+--GROUP BY bookingID,
+--	 date,
+--	 status,
+--	 StatusUpdated ) tbl2 
+--ON tbl1.bookingID=tbl2.bookingID AND  tbl1.createdBy=@id
