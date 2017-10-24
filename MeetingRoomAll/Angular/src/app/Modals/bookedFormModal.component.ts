@@ -29,14 +29,14 @@ export class BookedFormModalComponent extends DialogComponent<ConfirmModel, bool
 
     bookingDetails: FormDetails;
     flag: boolean = false;
-
+    buttonClicked: boolean = false;
     constructor(dialogService: DialogService, private slotService: SlotService) {
         super(dialogService);
     }
     ngOnInit() {
         this.slotService.getDetails(this.bookingID).subscribe(
             (res) => this.bookingDetails = res,
-            (error) => { console.log(error)},
+            (error) => { console.log(error) },
             () => {
                 console.log(this.bookingDetails);
                 if (this.bookingDetails) {
@@ -50,14 +50,16 @@ export class BookedFormModalComponent extends DialogComponent<ConfirmModel, bool
     }
 
     enableDeleteOptions() {
-        if (this.bookingDetails.CreatedBy == parseInt(localStorage.getItem("userid"),10)) {
-        return true;
+        if (this.bookingDetails.CreatedBy == parseInt(localStorage.getItem("userid"), 10)) {
+            return true;
         }
         else return false;
     }
 
     delete() {
         let result: string;
+        this.buttonClicked = true;
+
         let disposable = this.dialogService
             .addDialog(DeleteConfirmComponent, { title: "Are you sure, you want to delete entire booking" }, { backdropColor: 'rgba(0,0,0,0.5)' })
             .subscribe(
@@ -71,11 +73,15 @@ export class BookedFormModalComponent extends DialogComponent<ConfirmModel, bool
                         (error) => { console.log(error) }
                         );
                 }
+                else
+                    this.buttonClicked = false;
             });
     }
 
     deleteSlot() {
         let result: string;
+        this.buttonClicked = true;
+
         let disposable = this.dialogService
             .addDialog(DeleteConfirmComponent, { title: "Are you sure, you want to delete selected date booking" }, { backdropColor: 'rgba(0,0,0,0.5)' })
             .subscribe(
@@ -89,15 +95,18 @@ export class BookedFormModalComponent extends DialogComponent<ConfirmModel, bool
                         (error) => { console.log(error) }
                         );
                 }
+                else
+                    this.buttonClicked = false;
+
             });
     }
     updateBooking() {
         // let temp_obj: FormDetails = new FormDetails(this.bookingDetails.CreatedBy, this.bookingDetails.LocationID, this.bookingDetails.LocationName, this.bookingDetails.RoomID, this.bookingDetails.RoomName, this.bookingDetails.Subject, this.bookingDetails.Description, new Date(this.bookingDetails.FromDate), new Date(this.bookingDetails.ToDate),null,null,this.bookingDetails.SlotID, this.bookingDetails.Slot, this.bookingDetails.SlotCount,null);
-        this.bookingDetails.FD=new Date(this.bookingDetails.FromDate);
-        this.bookingDetails.TD=new Date(this.bookingDetails.ToDate);
+        this.bookingDetails.FD = new Date(this.bookingDetails.FromDate);
+        this.bookingDetails.TD = new Date(this.bookingDetails.ToDate);
         console.log(this.bookingDetails);
         this.dialogService
             .addDialog(BookingFormModalComponent, { title: "Booking Form", bookingFormDetails: this.bookingDetails, bookingID: this.bookingID }, { backdropColor: 'rgba(0,0,0,0.5)' })
-            .subscribe(result => { if (result) { this.ngOnInit();this.result=true;this.close() } });
+            .subscribe(result => { if (result) { this.ngOnInit(); this.result = true; this.close() } });
     }
 }

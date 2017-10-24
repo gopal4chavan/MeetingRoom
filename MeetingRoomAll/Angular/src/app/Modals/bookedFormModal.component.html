@@ -1,7 +1,7 @@
 <div class="modal-dialog modal-lg" *ngIf=flag>
     <div class="modal-content">
 
-        <div class="modal-header booking_header" >
+        <div class="modal-header booking_header">
             <button type="button" class="close" (click)="modal_close()">&times;</button>
             <h2 class="modal-title text-center">Booking Details</h2>
         </div>
@@ -38,8 +38,8 @@
         </div>
         <div class="modal-footer" *ngIf="enableDeleteOptions()">
             <button class="btn btn-primary" (click)="updateBooking()">Edit</button>
-            <button class="btn btn-danger" (click)="delete()">delete entire booking</button>
-            <button class="btn btn-danger" (click)="deleteSlot()">delete selected slot</button>
+            <button class="btn btn-danger" [disabled]="buttonClicked" (click)="delete()">delete entire booking</button>
+            <button class="btn btn-danger" [disabled]="buttonClicked" (click)="deleteSlot()">delete selected slot</button>
             <button type="button" class="btn btn-default" (click)="modal_close()">Close</button>
         </div>
 
