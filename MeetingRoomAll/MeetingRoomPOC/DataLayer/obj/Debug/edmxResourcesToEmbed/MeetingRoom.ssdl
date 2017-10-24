@@ -16,13 +16,14 @@
     <Property Name="Subject" Type="varchar" MaxLength="60" Nullable="false" />
     <Property Name="Description" Type="varchar" MaxLength="250" Nullable="false" />
     <Property Name="Type" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="WeekDays" Type="varchar" MaxLength="7" />
   </EntityType>
   <EntityType Name="TblBookingDate">
     <Key>
       <PropertyRef Name="SNo" />
     </Key>
     <Property Name="SNo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="BookingID" Type="int" />
+    <Property Name="BookingID" Type="int" Nullable="false" />
     <Property Name="LocationID" Type="int" Nullable="false" />
     <Property Name="RoomID" Type="int" Nullable="false" />
     <Property Name="Date" Type="date" Nullable="false" />
@@ -89,7 +90,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_TblBookingDate_TblBooking">
-    <End Role="TblBooking" Type="Self.TblBooking" Multiplicity="0..1" />
+    <End Role="TblBooking" Type="Self.TblBooking" Multiplicity="1" />
     <End Role="TblBookingDate" Type="Self.TblBookingDate" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="TblBooking">
@@ -159,19 +160,22 @@
     <Parameter Name="SlotID" Type="int" Mode="In" />
     <Parameter Name="SlotCount" Type="int" Mode="In" />
   </Function>
+  <Function Name="SP_GetUserBookings" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+  </Function>
   <Function Name="SP_RepeatBooking" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="CreatedBy" Type="int" Mode="In" />
     <Parameter Name="LocationID" Type="int" Mode="In" />
     <Parameter Name="RoomID" Type="int" Mode="In" />
     <Parameter Name="Subject" Type="varchar" Mode="In" />
     <Parameter Name="Description" Type="varchar" Mode="In" />
+    <Parameter Name="SUN" Type="bit" Mode="In" />
     <Parameter Name="MON" Type="bit" Mode="In" />
     <Parameter Name="TUE" Type="bit" Mode="In" />
     <Parameter Name="WED" Type="bit" Mode="In" />
     <Parameter Name="THU" Type="bit" Mode="In" />
     <Parameter Name="FRI" Type="bit" Mode="In" />
     <Parameter Name="SAT" Type="bit" Mode="In" />
-    <Parameter Name="SUN" Type="bit" Mode="In" />
     <Parameter Name="StartOn" Type="date" Mode="In" />
     <Parameter Name="EndOn" Type="date" Mode="In" />
     <Parameter Name="SlotID" Type="int" Mode="In" />

@@ -16,6 +16,7 @@ export class MainService {
 
     private location_url: string = "http://localhost:65091/api/location";
     private room_url: string = "http://localhost:65091/api/room?locationID=";
+    private userBookings_url:string=`http://localhost:65091/api/booking/getuserbookingdetails?id=${localStorage.userid}`;
 
     
 
@@ -36,6 +37,10 @@ export class MainService {
     }
     public getDuration():Observable<Duration[]>{
         return of(DurationList);
+    }
+
+     public getUserBookings(){
+        return this.http.get(this.userBookings_url).map(result => result.json());
     }
 
 }

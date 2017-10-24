@@ -28,7 +28,7 @@
             <PropertyRef Name="SNo" />
           </Key>
           <Property Name="SNo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="BookingID" Type="int" />
+          <Property Name="BookingID" Type="int" Nullable="false" />
           <Property Name="LocationID" Type="int" Nullable="false" />
           <Property Name="RoomID" Type="int" Nullable="false" />
           <Property Name="Date" Type="date" Nullable="false" />
@@ -95,7 +95,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_TblBookingDate_TblBooking">
-          <End Role="TblBooking" Type="Self.TblBooking" Multiplicity="0..1" />
+          <End Role="TblBooking" Type="Self.TblBooking" Multiplicity="1" />
           <End Role="TblBookingDate" Type="Self.TblBookingDate" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TblBooking">
@@ -270,7 +270,7 @@
             <PropertyRef Name="SNo" />
           </Key>
           <Property Name="SNo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="BookingID" Type="Int32" />
+          <Property Name="BookingID" Type="Int32" Nullable="false" />
           <Property Name="LocationID" Type="Int32" Nullable="false" />
           <Property Name="RoomID" Type="Int32" Nullable="false" />
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
@@ -349,7 +349,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_TblBookingDate_TblBooking">
-          <End Role="TblBooking" Type="Self.TblBooking" Multiplicity="0..1" />
+          <End Role="TblBooking" Type="Self.TblBooking" Multiplicity="1" />
           <End Role="TblBookingDate" Type="Self.TblBookingDate" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TblBooking">

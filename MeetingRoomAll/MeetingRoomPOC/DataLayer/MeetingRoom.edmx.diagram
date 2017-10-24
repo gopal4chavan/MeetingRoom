@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="8e580839ef94474d8440316f90178f85" Name="Diagram1">
+      <Diagram DiagramId="3f9d5487b7d84968ba13491b6b04cac1" Name="Diagram1">
         <EntityTypeShape EntityType="AngularPOCModel.TblBooking" Width="1.5" PointX="5.25" PointY="5.25" IsExpanded="true" />
         <EntityTypeShape EntityType="AngularPOCModel.TblBookingDate" Width="1.5" PointX="7.5" PointY="5.75" IsExpanded="true" />
         <EntityTypeShape EntityType="AngularPOCModel.TblLocation" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />

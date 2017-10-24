@@ -27,6 +27,7 @@ import { CalendarModule } from 'primeng/components/calendar/calendar';
 
 import { BookingFormModalComponent } from './Modals/bookingFormModal.component';
 import { BookedFormModalComponent } from "./Modals/bookedFormModal.component";
+import {MyBookingsComponent} from "./MyBookings.Component"
 
 @NgModule({
   imports: [
@@ -51,6 +52,10 @@ import { BookedFormModalComponent } from "./Modals/bookedFormModal.component";
         path: '',
         redirectTo: '/login',
         pathMatch: 'full'
+      },
+      {
+         path: 'myBookings',
+        component: MyBookingsComponent
       }]
     )
   ],
@@ -63,7 +68,8 @@ import { BookedFormModalComponent } from "./Modals/bookedFormModal.component";
     StartComponent,
     BookingFormModalComponent,
     LoginComponent,
-    BookedFormModalComponent
+    BookedFormModalComponent,
+    MyBookingsComponent
   ],
   bootstrap: [
     StartComponent
