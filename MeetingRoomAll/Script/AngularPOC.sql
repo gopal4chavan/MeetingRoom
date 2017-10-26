@@ -215,18 +215,19 @@
 --	END CATCH
 --END
 
---exec SP_Booking 
---@CreatedBy = 1,
---@LocationID = 1,
---@RoomID = 1,
---@Subject = 'subject',
---@Description = 'Description',
---@FromDate = '2017/08/25',
---@ToDate = '2017/08/29',
---@SlotID = 1,
---@SlotCount = 2;
+exec SP_Booking 
+@CreatedBy = 1,
+@LocationID = 1,
+@RoomID = 1,
+@Subject = 'subject',
+@Description = 'Description',
+@FromDate = '2017/08/25',
+@ToDate = '2017/08/29',
+@SlotID = 1,
+@SlotCount = 2;
 
-
+select * from TblBooking
+select * from TblBookingDate;
 ----------------------------------------------------------------------------------------- Update store procdure	
 Alter procedure SP_UpdateBooking
 @BookingID INT,
@@ -259,9 +260,14 @@ BEGIN
 			RAISERROR(N'Invalid Date Range',16,1);
 		ELSE IF(@EditSlots=1 AND @Repeat=0)
 		BEGIN
-			UPDATE TblBooking 			
-			SET LocationID=@LocationID,RoomID=@RoomID,TimeStamp=CURRENT_TIMESTAMP,Subject=@Subject,Description=@Description,FromDate=@FromDate,ToDate=@ToDate,SlotID=@SlotID,@SlotCount=@SlotCount
-			WHERE BookingID=@BookingID AND CreatedBy=@CreatedBy;
+			IF EXISTS(SELECT 1 FROM TblBooking WHERE BookingID=@BookingID AND CreatedBy=@CreatedBy)
+			BEGIN
+				UPDATE TblBooking 			
+				SET LocationID=@LocationID,RoomID=@RoomID,TimeStamp=CURRENT_TIMESTAMP,Subject=@Subject,Description=@Description,FromDate=@FromDate,ToDate=@ToDate,SlotID=@SlotID,SlotCount=@SlotCount
+				WHERE BookingID=@BookingID AND CreatedBy=@CreatedBy;
+			END
+			ELSE
+				RAISERROR(N'INVALI Details',16,1);
 
 			UPDATE TblBookingDate
 			SET Status='TEMP_EDITED',StatusUpdated=CURRENT_TIMESTAMP
@@ -279,7 +285,7 @@ BEGIN
 					BEGIN
 						IF EXISTS(SELECT 1 FROM TblBookingDate WHERE LocationID=@LocationID AND RoomID=@RoomID AND Date=@FD AND SlotID=@SlotID AND Status='TEMP_EDITED')
 						BEGIN
-							UPDATE TblBookingDate SET Status='ACTIVE',StatusUpdated=NULL WHERE LocationID=@LocationID AND RoomID=@RoomID AND Date=@FD AND SlotID=@SlotID AND Status='TEMP_EDITED'
+							UPDATE TblBookingDate SET Status='ACTIVE',StatusUpdated=NULL WHERE LocationID=@LocationID AND RoomID=@RoomID AND Date=@FD AND SlotID=@SlotID AND Status='TEMP_EDITED';
 								SET @FD = DATEADD(DAY,1,@FD);			
 						END
 						ELSE
@@ -289,7 +295,9 @@ BEGIN
 						END
 					END
 					ELSE
-						RAISERROR(N'The current Booking overlaps the Existing booking',16,1);				
+					BEGIN
+						RAISERROR(N'The current Booking overlaps the Existing booking',16,1,@SlotID);
+					END
 				END
 				SET @FD=@FromDate;
 				SET @SlotID=@SlotID+1;
@@ -386,7 +394,7 @@ BEGIN
 	END TRY
 	BEGIN CATCH					
 		ROLLBACK TRAN;
-		DECLARE @ERRORMSG VARCHAR(350) = ERROR_MESSAGE();
+		DECLARE @ERRORMSG VARCHAR(3050) = ERROR_MESSAGE();
 		RAISERROR(@ErrorMsg,16,1);
 	END CATCH
 END
@@ -403,6 +411,30 @@ END
 --@SlotID=4,
 --@SlotCount=2,
 --@EditSlots=0;
+
+exec SP_UpdateBooking
+@BookingID = 8,
+@CreatedBy = 1,
+@LocationID = 1,
+@RoomID = 1,
+@Subject = 'sub',
+@Description = 'desc',
+@FromDate ='2017-08-24',
+@ToDate = '2017-08-26',
+@SlotID = 2,
+@SlotCount = 1,
+@Repeat = 0,
+@SUN =0,
+@MON =0,
+@TUE =0,
+@WED =0,
+@THU =0,
+@FRI =0,
+@SAT =0,
+@WeekDays = null,
+@EditSlots = 1
+select * from TblBooking
+select * from TblBookingDate;
 
 ----------------------------------------------------------------------------------------- Repeat Booking Proc
 
@@ -486,20 +518,21 @@ END
 --	END CATCH
 --END
 
---exec SP_RepeatBooking
---@CreatedBy = 1,
---@LocationID = 1,
---@RoomID = 1,
---@Subject = 'SUB',
---@Description = 'DESC',
---@MON = 1,
---@TUE = 1,
---@WED = 1,
---@THU = 1,
---@FRI = 1,
---@SAT = 1,
---@SUN = 1,
---@StartOn = '2017-10-20',
---@EndOn = '2017-10-29',
---@SlotID = 3,
---@SlotCount =2  
+exec SP_RepeatBooking
+@CreatedBy = 1,
+@LocationID = 1,
+@RoomID = 1,
+@Subject = 'SUB',
+@Description = 'DESC',
+@SUN = 1,
+@MON = 0,
+@TUE = 0,
+@WED = 0,
+@THU = 0,
+@FRI = 0,
+@SAT = 1,
+@StartOn = '2017-10-20',
+@EndOn = '2017-10-29',
+@SlotID = 3,
+@SlotCount =2,
+@WeekDays = '1000001'
