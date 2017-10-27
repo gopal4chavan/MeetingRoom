@@ -254,20 +254,17 @@ AS
 BEGIN	
 	BEGIN TRY
 		BEGIN TRAN
-		IF(@SlotCount>4 OR @SlotCount<1)
+		IF NOT EXISTS(SELECT 1 FROM TblBooking WHERE BookingID=@BookingID AND CreatedBy=@CreatedBy)
+			RAISERROR(N'INVALID DETAILS',16,1);
+		ELSE IF(@SlotCount>4 OR @SlotCount<1)
 			RAISERROR(N'Invalid number of Slots',16,1);
 		ELSE IF(@FromDate>@ToDate OR DATEDIFF(DAY, @FromDate, @ToDate)>30)
 			RAISERROR(N'Invalid Date Range',16,1);
 		ELSE IF(@EditSlots=1 AND @Repeat=0)
 		BEGIN
-			IF EXISTS(SELECT 1 FROM TblBooking WHERE BookingID=@BookingID AND CreatedBy=@CreatedBy)
-			BEGIN
-				UPDATE TblBooking 			
-				SET LocationID=@LocationID,RoomID=@RoomID,TimeStamp=CURRENT_TIMESTAMP,Subject=@Subject,Description=@Description,FromDate=@FromDate,ToDate=@ToDate,SlotID=@SlotID,SlotCount=@SlotCount
-				WHERE BookingID=@BookingID AND CreatedBy=@CreatedBy;
-			END
-			ELSE
-				RAISERROR(N'INVALI Details',16,1);
+			UPDATE TblBooking 			
+			SET LocationID=@LocationID,RoomID=@RoomID,TimeStamp=CURRENT_TIMESTAMP,Subject=@Subject,Description=@Description,FromDate=@FromDate,ToDate=@ToDate,SlotID=@SlotID,SlotCount=@SlotCount
+			WHERE BookingID=@BookingID AND CreatedBy=@CreatedBy;
 
 			UPDATE TblBookingDate
 			SET Status='TEMP_EDITED',StatusUpdated=CURRENT_TIMESTAMP
@@ -280,24 +277,18 @@ BEGIN
 			WHILE(@Count<@SlotCount)		
 			BEGIN
 				WHILE(@FD <= @TD)
-				BEGIN				
+				BEGIN									
 					IF NOT EXISTS(SELECT 1 FROM TblBookingDate WHERE LocationID=@LocationID AND RoomID=@RoomID AND Date=@FD AND SlotID=@SlotID AND Status='ACTIVE')
-					BEGIN
+					BEGIN						
 						IF EXISTS(SELECT 1 FROM TblBookingDate WHERE LocationID=@LocationID AND RoomID=@RoomID AND Date=@FD AND SlotID=@SlotID AND Status='TEMP_EDITED')
-						BEGIN
-							UPDATE TblBookingDate SET Status='ACTIVE',StatusUpdated=NULL WHERE LocationID=@LocationID AND RoomID=@RoomID AND Date=@FD AND SlotID=@SlotID AND Status='TEMP_EDITED';
-								SET @FD = DATEADD(DAY,1,@FD);			
-						END
+							UPDATE TblBookingDate SET Status='ACTIVE',StatusUpdated=NULL WHERE LocationID=@LocationID AND RoomID=@RoomID AND Date=@FD AND SlotID=@SlotID AND Status='TEMP_EDITED';											
 						ELSE
-						BEGIN
 							INSERT INTO  TblBookingDate (BookingID,LocationID,RoomID,Date,SlotID,Status,StatusUpdated)
-								VALUES(@BookingID,@LocationID,@RoomID,@FD,@SlotID,'ACTIVE',NULL);							
-						END
+								VALUES(@BookingID,@LocationID,@RoomID,@FD,@SlotID,'ACTIVE',NULL);															
+						SET @FD = DATEADD(DAY,1,@FD);
 					END
 					ELSE
-					BEGIN
 						RAISERROR(N'The current Booking overlaps the Existing booking',16,1,@SlotID);
-					END
 				END
 				SET @FD=@FromDate;
 				SET @SlotID=@SlotID+1;
@@ -338,15 +329,11 @@ BEGIN
 							IF NOT EXISTS(SELECT 1 FROM TblBookingDate WHERE LocationID=@LocationID AND RoomID = @RoomID AND Date=@TEMP_DATE AND SlotID=@TEMP_SID AND Status='ACTIVE')
 							BEGIN
 								IF EXISTS(SELECT 1 FROM TblBookingDate WHERE LocationID=@LocationID AND RoomID=@RoomID AND Date=@TEMP_DATE AND SlotID=@TEMP_SID AND Status='TEMP_EDITED')
-								BEGIN
-									UPDATE TblBookingDate SET Status='ACTIVE',StatusUpdated=NULL WHERE LocationID=@LocationID AND RoomID=@RoomID AND Date=@TEMP_DATE AND SlotID=@TEMP_SID AND Status='TEMP_EDITED'
-										SET @FD = DATEADD(DAY,1,@FD);
-								END
+									UPDATE TblBookingDate SET Status='ACTIVE',StatusUpdated=NULL WHERE LocationID=@LocationID AND RoomID=@RoomID AND Date=@TEMP_DATE AND SlotID=@TEMP_SID AND Status='TEMP_EDITED'										
 								ELSE
-								BEGIN
 									INSERT INTO  TblBookingDate(BookingID,LocationID,RoomID,Date,SlotID,Status,StatusUpdated)
 										VALUES(@BookingID,@LocationID,@RoomID,@TEMP_DATE,@TEMP_SID,'ACTIVE',NULL);
-								END
+								SET @FD = DATEADD(DAY,1,@FD);
 							END
 							ELSE
 								RAISERROR(N'The current Booking overlaps the Existing booking',16,1);
@@ -358,39 +345,40 @@ BEGIN
 				END	
 				SET @INDEX=@INDEX+1;
 			END
+			UPDATE TblBookingDate SET Status='EDITED' Where BookingID=@BookingID AND Status='TEMP_EDITED';
 			COMMIT TRAN;
 		END
-		ELSE
-		BEGIN
-			--DECLARE @TEMP_SID INT;
-			SELECT @SlotCount = SlotCount FROM TblBooking WHERE BookingID=@BookingID;
-			SELECT @TEMP_SID=MIN(SlotID) From TblBookingDate 
-			WHERE BookingID=@BookingID AND LocationID=@LocationID AND RoomID=@RoomID AND Date=@FromDate AND Status='ACTIVE';
+		--ELSE============================================================================================
+		--BEGIN
+		--	--DECLARE @TEMP_SID INT;
+		--	SELECT @SlotCount = SlotCount FROM TblBooking WHERE BookingID=@BookingID;
+		--	SELECT @TEMP_SID=MIN(SlotID) From TblBookingDate 
+		--	WHERE BookingID=@BookingID AND LocationID=@LocationID AND RoomID=@RoomID AND Date=@FromDate AND Status='ACTIVE';
 
-			--UPDATE TblBookingDate
-			--SET Status='TEMP_EDITED',StatusUpdated=CURRENT_TIMESTAMP
-			--WHERE BookingID=@BookingID AND LocationID=@LocationID AND RoomID=@RoomID AND Date=@FromDate AND Status='ACTIVE';
+		--	--UPDATE TblBookingDate
+		--	--SET Status='TEMP_EDITED',StatusUpdated=CURRENT_TIMESTAMP
+		--	--WHERE BookingID=@BookingID AND LocationID=@LocationID AND RoomID=@RoomID AND Date=@FromDate AND Status='ACTIVE';
 
-			SET @Count = 0;
-			WHILE(@Count<@SlotCount)
-			BEGIN
-				IF NOT EXISTS(SELECT 1 FROM TblBookingDate WHERE LocationID=@LocationID AND RoomID=@RoomID AND Date=@FromDate AND SlotID=@TEMP_SID AND Status='ACTIVE')
-				BEGIN
-					--IF NOT EXISTS(SELECT 1 FROM TblBookingDate WHERE LocationID=@LocationID AND RoomID=@RoomID AND Date=@FromDate AND SlotID=@SlotID AND Status='TEMP_EDITED')
-					--	INSERT INTO  TblBookingDate (BookingID,LocationID,RoomID,Date,SlotID,Status,StatusUpdated)
-					--			VALUES(@BookingID,@LocationID,@RoomID,@FD,@SlotID,'ACTIVE',NULL);
-					--ELSE 
-						UPDATE TblBookingDate SET SlotID=@SlotID,Status='ACTIVE',StatusUpdated=NULL WHERE BookingID=@BookingID AND LocationID=@LocationID AND RoomID=@RoomID AND Date=@FromDate AND SlotID=@TEMP_SID
-				END
-				ELSE
-					RAISERROR(N'The current Booking overlaps the Existing booking',16,1);
-				SET @Count=@Count+1;
-				SET @SlotID=@SlotID+1;
-				SET @TEMP_SID=@TEMP_SID+1;
-			END
-			--UPDATE TblBookingDate SET Status='EDITED' Where BookingID=@BookingID AND Status='TEMP_EDITED';
-			COMMIT TRAN
-		END
+		--	SET @Count = 0;
+		--	WHILE(@Count<@SlotCount)
+		--	BEGIN
+		--		IF NOT EXISTS(SELECT 1 FROM TblBookingDate WHERE LocationID=@LocationID AND RoomID=@RoomID AND Date=@FromDate AND SlotID=@TEMP_SID AND Status='ACTIVE')
+		--		BEGIN
+		--			--IF NOT EXISTS(SELECT 1 FROM TblBookingDate WHERE LocationID=@LocationID AND RoomID=@RoomID AND Date=@FromDate AND SlotID=@SlotID AND Status='TEMP_EDITED')
+		--			--	INSERT INTO  TblBookingDate (BookingID,LocationID,RoomID,Date,SlotID,Status,StatusUpdated)
+		--			--			VALUES(@BookingID,@LocationID,@RoomID,@FD,@SlotID,'ACTIVE',NULL);
+		--			--ELSE 
+		--				UPDATE TblBookingDate SET SlotID=@SlotID,Status='ACTIVE',StatusUpdated=NULL WHERE BookingID=@BookingID AND LocationID=@LocationID AND RoomID=@RoomID AND Date=@FromDate AND SlotID=@TEMP_SID
+		--		END
+		--		ELSE
+		--			RAISERROR(N'The current Booking overlaps the Existing booking',16,1);
+		--		SET @Count=@Count+1;
+		--		SET @SlotID=@SlotID+1;
+		--		SET @TEMP_SID=@TEMP_SID+1;
+		--	END
+		--	--UPDATE TblBookingDate SET Status='EDITED' Where BookingID=@BookingID AND Status='TEMP_EDITED';
+		--	COMMIT TRAN
+		--END
 	END TRY
 	BEGIN CATCH					
 		ROLLBACK TRAN;
@@ -413,25 +401,25 @@ END
 --@EditSlots=0;
 
 exec SP_UpdateBooking
-@BookingID = 8,
+@BookingID = 11,
 @CreatedBy = 1,
 @LocationID = 1,
 @RoomID = 1,
-@Subject = 'sub',
-@Description = 'desc',
+@Subject = 'subR',
+@Description = 'descR',
 @FromDate ='2017-08-24',
-@ToDate = '2017-08-26',
-@SlotID = 2,
+@ToDate = '2017-08-27',
+@SlotID = 3,
 @SlotCount = 1,
-@Repeat = 0,
+@Repeat = 1,
 @SUN =0,
-@MON =0,
-@TUE =0,
-@WED =0,
-@THU =0,
-@FRI =0,
+@MON =1,
+@TUE =1,
+@WED =1,
+@THU =1,
+@FRI =1,
 @SAT =0,
-@WeekDays = null,
+@WeekDays = '0111110',
 @EditSlots = 1
 select * from TblBooking
 select * from TblBookingDate;
@@ -536,3 +524,8 @@ exec SP_RepeatBooking
 @SlotID = 3,
 @SlotCount =2,
 @WeekDays = '1000001'
+
+DELETE FROM TblBookingDate;
+DELETE FROM TblBooking;
+SELECT * FROM TblBooking;
+SELECT * FROM TblBookingDate;
