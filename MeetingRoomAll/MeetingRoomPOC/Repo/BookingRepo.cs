@@ -102,7 +102,8 @@ namespace Repo
 
         public string UpdateBooking(int BookingID, BookingTbl details, bool bulkEdit = true)
         {
-            bool repeat = (details.SUN || details.MON || details.TUE || details.WED || details.THU || details.FRI || details.SAT)
+            bool repeat = (details.SUN || details.MON || details.TUE || details.WED || details.THU || details.FRI || details.SAT);
+            string WeekDays = (details.SUN ? "1" : "0") + (details.MON ? "1" : "0") + (details.TUE ? "1" : "0") + (details.WED ? "1" : "0") + (details.THU ? "1" : "0") + (details.FRI ? "1" : "0") + (details.SAT ? "1" : "0");
             try
             {
 
@@ -127,6 +128,7 @@ namespace Repo
                         details.THU,
                         details.FRI,
                         details.SAT,
+                        WeekDays,
                         bulkEdit
                     );
                     _db.SaveChanges();
@@ -163,7 +165,15 @@ namespace Repo
                             SlotID = res.SlotID,
                             SlotCount = res.SlotCount,
                             Slot = _db.TblSlots.FirstOrDefault(elem => elem.SlotID == res.SlotID).Slot,
-                            TimeStamp = res.TimeStamp
+                            TimeStamp = res.TimeStamp,
+                            Repeat = res.Type == "REPEAT" ? true : false,
+                            SUN = res.WeekDays.Substring(0, 1) == "1" ? true : false,
+                            MON = res.WeekDays.Substring(1, 1) == "1" ? true : false,
+                            TUE = res.WeekDays.Substring(2, 1) == "1" ? true : false,
+                            WED = res.WeekDays.Substring(3, 1) == "1" ? true : false,
+                            THU = res.WeekDays.Substring(4, 1) == "1" ? true : false,
+                            FRI = res.WeekDays.Substring(5, 1) == "1" ? true : false,
+                            SAT = res.WeekDays.Substring(6, 1) == "1" ? true : false,
 
                         }).FirstOrDefault();
                 }

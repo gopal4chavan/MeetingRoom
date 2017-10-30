@@ -162,7 +162,7 @@
           <Parameter Name="Description" Type="varchar" Mode="In" />
           <Parameter Name="FromDate" Type="date" Mode="In" />
           <Parameter Name="ToDate" Type="date" Mode="In" />
-          <Parameter Name="Slot" Type="int" Mode="In" />
+          <Parameter Name="SlotID" Type="int" Mode="In" />
           <Parameter Name="SlotCount" Type="int" Mode="In" />
         </Function>
         <Function Name="SP_RepeatBooking" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -195,6 +195,15 @@
           <Parameter Name="ToDate" Type="date" Mode="In" />
           <Parameter Name="SlotID" Type="int" Mode="In" />
           <Parameter Name="SlotCount" Type="int" Mode="In" />
+          <Parameter Name="Repeat" Type="bit" Mode="In" />
+          <Parameter Name="SUN" Type="bit" Mode="In" />
+          <Parameter Name="MON" Type="bit" Mode="In" />
+          <Parameter Name="TUE" Type="bit" Mode="In" />
+          <Parameter Name="WED" Type="bit" Mode="In" />
+          <Parameter Name="THU" Type="bit" Mode="In" />
+          <Parameter Name="FRI" Type="bit" Mode="In" />
+          <Parameter Name="SAT" Type="bit" Mode="In" />
+          <Parameter Name="WeekDays" Type="varchar" Mode="In" />
           <Parameter Name="EditSlots" Type="bit" Mode="In" />
         </Function>
         <EntityContainer Name="AngularPOCModelStoreContainer">
@@ -452,7 +461,7 @@
             <Parameter Name="Description" Mode="In" Type="String" />
             <Parameter Name="FromDate" Mode="In" Type="DateTime" />
             <Parameter Name="ToDate" Mode="In" Type="DateTime" />
-            <Parameter Name="Slot" Mode="In" Type="Int32" />
+            <Parameter Name="SlotID" Mode="In" Type="Int32" />
             <Parameter Name="SlotCount" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_RepeatBooking">
@@ -485,6 +494,15 @@
             <Parameter Name="ToDate" Mode="In" Type="DateTime" />
             <Parameter Name="SlotID" Mode="In" Type="Int32" />
             <Parameter Name="SlotCount" Mode="In" Type="Int32" />
+            <Parameter Name="Repeat" Mode="In" Type="Boolean" />
+            <Parameter Name="SUN" Mode="In" Type="Boolean" />
+            <Parameter Name="MON" Mode="In" Type="Boolean" />
+            <Parameter Name="TUE" Mode="In" Type="Boolean" />
+            <Parameter Name="WED" Mode="In" Type="Boolean" />
+            <Parameter Name="THU" Mode="In" Type="Boolean" />
+            <Parameter Name="FRI" Mode="In" Type="Boolean" />
+            <Parameter Name="SAT" Mode="In" Type="Boolean" />
+            <Parameter Name="WeekDays" Mode="In" Type="String" />
             <Parameter Name="EditSlots" Mode="In" Type="Boolean" />
           </FunctionImport>
         </EntityContainer>

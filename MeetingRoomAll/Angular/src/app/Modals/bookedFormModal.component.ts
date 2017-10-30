@@ -94,7 +94,7 @@ export class BookedFormModalComponent extends DialogComponent<ConfirmModel, bool
         this.bookingDetails.FD=new Date(this.bookingDetails.FromDate);
         this.bookingDetails.TD=new Date(this.bookingDetails.ToDate);
         this.dialogService
-            .addDialog(BookingFormModalComponent, { title: "Booking Form", bookingFormDetails: this.bookingDetails, bookingID: this.bookingID }, { backdropColor: 'rgba(0,0,0,0.5)' })
+            .addDialog(BookingFormModalComponent, { title: "Edit Booking", bookingFormDetails: this.bookingDetails, bookingID: this.bookingID }, { backdropColor: 'rgba(0,0,0,0.5)' })
             .subscribe(result => { if (result) { this.ngOnInit();this.result=true;this.close() } });
     }
 }
