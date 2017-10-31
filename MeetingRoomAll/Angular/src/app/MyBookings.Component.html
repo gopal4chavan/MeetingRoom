@@ -1,0 +1,9 @@
+<button (click)="backToMyapp()">&larr;back</button>
+<table *ngIf=userBookings class="table table-striped table-bordered" >
+    <tr  *ngFor="let bookings of userBookings"   [ngStyle]="{'background-color':bookings.status === 'ACTIVE' ? '#CCFFCE' : '#d9534f' }">
+        <th >{{bookings.bookingID}}</th>
+        <th  >{{bookings.timestamp}}</th>
+        <th  >{{bookings.subject}}</th>
+        <th  >{{bookings.date}} :: {{bookings.status}}</th>
+    </tr>
+</table>
