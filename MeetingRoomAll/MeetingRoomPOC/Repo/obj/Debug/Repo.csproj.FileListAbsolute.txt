@@ -82,3 +82,17 @@ D:\MeetingRoom\MeetingRoom\MeetingRoomAll\MeetingRoomPOC\Repo\bin\Debug\EntityFr
 D:\MeetingRoom\MeetingRoom\MeetingRoomAll\MeetingRoomPOC\Repo\obj\Debug\Repo.csprojResolveAssemblyReference.cache
 D:\MeetingRoom\MeetingRoom\MeetingRoomAll\MeetingRoomPOC\Repo\obj\Debug\Repo.dll
 D:\MeetingRoom\MeetingRoom\MeetingRoomAll\MeetingRoomPOC\Repo\obj\Debug\Repo.pdb
+C:\Users\abhinay.cheela\Desktop\gitFolder\MeetingRoom\MeetingRoomAll\MeetingRoomPOC\Repo\bin\Debug\Repo.dll.config
+C:\Users\abhinay.cheela\Desktop\gitFolder\MeetingRoom\MeetingRoomAll\MeetingRoomPOC\Repo\bin\Debug\Repo.dll
+C:\Users\abhinay.cheela\Desktop\gitFolder\MeetingRoom\MeetingRoomAll\MeetingRoomPOC\Repo\bin\Debug\Repo.pdb
+C:\Users\abhinay.cheela\Desktop\gitFolder\MeetingRoom\MeetingRoomAll\MeetingRoomPOC\Repo\bin\Debug\DataLayer.dll
+C:\Users\abhinay.cheela\Desktop\gitFolder\MeetingRoom\MeetingRoomAll\MeetingRoomPOC\Repo\bin\Debug\DomainLayer.dll
+C:\Users\abhinay.cheela\Desktop\gitFolder\MeetingRoom\MeetingRoomAll\MeetingRoomPOC\Repo\bin\Debug\EntityFramework.dll
+C:\Users\abhinay.cheela\Desktop\gitFolder\MeetingRoom\MeetingRoomAll\MeetingRoomPOC\Repo\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\abhinay.cheela\Desktop\gitFolder\MeetingRoom\MeetingRoomAll\MeetingRoomPOC\Repo\bin\Debug\DataLayer.pdb
+C:\Users\abhinay.cheela\Desktop\gitFolder\MeetingRoom\MeetingRoomAll\MeetingRoomPOC\Repo\bin\Debug\DomainLayer.pdb
+C:\Users\abhinay.cheela\Desktop\gitFolder\MeetingRoom\MeetingRoomAll\MeetingRoomPOC\Repo\bin\Debug\EntityFramework.xml
+C:\Users\abhinay.cheela\Desktop\gitFolder\MeetingRoom\MeetingRoomAll\MeetingRoomPOC\Repo\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\abhinay.cheela\Desktop\gitFolder\MeetingRoom\MeetingRoomAll\MeetingRoomPOC\Repo\obj\Debug\Repo.csprojResolveAssemblyReference.cache
+C:\Users\abhinay.cheela\Desktop\gitFolder\MeetingRoom\MeetingRoomAll\MeetingRoomPOC\Repo\obj\Debug\Repo.dll
+C:\Users\abhinay.cheela\Desktop\gitFolder\MeetingRoom\MeetingRoomAll\MeetingRoomPOC\Repo\obj\Debug\Repo.pdb

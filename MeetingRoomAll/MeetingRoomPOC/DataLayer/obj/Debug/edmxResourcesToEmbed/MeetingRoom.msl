@@ -16,6 +16,7 @@
           <ScalarProperty Name="Subject" ColumnName="Subject" />
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="WeekDays" ColumnName="WeekDays" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -59,6 +60,24 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <FunctionImportMapping FunctionImportName="SP_Booking" FunctionName="AngularPOCModel.Store.SP_Booking" />
+    <FunctionImportMapping FunctionImportName="SP_GetUserBookings" FunctionName="AngularPOCModel.Store.SP_GetUserBookings">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="AngularPOCModel.SP_GetUserBookings_Result">
+          <ScalarProperty Name="bookingID" ColumnName="bookingID" />
+          <ScalarProperty Name="createdBy" ColumnName="createdBy" />
+          <ScalarProperty Name="subject" ColumnName="subject" />
+          <ScalarProperty Name="timestamp" ColumnName="timestamp" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="locationid" ColumnName="locationid" />
+          <ScalarProperty Name="roomid" ColumnName="roomid" />
+          <ScalarProperty Name="slotid" ColumnName="slotid" />
+          <ScalarProperty Name="slotcount" ColumnName="slotcount" />
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="StatusUpdated" ColumnName="StatusUpdated" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="SP_RepeatBooking" FunctionName="AngularPOCModel.Store.SP_RepeatBooking" />
     <FunctionImportMapping FunctionImportName="SP_UpdateBooking" FunctionName="AngularPOCModel.Store.SP_UpdateBooking" />
   </EntityContainerMapping>

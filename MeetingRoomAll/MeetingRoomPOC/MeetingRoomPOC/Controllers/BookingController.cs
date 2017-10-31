@@ -96,5 +96,20 @@ namespace MeetingRoomPOC.Controllers
                 throw;
             }
         }
+
+
+        [HttpGet]
+        [Route("getuserbookingdetails")]
+        public HttpResponseMessage GetUserBookingsDetails( int id)
+        {
+            try
+            {
+                return Request.CreateResponse(HttpStatusCode.OK, _repoObj.GetUserBookings(id));
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+        }
     }
 }

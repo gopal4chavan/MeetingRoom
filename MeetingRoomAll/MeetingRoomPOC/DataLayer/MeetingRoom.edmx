@@ -21,13 +21,14 @@
           <Property Name="Subject" Type="varchar" MaxLength="60" Nullable="false" />
           <Property Name="Description" Type="varchar" MaxLength="250" Nullable="false" />
           <Property Name="Type" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="WeekDays" Type="varchar" MaxLength="7" />
         </EntityType>
         <EntityType Name="TblBookingDate">
           <Key>
             <PropertyRef Name="SNo" />
           </Key>
           <Property Name="SNo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="BookingID" Type="int" />
+          <Property Name="BookingID" Type="int" Nullable="false" />
           <Property Name="LocationID" Type="int" Nullable="false" />
           <Property Name="RoomID" Type="int" Nullable="false" />
           <Property Name="Date" Type="date" Nullable="false" />
@@ -94,7 +95,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_TblBookingDate_TblBooking">
-          <End Role="TblBooking" Type="Self.TblBooking" Multiplicity="0..1" />
+          <End Role="TblBooking" Type="Self.TblBooking" Multiplicity="1" />
           <End Role="TblBookingDate" Type="Self.TblBookingDate" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TblBooking">
@@ -164,19 +165,22 @@
           <Parameter Name="SlotID" Type="int" Mode="In" />
           <Parameter Name="SlotCount" Type="int" Mode="In" />
         </Function>
+        <Function Name="SP_GetUserBookings" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
         <Function Name="SP_RepeatBooking" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="CreatedBy" Type="int" Mode="In" />
           <Parameter Name="LocationID" Type="int" Mode="In" />
           <Parameter Name="RoomID" Type="int" Mode="In" />
           <Parameter Name="Subject" Type="varchar" Mode="In" />
           <Parameter Name="Description" Type="varchar" Mode="In" />
+          <Parameter Name="SUN" Type="bit" Mode="In" />
           <Parameter Name="MON" Type="bit" Mode="In" />
           <Parameter Name="TUE" Type="bit" Mode="In" />
           <Parameter Name="WED" Type="bit" Mode="In" />
           <Parameter Name="THU" Type="bit" Mode="In" />
           <Parameter Name="FRI" Type="bit" Mode="In" />
           <Parameter Name="SAT" Type="bit" Mode="In" />
-          <Parameter Name="SUN" Type="bit" Mode="In" />
           <Parameter Name="StartOn" Type="date" Mode="In" />
           <Parameter Name="EndOn" Type="date" Mode="In" />
           <Parameter Name="SlotID" Type="int" Mode="In" />
@@ -255,6 +259,7 @@
           <Property Name="Subject" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Type" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="WeekDays" Type="String" MaxLength="7" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="TblLocation" Relationship="Self.FK_TblBooking_TblLocation" FromRole="TblBooking" ToRole="TblLocation" />
           <NavigationProperty Name="TblRoom" Relationship="Self.FK_TblBooking_TblRoom" FromRole="TblBooking" ToRole="TblRoom" />
           <NavigationProperty Name="TblSlot" Relationship="Self.FK_TblBooking_TblSlot" FromRole="TblBooking" ToRole="TblSlot" />
@@ -265,7 +270,7 @@
             <PropertyRef Name="SNo" />
           </Key>
           <Property Name="SNo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="BookingID" Type="Int32" />
+          <Property Name="BookingID" Type="Int32" Nullable="false" />
           <Property Name="LocationID" Type="Int32" Nullable="false" />
           <Property Name="RoomID" Type="Int32" Nullable="false" />
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
@@ -344,7 +349,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_TblBookingDate_TblBooking">
-          <End Role="TblBooking" Type="Self.TblBooking" Multiplicity="0..1" />
+          <End Role="TblBooking" Type="Self.TblBooking" Multiplicity="1" />
           <End Role="TblBookingDate" Type="Self.TblBookingDate" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TblBooking">
@@ -452,19 +457,22 @@
             <Parameter Name="SlotID" Mode="In" Type="Int32" />
             <Parameter Name="SlotCount" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="SP_GetUserBookings" ReturnType="Collection(AngularPOCModel.SP_GetUserBookings_Result)">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
           <FunctionImport Name="SP_RepeatBooking">
             <Parameter Name="CreatedBy" Mode="In" Type="Int32" />
             <Parameter Name="LocationID" Mode="In" Type="Int32" />
             <Parameter Name="RoomID" Mode="In" Type="Int32" />
             <Parameter Name="Subject" Mode="In" Type="String" />
             <Parameter Name="Description" Mode="In" Type="String" />
+            <Parameter Name="SUN" Mode="In" Type="Boolean" />
             <Parameter Name="MON" Mode="In" Type="Boolean" />
             <Parameter Name="TUE" Mode="In" Type="Boolean" />
             <Parameter Name="WED" Mode="In" Type="Boolean" />
             <Parameter Name="THU" Mode="In" Type="Boolean" />
             <Parameter Name="FRI" Mode="In" Type="Boolean" />
             <Parameter Name="SAT" Mode="In" Type="Boolean" />
-            <Parameter Name="SUN" Mode="In" Type="Boolean" />
             <Parameter Name="StartOn" Mode="In" Type="DateTime" />
             <Parameter Name="EndOn" Mode="In" Type="DateTime" />
             <Parameter Name="SlotID" Mode="In" Type="Int32" />
@@ -484,6 +492,20 @@
             <Parameter Name="EditSlots" Mode="In" Type="Boolean" />
           </FunctionImport>
         </EntityContainer>
+        <ComplexType Name="SP_GetUserBookings_Result">
+          <Property Type="Int32" Name="bookingID" Nullable="false" />
+          <Property Type="Int32" Name="createdBy" Nullable="false" />
+          <Property Type="String" Name="subject" Nullable="false" MaxLength="60" />
+          <Property Type="DateTime" Name="timestamp" Nullable="false" Precision="16" />
+          <Property Type="String" Name="description" Nullable="false" MaxLength="250" />
+          <Property Type="Int32" Name="locationid" Nullable="false" />
+          <Property Type="Int32" Name="roomid" Nullable="false" />
+          <Property Type="Int32" Name="slotid" Nullable="false" />
+          <Property Type="Int32" Name="slotcount" Nullable="false" />
+          <Property Type="DateTime" Name="date" Nullable="false" />
+          <Property Type="String" Name="status" Nullable="false" MaxLength="30" />
+          <Property Type="DateTime" Name="StatusUpdated" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -505,6 +527,7 @@
                 <ScalarProperty Name="Subject" ColumnName="Subject" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="WeekDays" ColumnName="WeekDays" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -548,6 +571,24 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="SP_Booking" FunctionName="AngularPOCModel.Store.SP_Booking" />
+          <FunctionImportMapping FunctionImportName="SP_GetUserBookings" FunctionName="AngularPOCModel.Store.SP_GetUserBookings">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="AngularPOCModel.SP_GetUserBookings_Result">
+                <ScalarProperty Name="bookingID" ColumnName="bookingID" />
+                <ScalarProperty Name="createdBy" ColumnName="createdBy" />
+                <ScalarProperty Name="subject" ColumnName="subject" />
+                <ScalarProperty Name="timestamp" ColumnName="timestamp" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="locationid" ColumnName="locationid" />
+                <ScalarProperty Name="roomid" ColumnName="roomid" />
+                <ScalarProperty Name="slotid" ColumnName="slotid" />
+                <ScalarProperty Name="slotcount" ColumnName="slotcount" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="StatusUpdated" ColumnName="StatusUpdated" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="SP_RepeatBooking" FunctionName="AngularPOCModel.Store.SP_RepeatBooking" />
           <FunctionImportMapping FunctionImportName="SP_UpdateBooking" FunctionName="AngularPOCModel.Store.SP_UpdateBooking" />
         </EntityContainerMapping>

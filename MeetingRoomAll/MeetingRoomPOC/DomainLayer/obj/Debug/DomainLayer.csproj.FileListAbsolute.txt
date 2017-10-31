@@ -23,3 +23,8 @@ D:\MeetingRoom\MeetingRoom\MeetingRoomAll\MeetingRoomPOC\DomainLayer\bin\Debug\D
 D:\MeetingRoom\MeetingRoom\MeetingRoomAll\MeetingRoomPOC\DomainLayer\obj\Debug\DomainLayer.csprojResolveAssemblyReference.cache
 D:\MeetingRoom\MeetingRoom\MeetingRoomAll\MeetingRoomPOC\DomainLayer\obj\Debug\DomainLayer.dll
 D:\MeetingRoom\MeetingRoom\MeetingRoomAll\MeetingRoomPOC\DomainLayer\obj\Debug\DomainLayer.pdb
+C:\Users\abhinay.cheela\Desktop\gitFolder\MeetingRoom\MeetingRoomAll\MeetingRoomPOC\DomainLayer\bin\Debug\DomainLayer.dll
+C:\Users\abhinay.cheela\Desktop\gitFolder\MeetingRoom\MeetingRoomAll\MeetingRoomPOC\DomainLayer\bin\Debug\DomainLayer.pdb
+C:\Users\abhinay.cheela\Desktop\gitFolder\MeetingRoom\MeetingRoomAll\MeetingRoomPOC\DomainLayer\obj\Debug\DomainLayer.csprojResolveAssemblyReference.cache
+C:\Users\abhinay.cheela\Desktop\gitFolder\MeetingRoom\MeetingRoomAll\MeetingRoomPOC\DomainLayer\obj\Debug\DomainLayer.dll
+C:\Users\abhinay.cheela\Desktop\gitFolder\MeetingRoom\MeetingRoomAll\MeetingRoomPOC\DomainLayer\obj\Debug\DomainLayer.pdb

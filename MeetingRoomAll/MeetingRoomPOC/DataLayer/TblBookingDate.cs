@@ -15,7 +15,7 @@ namespace DataLayer
     public partial class TblBookingDate
     {
         public int SNo { get; set; }
-        public Nullable<int> BookingID { get; set; }
+        public int BookingID { get; set; }
         public int LocationID { get; set; }
         public int RoomID { get; set; }
         public System.DateTime Date { get; set; }
