@@ -5,7 +5,7 @@ import { MainService } from './main.service';
 import { FormGroup } from "@angular/forms";
 import { DialogService } from "ng2-bootstrap-modal";
 import { BookingFormModalComponent } from './Modals/bookingFormModal.component';
-
+import { Router } from "@angular/router";
 @Component({
     selector: "main",
     templateUrl: "app/main.component.html",
@@ -34,7 +34,7 @@ export class MainComponent implements OnInit {
     @Output() detailsEvent = new EventEmitter<IPrimaryDetails>();
     @Output() locationChangeEvent = new EventEmitter<boolean>();
 
-    constructor(private service: MainService, private dialogService: DialogService) {
+    constructor(private service: MainService, private dialogService: DialogService,private router:Router) {
 
     }
 
@@ -92,5 +92,9 @@ export class MainComponent implements OnInit {
             null);
         let disposable = this.dialogService
             .addDialog(BookingFormModalComponent, { title: "Booking Form", bookingFormDetails: temp_form_det }, { backdropColor: 'rgba(0,0,0,0.5)' })
+    }
+
+       myBookings(){
+        this.router.navigate(['/myBookings'])
     }
 }

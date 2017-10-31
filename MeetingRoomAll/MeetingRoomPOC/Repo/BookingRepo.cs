@@ -183,6 +183,9 @@ namespace Repo
                 throw;
             }
         }
+    }
+}
+
         public string AddRepeatBooking(BookingTbl details)
         {
             try
@@ -218,5 +221,27 @@ namespace Repo
                 throw;
             }
         }
-    }
-}
+
+        public IEnumerable<object> GetUserBookings(int userID)
+        {
+            try
+            {
+
+                using (_db = new AngularPOCEntities())
+                {
+
+                  
+
+                    var userBookingIds = from bookings in _db.TblBookings where bookings.CreatedBy == userID select bookings.BookingID;
+
+                    var userBookings = _db.TblBookingDates.Where(re => userBookingIds.Contains(re.BookingID));
+                
+                    var output = _db.SP_GetUserBookings(userID);
+                    return _db.SP_GetUserBookings(userID).ToList();
+                }
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+        }

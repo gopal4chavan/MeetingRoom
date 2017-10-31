@@ -117,3 +117,29 @@ export const DurationList: Duration[] = [
     new Duration(3, "90 min"),
     new Duration(4, "120 min")
 ]
+//------------------------------------------------------UserBooking
+export class UserBookings{
+     public bookingID:number;
+        public createdBy:number;
+        public locationID:number;
+        public roomID:number;
+        public timeStamp:Date;
+        public subject:string;
+        public description:string;
+        public slotID:number;
+        public slotCount:number;
+        public date:Date;
+        public status:string;
+    // constructor(
+    //      bookingID:number,
+    //      createdBy:number,
+    //      locationID:number,
+    //      roomID:number,
+    //      timeStamp:Date,
+    //      subject:string,
+    //      description:string,
+    //      slotID:number,
+    //      slotCount:number,
+    //      bookedSlots:any[]
+    // ){}
+}
