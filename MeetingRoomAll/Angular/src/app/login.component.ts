@@ -8,7 +8,7 @@ import { Router } from "@angular/router";
 export class LoginComponent{  
     constructor(private router:Router){}
     meth(event:any){
-        console.log(event.target.value);        
+    
         localStorage.setItem("userid",event.target.value);
         localStorage.setItem("password",event.target.value);
         this.router.navigate(['/my-app']);

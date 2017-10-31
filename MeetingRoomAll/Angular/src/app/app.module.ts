@@ -24,6 +24,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CalendarModule } from 'primeng/components/calendar/calendar';
+import {CheckboxModule} from 'primeng/primeng';
 
 import { BookingFormModalComponent } from './Modals/bookingFormModal.component';
 import { BookedFormModalComponent } from "./Modals/bookedFormModal.component";
@@ -36,6 +37,7 @@ import {MyBookingsComponent} from "./MyBookings.Component"
     HttpModule,
     ReactiveFormsModule,
     CalendarModule,
+    CheckboxModule,
     BrowserAnimationsModule,
     BootstrapModalModule,
     Daterangepicker,    

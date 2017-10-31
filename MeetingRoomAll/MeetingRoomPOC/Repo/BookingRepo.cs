@@ -54,7 +54,7 @@ namespace Repo
                             TimeStamp = res.TimeStamp,
                             Subject = res.Subject,
                             Description = res.Description,
-                            BookedSlots = _db.TblBookingDates.Where(resp => res.BookingID == resp.BookingID).Select(r => new { BookingID=r.BookingID,CreatedBy=res.CreatedBy, SlotID = r.SlotID, Date = r.Date }).ToList()
+                            BookedSlots = _db.TblBookingDates.Where(resp => res.BookingID == resp.BookingID && resp.Status == "ACTIVE").Select(r => new { BookingID = r.BookingID, CreatedBy = res.CreatedBy, SlotID = r.SlotID, Date = r.Date }).ToList()
                         }).ToList();
                 }
             }
@@ -63,18 +63,15 @@ namespace Repo
                 throw;
             }
         }
-        public string DeleteDay(int BookingID,DateTime date)
+        public string DeleteDay(int BookingID, DateTime date)
         {
             try
             {
                 using (_db = new AngularPOCEntities())
                 {
-                    _db.TblBookingDates.RemoveRange(_db.TblBookingDates.Where(result => result.BookingID == BookingID && result.Date == date));
-                    int count = _db.TblBookingDates.Where(result => result.BookingID == BookingID).Count();
-                    if (count == 0)
-                    {
-                        _db.TblBookings.Remove(_db.TblBookings.SingleOrDefault(res => res.BookingID == BookingID));
-                    }
+                    var thisBookingId = _db.TblBookingDates.Where(result => result.BookingID == BookingID && result.Date == date).ToList();
+
+                    thisBookingId.ForEach(el => el.Status = "CANCEL");
                     _db.SaveChanges();
                     return "success";
                 }
@@ -90,10 +87,11 @@ namespace Repo
             {
                 using (_db = new AngularPOCEntities())
                 {
-                    _db.TblBookingDates.RemoveRange(_db.TblBookingDates.Where(result => result.BookingID == BookingID));
-                    _db.TblBookings.Remove(_db.TblBookings.SingleOrDefault(res => res.BookingID == BookingID));
+                    var thisBookingId = _db.TblBookingDates.Where(result => result.BookingID == BookingID).ToList();
+                    thisBookingId.ForEach(el => el.Status = "CANCEL");
                     _db.SaveChanges();
                     return "success";
+
                 }
             }
             catch (Exception e)
@@ -102,8 +100,10 @@ namespace Repo
             }
         }
 
-        public string UpdateBooking(int BookingID,BookingTbl details,bool bulkEdit=true)
+        public string UpdateBooking(int BookingID, BookingTbl details, bool bulkEdit = true)
         {
+            bool repeat = (details.SUN || details.MON || details.TUE || details.WED || details.THU || details.FRI || details.SAT);
+            string WeekDays = (details.SUN ? "1" : "0") + (details.MON ? "1" : "0") + (details.TUE ? "1" : "0") + (details.WED ? "1" : "0") + (details.THU ? "1" : "0") + (details.FRI ? "1" : "0") + (details.SAT ? "1" : "0");
             try
             {
 
@@ -120,6 +120,15 @@ namespace Repo
                         details.ToDate,
                         details.SlotID,
                         details.SlotCount,
+                        repeat,
+                        details.SUN,
+                        details.MON,
+                        details.TUE,
+                        details.WED,
+                        details.THU,
+                        details.FRI,
+                        details.SAT,
+                        WeekDays,
                         bulkEdit
                     );
                     _db.SaveChanges();
@@ -156,9 +165,55 @@ namespace Repo
                             SlotID = res.SlotID,
                             SlotCount = res.SlotCount,
                             Slot = _db.TblSlots.FirstOrDefault(elem => elem.SlotID == res.SlotID).Slot,
-                            TimeStamp = res.TimeStamp                             
+                            TimeStamp = res.TimeStamp,
+                            Repeat = res.Type == "REPEAT" ? true : false,
+                            SUN = res.WeekDays.Substring(0, 1) == "1" ? true : false,
+                            MON = res.WeekDays.Substring(1, 1) == "1" ? true : false,
+                            TUE = res.WeekDays.Substring(2, 1) == "1" ? true : false,
+                            WED = res.WeekDays.Substring(3, 1) == "1" ? true : false,
+                            THU = res.WeekDays.Substring(4, 1) == "1" ? true : false,
+                            FRI = res.WeekDays.Substring(5, 1) == "1" ? true : false,
+                            SAT = res.WeekDays.Substring(6, 1) == "1" ? true : false,
 
                         }).FirstOrDefault();
+                }
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+        }
+    }
+}
+
+        public string AddRepeatBooking(BookingTbl details)
+        {
+            try
+            {
+                string WeekDays = (details.SUN ? "1" : "0") + (details.MON ? "1" : "0") + (details.TUE ? "1" : "0") + (details.WED ? "1" : "0") + (details.THU ? "1" : "0") + (details.FRI ? "1" : "0") + (details.SAT ? "1" : "0");
+                using (_db = new AngularPOCEntities())
+                {
+                    _db.SP_RepeatBooking(
+                        details.CreatedBy,
+                        details.LocationID,
+                        details.RoomID,
+                        details.Subject,
+                        details.Description,
+                        details.SUN,
+                        details.MON,
+                        details.TUE,
+                        details.WED,
+                        details.THU,
+                        details.FRI,
+                        details.SAT,
+                        details.FromDate,
+                        details.ToDate,
+                        details.SlotID,
+                        details.SlotCount,
+                        WeekDays
+                  );
+                    _db.SaveChanges();
+                    return "success";
                 }
             }
             catch (Exception e)
@@ -190,5 +245,3 @@ namespace Repo
                 throw;
             }
         }
-    }
-}

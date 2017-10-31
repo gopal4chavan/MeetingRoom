@@ -96,19 +96,17 @@ namespace MeetingRoomPOC.Controllers
                 throw;
             }
         }
-
-
-        [HttpGet]
-        [Route("getuserbookingdetails")]
-        public HttpResponseMessage GetUserBookingsDetails( int id)
+        [Route("repeat")]
+        [HttpPost]
+        public HttpResponseMessage AddRepeatBooking([FromBody]BookingTbl details)
         {
             try
             {
-                return Request.CreateResponse(HttpStatusCode.OK, _repoObj.GetUserBookings(id));
+                return Request.CreateResponse(HttpStatusCode.OK, _repoObj.AddRepeatBooking(details));
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                throw;
+                return SetErrorResponse(ex.Message);
             }
         }
     }

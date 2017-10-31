@@ -17,6 +17,7 @@ export class SlotService {
     private deleteslot_url="http://localhost:65091/api/booking/deleteslot?bookingID=";
     private details_url="http://localhost:65091/api/booking/getdetails?bookingID=";
     private updatebooking_url="http://localhost:65091/api/booking/update?bookingID=";
+    private repeat_booking_url="http://localhost:65091/api/booking/repeat"
 
     constructor(private http:Http){}
 
@@ -30,7 +31,6 @@ export class SlotService {
     }
 
     public bookRoom(formdet:FormDetails):Observable<string>{
-        console.log(formdet);
         formdet.FromDate=new Date(formdet.FD).toDateString();
         formdet.ToDate =new Date(formdet.TD).toDateString();
         return this.http.post(this.booking_url,formdet).map(result=>result.json());
@@ -53,10 +53,17 @@ export class SlotService {
     }
     public getDetails(bookingID:number)
     {
-        return this.http.get(this.details_url+bookingID).map(res=>res.json());
+        return this.http.get(this.details_url+bookingID).map(res=>{let x=res.json();console.log(x);return x;})
     }
     public updateBooking(bookingID:number,obj:FormDetails){
+        obj.FromDate=new Date(obj.FD).toDateString();
+        obj.ToDate =new Date(obj.TD).toDateString();
         return this.http.post(this.updatebooking_url+bookingID,obj).map(res=>res.json());
+    }
+    public repeatBooking(obj:FormDetails){
+        obj.FromDate=new Date(obj.FD).toDateString();
+        obj.ToDate =new Date(obj.TD).toDateString();
+        return this.http.post(this.repeat_booking_url,obj).map(res=>res.json());
     }
 }
 

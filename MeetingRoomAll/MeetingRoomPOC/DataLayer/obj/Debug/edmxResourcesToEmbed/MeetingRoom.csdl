@@ -234,6 +234,7 @@
       <Parameter Name="EndOn" Mode="In" Type="DateTime" />
       <Parameter Name="SlotID" Mode="In" Type="Int32" />
       <Parameter Name="SlotCount" Mode="In" Type="Int32" />
+      <Parameter Name="WeekDays" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="SP_UpdateBooking">
       <Parameter Name="BookingID" Mode="In" Type="Int32" />
@@ -246,6 +247,15 @@
       <Parameter Name="ToDate" Mode="In" Type="DateTime" />
       <Parameter Name="SlotID" Mode="In" Type="Int32" />
       <Parameter Name="SlotCount" Mode="In" Type="Int32" />
+      <Parameter Name="Repeat" Mode="In" Type="Boolean" />
+      <Parameter Name="SUN" Mode="In" Type="Boolean" />
+      <Parameter Name="MON" Mode="In" Type="Boolean" />
+      <Parameter Name="TUE" Mode="In" Type="Boolean" />
+      <Parameter Name="WED" Mode="In" Type="Boolean" />
+      <Parameter Name="THU" Mode="In" Type="Boolean" />
+      <Parameter Name="FRI" Mode="In" Type="Boolean" />
+      <Parameter Name="SAT" Mode="In" Type="Boolean" />
+      <Parameter Name="WeekDays" Mode="In" Type="String" />
       <Parameter Name="EditSlots" Mode="In" Type="Boolean" />
     </FunctionImport>
   </EntityContainer>

@@ -25,9 +25,7 @@ export class SlotsComponent implements OnInit, DoCheck {
     BookedSlotsDetails: IBookedSlotDetail[] = [];
     BookedSlots: IBookedSlot[] = [];
     bookedDetFlag: boolean = false;
-    
 
-    //for ngdocheck
     loc_id: number = null;
     room_id: number = null;
     date: string = null;
@@ -35,11 +33,6 @@ export class SlotsComponent implements OnInit, DoCheck {
     subject: string = null;
     bookingID: number = null;
     viewDets: IViewDetails;
-
-
-    // del_BookingID: number;
-    // del_Date: Date;
-    // del_SlotId: number;
 
     aboveFlag:boolean=false;
     slotcount:any=1;
@@ -49,7 +42,7 @@ export class SlotsComponent implements OnInit, DoCheck {
 
     ngOnInit(): void {
         this.service.getBookedSlots(this.primaryDetails.loc_id, this.primaryDetails.room_id)
-            .finally(()=>console.log(this.BookedSlotsDetails))
+            .finally(()=>{})
             .subscribe
             (
                 res => this.BookedSlotsDetails = res,
@@ -96,12 +89,20 @@ export class SlotsComponent implements OnInit, DoCheck {
             new Date(date),
             null,
             null,
+            null,            
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
             null,
             slot.SlotID,
             null,
             null,
             null);
-
+        console.log(temp_obj);
         this.dialogService
             .addDialog(BookingFormModalComponent, { title: "Booking Form", bookingFormDetails: temp_obj }, { backdropColor: 'rgba(0,0,0,0.5)' })
             .subscribe(result => { if (result) { this.ngOnInit() } });
@@ -125,8 +126,6 @@ export class SlotsComponent implements OnInit, DoCheck {
     CheckIfBooked(date: Date, slot: ISlot) {        
         let elem = this.BookedSlots.find(element => element.SlotID == slot.SlotID && (new Date(element.Date)).toDateString() == (new Date(date)).toDateString());
         let daySlots;
-        // console.log(elem);
-        // console.log(this.BookedSlots);
 
         if (elem) {
             let res = this.BookedSlotsDetails.find(ele => ele.BookingID == elem.BookingID);

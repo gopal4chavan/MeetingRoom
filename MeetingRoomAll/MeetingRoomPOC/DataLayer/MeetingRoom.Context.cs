@@ -83,7 +83,7 @@ namespace DataLayer
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_GetUserBookings_Result>("SP_GetUserBookings", idParameter);
         }
     
-        public virtual int SP_RepeatBooking(Nullable<int> createdBy, Nullable<int> locationID, Nullable<int> roomID, string subject, string description, Nullable<bool> sUN, Nullable<bool> mON, Nullable<bool> tUE, Nullable<bool> wED, Nullable<bool> tHU, Nullable<bool> fRI, Nullable<bool> sAT, Nullable<System.DateTime> startOn, Nullable<System.DateTime> endOn, Nullable<int> slotID, Nullable<int> slotCount)
+        public virtual int SP_RepeatBooking(Nullable<int> createdBy, Nullable<int> locationID, Nullable<int> roomID, string subject, string description, Nullable<bool> sUN, Nullable<bool> mON, Nullable<bool> tUE, Nullable<bool> wED, Nullable<bool> tHU, Nullable<bool> fRI, Nullable<bool> sAT, Nullable<System.DateTime> startOn, Nullable<System.DateTime> endOn, Nullable<int> slotID, Nullable<int> slotCount, string weekDays)
         {
             var createdByParameter = createdBy.HasValue ?
                 new ObjectParameter("CreatedBy", createdBy) :
@@ -149,10 +149,14 @@ namespace DataLayer
                 new ObjectParameter("SlotCount", slotCount) :
                 new ObjectParameter("SlotCount", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_RepeatBooking", createdByParameter, locationIDParameter, roomIDParameter, subjectParameter, descriptionParameter, sUNParameter, mONParameter, tUEParameter, wEDParameter, tHUParameter, fRIParameter, sATParameter, startOnParameter, endOnParameter, slotIDParameter, slotCountParameter);
+            var weekDaysParameter = weekDays != null ?
+                new ObjectParameter("WeekDays", weekDays) :
+                new ObjectParameter("WeekDays", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_RepeatBooking", createdByParameter, locationIDParameter, roomIDParameter, subjectParameter, descriptionParameter, sUNParameter, mONParameter, tUEParameter, wEDParameter, tHUParameter, fRIParameter, sATParameter, startOnParameter, endOnParameter, slotIDParameter, slotCountParameter, weekDaysParameter);
         }
     
-        public virtual int SP_UpdateBooking(Nullable<int> bookingID, Nullable<int> createdBy, Nullable<int> locationID, Nullable<int> roomID, string subject, string description, Nullable<System.DateTime> fromDate, Nullable<System.DateTime> toDate, Nullable<int> slotID, Nullable<int> slotCount, Nullable<bool> editSlots)
+        public virtual int SP_UpdateBooking(Nullable<int> bookingID, Nullable<int> createdBy, Nullable<int> locationID, Nullable<int> roomID, string subject, string description, Nullable<System.DateTime> fromDate, Nullable<System.DateTime> toDate, Nullable<int> slotID, Nullable<int> slotCount, Nullable<bool> repeat, Nullable<bool> sUN, Nullable<bool> mON, Nullable<bool> tUE, Nullable<bool> wED, Nullable<bool> tHU, Nullable<bool> fRI, Nullable<bool> sAT, string weekDays, Nullable<bool> editSlots)
         {
             var bookingIDParameter = bookingID.HasValue ?
                 new ObjectParameter("BookingID", bookingID) :
@@ -194,11 +198,47 @@ namespace DataLayer
                 new ObjectParameter("SlotCount", slotCount) :
                 new ObjectParameter("SlotCount", typeof(int));
     
+            var repeatParameter = repeat.HasValue ?
+                new ObjectParameter("Repeat", repeat) :
+                new ObjectParameter("Repeat", typeof(bool));
+    
+            var sUNParameter = sUN.HasValue ?
+                new ObjectParameter("SUN", sUN) :
+                new ObjectParameter("SUN", typeof(bool));
+    
+            var mONParameter = mON.HasValue ?
+                new ObjectParameter("MON", mON) :
+                new ObjectParameter("MON", typeof(bool));
+    
+            var tUEParameter = tUE.HasValue ?
+                new ObjectParameter("TUE", tUE) :
+                new ObjectParameter("TUE", typeof(bool));
+    
+            var wEDParameter = wED.HasValue ?
+                new ObjectParameter("WED", wED) :
+                new ObjectParameter("WED", typeof(bool));
+    
+            var tHUParameter = tHU.HasValue ?
+                new ObjectParameter("THU", tHU) :
+                new ObjectParameter("THU", typeof(bool));
+    
+            var fRIParameter = fRI.HasValue ?
+                new ObjectParameter("FRI", fRI) :
+                new ObjectParameter("FRI", typeof(bool));
+    
+            var sATParameter = sAT.HasValue ?
+                new ObjectParameter("SAT", sAT) :
+                new ObjectParameter("SAT", typeof(bool));
+    
+            var weekDaysParameter = weekDays != null ?
+                new ObjectParameter("WeekDays", weekDays) :
+                new ObjectParameter("WeekDays", typeof(string));
+    
             var editSlotsParameter = editSlots.HasValue ?
                 new ObjectParameter("EditSlots", editSlots) :
                 new ObjectParameter("EditSlots", typeof(bool));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_UpdateBooking", bookingIDParameter, createdByParameter, locationIDParameter, roomIDParameter, subjectParameter, descriptionParameter, fromDateParameter, toDateParameter, slotIDParameter, slotCountParameter, editSlotsParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_UpdateBooking", bookingIDParameter, createdByParameter, locationIDParameter, roomIDParameter, subjectParameter, descriptionParameter, fromDateParameter, toDateParameter, slotIDParameter, slotCountParameter, repeatParameter, sUNParameter, mONParameter, tUEParameter, wEDParameter, tHUParameter, fRIParameter, sATParameter, weekDaysParameter, editSlotsParameter);
         }
     }
 }
