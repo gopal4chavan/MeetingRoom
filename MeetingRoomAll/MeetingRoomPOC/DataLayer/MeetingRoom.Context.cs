@@ -74,6 +74,15 @@ namespace DataLayer
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Booking", createdByParameter, locationIDParameter, roomIDParameter, subjectParameter, descriptionParameter, fromDateParameter, toDateParameter, slotIDParameter, slotCountParameter);
         }
     
+        public virtual ObjectResult<SP_GetUserBookings_Result> SP_GetUserBookings(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_GetUserBookings_Result>("SP_GetUserBookings", idParameter);
+        }
+    
         public virtual int SP_RepeatBooking(Nullable<int> createdBy, Nullable<int> locationID, Nullable<int> roomID, string subject, string description, Nullable<bool> sUN, Nullable<bool> mON, Nullable<bool> tUE, Nullable<bool> wED, Nullable<bool> tHU, Nullable<bool> fRI, Nullable<bool> sAT, Nullable<System.DateTime> startOn, Nullable<System.DateTime> endOn, Nullable<int> slotID, Nullable<int> slotCount, string weekDays)
         {
             var createdByParameter = createdBy.HasValue ?

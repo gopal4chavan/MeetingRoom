@@ -27,7 +27,7 @@
       <PropertyRef Name="SNo" />
     </Key>
     <Property Name="SNo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="BookingID" Type="Int32" />
+    <Property Name="BookingID" Type="Int32" Nullable="false" />
     <Property Name="LocationID" Type="Int32" Nullable="false" />
     <Property Name="RoomID" Type="Int32" Nullable="false" />
     <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
@@ -47,7 +47,7 @@
     <Property Name="LocationName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
     <NavigationProperty Name="TblBookings" Relationship="Self.FK_TblBooking_TblLocation" FromRole="TblLocation" ToRole="TblBooking" />
     <NavigationProperty Name="TblBookingDates" Relationship="Self.FK_TblBookingDate_TblLocation" FromRole="TblLocation" ToRole="TblBookingDate" />
-    <NavigationProperty Name="TblRooms" Relationship="Self.FK_TblRoom_TblLocation" FromRole="TblLocation" ToRole="TblRoom" />
+    <NavigationProperty Name="TblRooms" Relationship="Self.FK_tblRoom_tblLocation" FromRole="TblLocation" ToRole="TblRoom" />
   </EntityType>
   <EntityType Name="TblRoom">
     <Key>
@@ -58,7 +58,7 @@
     <Property Name="LocationID" Type="Int32" Nullable="false" />
     <NavigationProperty Name="TblBookings" Relationship="Self.FK_TblBooking_TblRoom" FromRole="TblRoom" ToRole="TblBooking" />
     <NavigationProperty Name="TblBookingDates" Relationship="Self.FK_TblBookingDate_TblRoom" FromRole="TblRoom" ToRole="TblBookingDate" />
-    <NavigationProperty Name="TblLocation" Relationship="Self.FK_TblRoom_TblLocation" FromRole="TblRoom" ToRole="TblLocation" />
+    <NavigationProperty Name="TblLocation" Relationship="Self.FK_tblRoom_tblLocation" FromRole="TblRoom" ToRole="TblLocation" />
   </EntityType>
   <EntityType Name="TblSlot">
     <Key>
@@ -106,7 +106,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_TblBookingDate_TblBooking">
-    <End Role="TblBooking" Type="Self.TblBooking" Multiplicity="0..1" />
+    <End Role="TblBooking" Type="Self.TblBooking" Multiplicity="1" />
     <End Role="TblBookingDate" Type="Self.TblBookingDate" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="TblBooking">
@@ -153,7 +153,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_TblRoom_TblLocation">
+  <Association Name="FK_tblRoom_tblLocation">
     <End Role="TblLocation" Type="Self.TblLocation" Multiplicity="1" />
     <End Role="TblRoom" Type="Self.TblRoom" Multiplicity="*" />
     <ReferentialConstraint>
@@ -199,7 +199,7 @@
       <End Role="TblSlot" EntitySet="TblSlots" />
       <End Role="TblBookingDate" EntitySet="TblBookingDates" />
     </AssociationSet>
-    <AssociationSet Name="FK_TblRoom_TblLocation" Association="Self.FK_TblRoom_TblLocation">
+    <AssociationSet Name="FK_tblRoom_tblLocation" Association="Self.FK_tblRoom_tblLocation">
       <End Role="TblLocation" EntitySet="TblLocations" />
       <End Role="TblRoom" EntitySet="TblRooms" />
     </AssociationSet>
@@ -213,6 +213,9 @@
       <Parameter Name="ToDate" Mode="In" Type="DateTime" />
       <Parameter Name="SlotID" Mode="In" Type="Int32" />
       <Parameter Name="SlotCount" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="SP_GetUserBookings" ReturnType="Collection(AngularPOCModel.SP_GetUserBookings_Result)">
+      <Parameter Name="id" Mode="In" Type="Int32" />
     </FunctionImport>
     <FunctionImport Name="SP_RepeatBooking">
       <Parameter Name="CreatedBy" Mode="In" Type="Int32" />
@@ -256,4 +259,18 @@
       <Parameter Name="EditSlots" Mode="In" Type="Boolean" />
     </FunctionImport>
   </EntityContainer>
+  <ComplexType Name="SP_GetUserBookings_Result">
+    <Property Type="Int32" Name="bookingID" Nullable="false" />
+    <Property Type="Int32" Name="createdBy" Nullable="false" />
+    <Property Type="String" Name="subject" Nullable="false" MaxLength="60" />
+    <Property Type="DateTime" Name="timestamp" Nullable="false" Precision="16" />
+    <Property Type="String" Name="description" Nullable="false" MaxLength="250" />
+    <Property Type="Int32" Name="locationid" Nullable="false" />
+    <Property Type="Int32" Name="roomid" Nullable="false" />
+    <Property Type="Int32" Name="slotid" Nullable="false" />
+    <Property Type="Int32" Name="slotcount" Nullable="false" />
+    <Property Type="DateTime" Name="date" Nullable="false" />
+    <Property Type="String" Name="status" Nullable="false" MaxLength="30" />
+    <Property Type="DateTime" Name="StatusUpdated" Nullable="true" />
+  </ComplexType>
 </Schema>

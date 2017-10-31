@@ -23,7 +23,7 @@
       <PropertyRef Name="SNo" />
     </Key>
     <Property Name="SNo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="BookingID" Type="int" />
+    <Property Name="BookingID" Type="int" Nullable="false" />
     <Property Name="LocationID" Type="int" Nullable="false" />
     <Property Name="RoomID" Type="int" Nullable="false" />
     <Property Name="Date" Type="date" Nullable="false" />
@@ -90,7 +90,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_TblBookingDate_TblBooking">
-    <End Role="TblBooking" Type="Self.TblBooking" Multiplicity="0..1" />
+    <End Role="TblBooking" Type="Self.TblBooking" Multiplicity="1" />
     <End Role="TblBookingDate" Type="Self.TblBookingDate" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="TblBooking">
@@ -137,7 +137,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_TblRoom_TblLocation">
+  <Association Name="FK_tblRoom_tblLocation">
     <End Role="TblLocation" Type="Self.TblLocation" Multiplicity="1" />
     <End Role="TblRoom" Type="Self.TblRoom" Multiplicity="*" />
     <ReferentialConstraint>
@@ -159,6 +159,9 @@
     <Parameter Name="ToDate" Type="date" Mode="In" />
     <Parameter Name="SlotID" Type="int" Mode="In" />
     <Parameter Name="SlotCount" Type="int" Mode="In" />
+  </Function>
+  <Function Name="SP_GetUserBookings" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
   </Function>
   <Function Name="SP_RepeatBooking" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="CreatedBy" Type="int" Mode="In" />
@@ -235,7 +238,7 @@
       <End Role="TblSlot" EntitySet="TblSlot" />
       <End Role="TblBookingDate" EntitySet="TblBookingDate" />
     </AssociationSet>
-    <AssociationSet Name="FK_TblRoom_TblLocation" Association="Self.FK_TblRoom_TblLocation">
+    <AssociationSet Name="FK_tblRoom_tblLocation" Association="Self.FK_tblRoom_tblLocation">
       <End Role="TblLocation" EntitySet="TblLocation" />
       <End Role="TblRoom" EntitySet="TblRoom" />
     </AssociationSet>

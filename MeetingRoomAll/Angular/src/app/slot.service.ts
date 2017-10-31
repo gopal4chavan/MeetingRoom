@@ -53,10 +53,11 @@ export class SlotService {
     }
     public getDetails(bookingID:number)
     {
-        debugger;
         return this.http.get(this.details_url+bookingID).map(res=>{let x=res.json();console.log(x);return x;})
     }
     public updateBooking(bookingID:number,obj:FormDetails){
+        obj.FromDate=new Date(obj.FD).toDateString();
+        obj.ToDate =new Date(obj.TD).toDateString();
         return this.http.post(this.updatebooking_url+bookingID,obj).map(res=>res.json());
     }
     public repeatBooking(obj:FormDetails){

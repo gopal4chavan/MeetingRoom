@@ -145,7 +145,7 @@ SELECT 'BOOKING DATE TABLE';
 ------------------------------------------------------------------------------------------	Date-Booking Table
 --CREATE TABLE TblBookingDate(
 --SNo INT IDENTITY(1,1) NOT NULL,
---BookingID INT,
+--BookingID INT NOT NULL ,
 --LocationID INT NOT NULL,
 --RoomID INT NOT NULL,
 --Date DATE NOT NULL,
@@ -228,7 +228,7 @@ SELECT 'BOOKING STORE PROC'
 --@SlotCount = 2;
 SELECT 'UPDATE STORE PROC';
 ------------------------------------------------------------------------------------------- Update store procdure	
---Alter procedure SP_UpdateBooking
+--ALTER procedure SP_UpdateBooking
 --@BookingID INT,
 --@CreatedBy INT,
 --@LocationID INT,
@@ -352,6 +352,10 @@ SELECT 'UPDATE STORE PROC';
 --				SET @INDEX=@INDEX+1;
 --			END
 --			UPDATE TblBookingDate SET Status='EDITED' Where BookingID=@BookingID AND Status='TEMP_EDITED';
+--			SELECT @Count=COUNT(1) FROM TblBookingDate WHERE BookingID=@BookingID AND Status='ACTIVE';
+--			IF(@Count=0)
+--				RAISERROR(N'INVALID BOOKING DAY',16,1);
+--			COMMIT TRAN;
 --			COMMIT TRAN;			
 --		END
 --		ELSE
@@ -477,6 +481,9 @@ SELECT 'REPEAT BOOKING PROC'
 --				END	
 --				SET @INDEX=@INDEX+1;
 --			END
+--			SELECT @Count=COUNT(1) FROM TblBookingDate WHERE BookingID=@BookingID AND Status='ACTIVE';
+--			IF(@Count=0)
+--				RAISERROR(N'INVALID BOOKING DAY',16,1);
 --			COMMIT TRAN;
 --		END
 --	END TRY
@@ -494,14 +501,17 @@ SELECT 'REPEAT BOOKING PROC'
 --@Subject = 'SUB',
 --@Description = 'DESC',
 --@SUN = 0,
---@MON = 1,
+--@MON = 0,
 --@TUE = 1,
---@WED = 1,
+--@WED = 0,
 --@THU = 1,
 --@FRI = 1,
 --@SAT = 0,
 --@StartOn = '2017-10-24',
---@EndOn = '2017-10-27',
+--@EndOn = '2017-10-24',
 --@SlotID = 3,
 --@SlotCount =1,
 --@WeekDays = '0111110'
+
+
+
